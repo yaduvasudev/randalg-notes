@@ -1,0 +1,87 @@
+\documentclass[a4paper,12pt]{scrreport}
+\usepackage{graphicx}
+%\usepackage{draftwatermark}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{thmtools}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage[T1]{fontenc}
+\useosf
+\linespread{1.05}
+\usepackage{marginnote}
+\renewcommand{\marginfont}{\tiny\textit}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{xfrac}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.misc, automata, positioning, arrows}
+\usepackage{xr-hyper} %for using references to lemmas/theorems from other documents.
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=MidnightBlue,
+	citecolor=Aquamarine}
+\usepackage{etoc}
+
+\usepackage{scribe}
+\usepackage{array}
+\usepackage{enumerate}
+
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{0.7}
+%\SetWatermarkColor[gray]{.95}
+
+\tikzset{->,  % makes the edges directed
+	>=stealth, % makes the arrow heads bold
+	node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+	every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+	initial text=$ $, % sets the text that appears on the start arrow
+}
+
+
+%uncomment the line below if you want references from week1.tex
+%\externaldocument{week1} 
+
+%%%% You can give your definitions here
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\zeroes}{zeroes}
+\DeclareMathOperator{\poly}{poly}
+\newcommand{\blank}{\sqcup}
+\newcommand{\lang}[1]{\mathsf{#1}}
+%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\drop}
+\setcounter{tocdepth}{1}
+
+\newcommand*{\titleS}{\begingroup% Scripts, T&H p 151
+	\drop = 0.1\textheight
+	\centering
+	\vspace*{\drop}
+	{\Huge \textsc{Randomized Algorithms}}\\[\baselineskip]
+	{\large CS6170}\\[\baselineskip]
+	\vfill
+	\rule{0.4\textwidth}{0.4pt}\\[\baselineskip]
+	{\large\itshape Jul - Nov 2021, Dept. of CSE, IIT Madras}\par
+	\vspace*{\drop}
+	\endgroup}
+
+\begin{document}
+
+\titleS
+
+%\newpage
+\tableofcontents
+\input{preface}
+\input{intro}
+
+
+\end{document}
+
