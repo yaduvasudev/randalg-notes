@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.15)  16 MAY 2021 13:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.15)  17 MAY 2021 12:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1453,15 +1453,21 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 (Font)              scaled to size 8.8pt on input line 143.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 (Font)              scaled to size 6.6pt on input line 143.
- [9] [10]) [11] (./notes.aux)
+ [9] [10]) (./rand-vars.tex [11]
+chapter 2.
+Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
+nput line 10.
+[12
+
+] [13]) [14] (./notes.aux)
 Package rerunfilecheck Info: File `notes.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 27429 strings out of 479383
- 532174 string characters out of 5875830
+ 27463 strings out of 479383
+ 532601 string characters out of 5875830
  994055 words of memory out of 5000000
- 43871 multiletter control sequences out of 15000+600000
+ 43881 multiletter control sequences out of 15000+600000
  541381 words of font info for 162 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,13n,124p,10631b,509s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1485,10 +1491,10 @@ ts/type1/public/libertine/LinLibertineTZ.pfb></usr/share/texmf-dist/fonts/type1
 mf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/share/texmf-dist/fonts/type1
 /public/txfonts/txsyb.pfb></usr/share/texmf-dist/fonts/type1/public/newtx/txsys
 .pfb>
-Output written on notes.pdf (11 pages, 496536 bytes).
+Output written on notes.pdf (14 pages, 510645 bytes).
 PDF statistics:
- 221 PDF objects out of 1000 (max. 8388607)
- 174 compressed objects within 2 object streams
- 49 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 265 PDF objects out of 1000 (max. 8388607)
+ 214 compressed objects within 3 object streams
+ 70 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 

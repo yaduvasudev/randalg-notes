@@ -1,0 +1,82 @@
+\chapter{Random variables and their properties}
+
+The outcome of a randomized algorithm is a variable that depends on the random choices made by the algorithm during its execution. Analyzing the guarantees of a randomized algorithm amounts to analyzing the properties of this \emph{random variable}. Formally, a random variable is a function $X:\Omega \to \R$. The standard notational convention is to use capital letters to denote random variables. We can associate events with random variables in a very natural way. If a random variable $X$ takes a value $a$, then the event associated with this is the set $A \subseteq \Omega$ such that $\omega \in A$ iff $X(\omega) = a$. We will also write that 
+\begin{align*}
+	\Pr[X=a] = \sum_{\omega \in \Omega, X(\omega)=a} \Pr[\omega]. 
+\end{align*}
+
+While analyzing randomized algorithm, we will need to define suitable random variables based on the algorithm  at hand. In many cases, it will difficult to analyze the random variable corresponding to the output of the algorithm directly, and we may need to express it as a function of other random variables. One important type of random variables that we will see is the \emph{indicator random variable}. For an event $E\subseteq \Omega$, an indicator random variable $X_A$ takes values $1$ or $0$ depending on the occurrence of the event $A$. One of the most important parameters associated with a random variable is its \emph{expectation}. The expectation of a random variable is the average value taken by it. Formally, we have
+\begin{definition}
+	[Expectation]
+	Let $\Omega$ be a sample space, and let $X:\Omega \to \R$ be a random variable. The expectation of the random variable $\E[X]$ is given by
+	\begin{align*}
+		\E[X] &= \sum_{\omega \in \Omega} \Pr[\omega] X(\omega).
+	\end{align*}
+	\label{defn:exp}
+\end{definition}
+
+Similar to the independence of events, we can define when two random variables are independent. We will say that two random variables $X$ and $Y$ are \emph{independent} if for every $x$ and $y$, we have
+\begin{align*}
+	\Pr[(X=x) \cap (Y=y)] = \Pr[X=x]\Pr[Y=y].
+\end{align*}
+
+An important property of expectation that will useful in analyzing random variables and algorithms is the following seemingly trivial property. The proof is a simple calculation from the definition, and is left as an exercise.
+\begin{theorem}
+	(Linearity of Expectation)
+	Let $X_1, X_2, \ldots, X_n$ be any $n$ random variables, and let $X = \sum_{i=1}^n X_i$. Then, we have
+	\begin{align*}
+		\E[X] = \E\left[\sum_{i=1}^n X_i\right] = \sum_{i=1}^n \E[X_i].
+	\end{align*}
+	\label{thm:loe}
+\end{theorem}
+Notice that the statement makes no assumption about the properties of the random variables. With these ideas, we can already say something non-trivial about an important combinatorial problem.
+
+\section{Maxcut}
+
+In the mincut problem that we saw in the last lecture, our aim was to find the cut of smallest size in a graph $G$. Now, we ask the complement question: Given a graph $G$, find the cut of largest cardinality. It is a central problem in combinatorial optimization, and no efficient algorithms are known for it. The problem is NP-hard, and hence unlikely to have an efficient algorithm. Let us look at a simple randomized algorithm for this problem.
+
+\begin{algorithm}
+	\KwIn{Graph $G(V,E)$}
+	
+	Set $V_1, V_2 \gets \emptyset$
+	
+	\For{$u\in V$}{
+		Choose $b$ u.a.r from $\{0,1\}$
+		
+		\leIf{$b=0$}{$V_1 \gets V_1 \cup \{u\}$}{$V_2 \gets V_2 \cup \{u\}$}
+	}
+
+	Output $X = |\{(u,v)\in E | u\in V_1, v\in V_2 \}|$.
+	\caption{Max-Cut}
+	\label{alg:maxcut}
+\end{algorithm}
+
+Firstly, if we analyze this algorithm with respect to a fixed cut $C$, then the probability that this cut size is output is $1/2^n$. If this probability was any better, then we could have repeated this for sufficient number of times and obtained a fast algorithm. What we will do instead is to look at the random variable $X$ and obtain some non-trivial bound on the size of the maxcuts of a graph. The output $X$ is a random variable that depends on the random choices made for the vertices in the graph. First, we show the following.
+
+\begin{lemma}
+	For $X$ output in Algorithm~\ref{alg:maxcut}, $\E[X] = |E|/2$.
+	\label{lem:size-maxcut}
+\end{lemma}
+\begin{proof}
+	For each edge $e\in E$, define the indicator random variable $X_e$ that denotes the event that $e$ is a cut-edge. We can then write 
+	\begin{align*}
+		X = \sum_{e\in E} X_e.
+	\end{align*}
+	By the linearity of expectation, $\E[X] = \sum_{e\in E} \E[X_e]$. So, all that remains now is to compute the expectation of $X_e$. For this we use the observation that for an indicator random variable, the expectation is equal to the probability of the occurrence of the corresponding event. In this case, we have $\E[X_e] = \Pr[\text{$e$ is a cut edge}]$. Suppose that $e=(u,v)$, then we have
+	\begin{align*}
+		\Pr[\text{$e$ is a cut edge}] &= \Pr[(u \in V_1 \text{ and } v\in V_2) \cup (u \in V_2 \text{ and } v\in V_1)]\\
+		&= \Pr[(u \in V_1 \text{ and } v\in V_2)] + \Pr[(u \in V_2 \text{ and } v\in V_1)] = \frac{1}{2}.
+	\end{align*}
+	Consequently, $\E[X] = |E|/2$.
+\end{proof}
+
+Notice that the expectation here is a weighted mean over all the cut sizes. Consequently, if the weighted mean is greater than a number $r$, then there must actually exists such a cut of size at least $r$. In fact, this observation gives us the following highly non-trivial theorem about cuts in graphs.
+
+\begin{theorem}
+	Every graph $G$ with $m$ edges has a cut of size at least $m/2$.
+	\label{thm:maxcut}
+\end{theorem}
+
+This method of proving the existence of combinatorial objects using randomization is known as the \emph{probabilistic method}. It is a very powerful tool that can be used in a variety of settings that do not seem amenable to such techniques on first sight.
+
+Let us try to understand the random variables $\{X_e\}_{e\in E}$ a little better. Firstly, for two edges $e_1$ and $e_2$, $X_{e_1}$ and $X_{e_2}$ are independent. If $e_1$ and $e_2$ don't share a vertex, then it is obvious. Suppose that $e_1$ and $e_2$ share a vertex $u$. Even in this case, if given that $X_{e_1}$ is $0$ or $1$, the value of $X_{e_2}$ depends on where the other endpoint is placed. Thus $\Pr[X_{e_2}=1 | X_{e_1}=1] = \Pr[X_{e_2}=1 | X_{e_1}=0] = 1/2$. Now suppose that the edges $e_1, e_2$, and $e_3$ for a triangle on vertices $u,v$, and $w$. Now give the values of $X_{e_1}$ and $X_{e_2}$, the positions of all three vertices are fixed, and hence the value of $X_{e_3}$. Thus, the variables $\{X_e\}_{e\in E}$ are not fully independent. The linearity of expectation gave us a non-trivial bound, even when we had no information about the properties of the random variables involved other than their expectation.
