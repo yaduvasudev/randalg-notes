@@ -1,0 +1,291 @@
+\chapter{Moments, deviation and concentration}
+
+In this lecture, we will analyze the random variable more closely by looking at its deviation from the mean and concentration around the mean. We will start with a simple bound about how far a random variable can go away from its expectation. We will not assume anything about the random variable, other than it being non-negative, and we will see that the bound we get is not optimal. As we discover more properties about the random variable, we will prove stronger statements about how the random variable is distributed with respect to its expectation.
+
+\section{Markov's inequality}
+
+We start with a simple inequality about a non-negative  random variable.
+\begin{theorem}
+	[Markov's Inequality]
+	Let $X$ be a non-negative random variable, and let $a > 0$. Then,
+	\begin{align*}
+		\Pr[X \geq a] \leq \frac{\E[X]}{a}.
+	\end{align*}
+	\label{thm:markov}
+\end{theorem}
+\begin{proof}
+	Define an indicator random variable $I$ such that $I=1$ iff $X \geq a$. Thus we have $\E[I] = \Pr[X \geq a]$. Furthermore, we have $I\leq X/a$ since $X$ is non-negative and $a>0$, and if $I=1$, then $X \geq a$. Therefore, we can write
+	\begin{align*}
+		\Pr[X \geq a] &= \E[I] \leq \E\left[\frac{X}{a}\right] = \frac{\E[X]}{a}.
+	\end{align*}
+\end{proof}
+
+While this may not seem much, we can already say something non-trivial about a few algorithms already. Let's try to analyze Quicksort better. We already know that the expected running time is $O(n\log n)$. But, what is the probability that the running time is close to $O(n\log n)$. 
+
+\subsection{Quicksort revisited}
+
+Recall that we can draw the recursion tree of Quicksort, where each node is the array under consideration. Initially, the whole array is considered, and depending on the choice of the pivot this array is split into two different arrays. The first observation that we can make is that the total number of comparisons done at every level of the recursion tree is $O(n)$. So what we want to compute is the probability that the depth of the recursion tree is at most $O(\log n)$. We will argue with respect to individual elements in the array, and then take a union bound. 
+
+Fix an element $a$ in the array. Let $X_i$ denote the size of the sub-array containing $a$ at the $i^{th}$ level of the recursion. Note that $X_0 = n$ since at the root of the recursion, the entire array is considered. Suppose that $X_{i-1}=t$, we will first compute the conditional expectation $\E[X_i | X_{i-1}=t]$ as follows:
+\begin{align*}
+	\E[X_i | X_{i-1} = t] \leq \frac{1}{2} \cdot \frac{3}{4}t + \frac{1}{2}\cdot t = \frac{7}{8}t.
+\end{align*}
+This is because with probability $1/2$, a randomly chosen pivot will partition the array into two parts, each of which is at most $3/4^{th}$ of the original array. Now, we can write
+\begin{align*}
+	\E[X_i] &= \sum_{t} \Pr[X_{i-1}=t]\E[X_i|X_{i-1}=t] \leq \sum_{t} \frac{7}{8}t\Pr[X_{i-1}=t]\\
+	&= \frac{7}{8}\E[X_{i-1}].
+\end{align*}
+
+We can inductively bound the value $\E[X_{i-1}]$, and obtain $\E[X_i] \leq \left(\frac{7}{8}\right)^in$. For $i=3\log_{8/7} n$, the value $\E[X_i] \leq 1/n^2$. Hence, we can use Markov's inequality to conclude that for $i = 3\log_{8/7}n$,
+\begin{align*}
+	\Pr[X_i > 1] \leq \E[X_i] \leq \frac{1}{n^2}.
+\end{align*}
+In other words, the probability that the part of the array containing $a$ occurs below the $3\log_{8/7}n$-th level is at most $1/n^2$. 
+
+For an array $A = (a_1, a_2, \ldots, a_n)$ denote the array we are sorting. Let $E_i$ denote the event that the element $a_i$ is in a subarray of size greater than $1$ at a recursion level $3\log_{8/7} n$. We have just computed that for every $i$, the probability $\Pr[E_i] \leq 1/n^2$. We are interested in the event that none of the $E_i$s occur. Therefore,
+\begin{align*}
+	\Pr\left[ \bigcap_{i=1}^n \overline{E}_i \right] &= 1 - \Pr\left[ \bigcup_{i=1}^n E_i \right]\\
+	&\geq 1 - \sum_{i=1}^n \Pr[E_i] (\text{due to the union bound})\\
+	&\geq 1 - \frac{1}{n}.
+\end{align*}
+
+Thus, let $T(n)$ denote the running time of the randomized Quicksort algorithm. What we have just shown is that
+\begin{align*}
+	\Pr[T(n) > 3\log_{8/7}n] \leq \frac{1}{n}.
+\end{align*}
+
+If we know more properties of the random variable $X$, we can naturally say stronger statements about its deviation from the mean. This is what we see next.
+
+\section{Chebyshev's inequality}
+
+To understand how a random variable is distributed around its expectation, we first look at the variance, which tells the expected deviation of the random variable from its expected value. Formally, for a random variable $X$, the variance $\Var(X)$ is defined as follows:
+\begin{align*}
+	\Var(X) &= \E[(X - \E[X])^2].
+\end{align*}
+Equivalently, $\Var(X) = \E[X^2] - (\E[X])^2$. The quantity $\E[X^k]$ is known as the $k^{th}$ moment of the random variable $X$. The standard deviation $\sigma$ is defined as $\sqrt{\Var(X)}$. We briefly recall some facts about variance.
+
+\begin{fact}
+	Let $X$ and $Y$ be two random variables. Then
+	\begin{align*}
+		\Var(X+Y) = \Var(X) + \Var(Y) + 2\E[(X-\E[X])(Y-\E[Y])].
+	\end{align*}
+\end{fact} 
+The quantity $\E[(X-\E[X])(Y-\E[Y])]$ is known as the covariance of $X$ and $Y$, denoted as $\Cov(X,Y)$. If $X$ and $Y$ are independent, then $\Cov(X,Y) =0$, and hence $\Var(X+Y) = \Var(X) + \Var(Y)$.
+
+Knowing the variance of a random variable, we can say something stronger about its deviation from the expectation. This is given by Chebyshev's inequality.
+\begin{theorem}
+	[Chebyshev's inequality]
+	Let $X$ be any random variable. For any $a > 0$, 
+	\begin{align*}
+		\Pr\left[ |X-\E[X]| \geq a \right] \leq \frac{\Var(X)}{a^2}.
+	\end{align*}
+	\label{thm:chebyshev}
+\end{theorem}
+\begin{proof}
+	We can write $\Pr[|X-\E[X]| \geq a] = \Pr[(X-\E[X])^2 \geq a^2]$. Now, we can apply Markov's inequality on the random variable $(X-\E[X])^2$, to get
+	\begin{align*}
+		\Pr[|X - \E[X]| \geq a] \leq \frac{\E[(X-\E[X])^2]}{a^2} = \frac{\Var(X)}{a^2}.
+	\end{align*}
+\end{proof}
+
+Sometimes, we use the following form of this inequality as well.
+\begin{align*}
+	\Pr[|X-\E[X]| \geq t\sigma] &\leq \frac{1}{t^2}, \text{ where $t >1$ and $\sigma$ is the standard deviation }.
+\end{align*}
+
+\subsection{Probability amplification using fewer random bits}
+
+We have seen how we can amplify the success probability of algorithm with one-sided error by repeating the algorithm $k$ times. If $n$ random bits are required for one run of the algorithm, then we need $kn$ random bits to repeat the algorithm and reduce the error probability to $2^{-k}$. Is it possible to use only $O(n)$ random bits and repeat the experiment $k$ times, and yet improve the success probability?
+
+Let us assume that we have an algorithm $\mathcal{A}$ that uses $n$ random bits. If you don't want to bother about an arbitrary algorithm, you can think about the matrix multiplication verification algorithm, say, that we have seen already. To improve the success probability to $1-2^{-k}$, we used the fact that independent random bits were used in the different iterations of the algorithm. To reduce the number of random bits used, we will forgo this requirement. We have seen something similar already when removing the randomness in the maxcut algorithm.
+
+We will first start with some technicalities that we will need. Let $p$ be a prime, and let $\Z_p$ denote the set of numbers $\{0,1,\ldots, p-1\}$. For two numbers $a$, $b$ in $\Z_p$, we will denote by $a+b$ and $a\cdot b$, the operations of addition and multiplication module the prime $p$. The structure $\Z_p$ is known as a finite field, and for our purposes, you can assume that it behaves nicely like the rationals or reals. 
+
+\begin{lemma}
+	Let $p$ be a prime. Suppose that $a$ and $b$ are chosen uniformly and independently at random from $\Z_p$, then the random variables $Y_1, Y_2, \ldots, Y_{p-1}$ defined as $Y_i = a\cdot i +b$ are
+	\begin{enumerate}
+		\item distributed uniformly over $\Z_p$, and 
+		\item are pairwise independent.
+	\end{enumerate}
+	\label{lem:pi-zp}
+\end{lemma}
+\begin{proof}
+	Let us start with showing that each of the $Y_i$s are distributed uniformly over $\Z_p$. Fix an $i \in \Z_p$. Now for any $c \in \Z_p$, for every choice of $b$, there is one and only one choice of $a$ such that $c = ai+b$. Therefore $\Pr[Y_i =c] = 1/p$ for every $c\in \Z_p$.
+	
+	Next, we want to show that for $i\neq j$, for every $c_1, c_2 \in \Z_p$ we have
+	\begin{align*}
+		\Pr[Y_i = c_1 \text{ and } Y_j=c_2] = \frac{1}{p^2}.
+	\end{align*}
+	This  follows from the observation that the system of linear equations over $\Z_p$ given by
+	\begin{align*}
+		c_1 &= ai + b,\\
+		c_2 &= aj + b
+	\end{align*}
+	has a unique solution over $\Z_p$, where $a = (c_1-c_2)(i-j)^{-1}$ and $b = (c_1j -c_2i)(j-i)^{-1}$.
+\end{proof}
+
+Let $\mathcal{A}$ be an algorithm that uses $n$ bits of randomness such that if $x$ is a true input, then $\Pr[\mathcal{A}(x)=1]=1$, and if $x$ is a false input, then $\Pr[\mathcal{A}(x)=1] \leq 1/2$. Let $N = 2^n$, and let $p > N$ be a prime. It is known that there is a prime number between $N$ and $2N$, and we will use numbers in $\Z_p$ as our random strings. 
+
+\begin{remark}
+	At this point, there is a small subtlety in that we need a way to obtain the prime $p$ efficiently. But, what we actually used was that the structure $\Z_p$ is a finite field. It is well known, from abstract algebra, that for every prime $p$ and integer $n$, there is one and only one finite field of cardinality $p^n$ up to isomorphism. This is sometimes referred to as the Galois field $\GF(p^n)$. This finite field is not the set $\{0,1,\ldots, p^{n-1}\}$. Furthermore, given $p$ and $n$, there is an efficient way to construct this finite field so that we can sample from it. In our case, we will construct the finite field $\GF(2^n)$ and work within this field. The analysis that we will do now, also works exactly the same way in $\GF(2^n)$. We will not get into these technicalities for now.
+\end{remark}
+
+Now, instead of sampling $k$ random strings independently to repeat the algorithm $\mathcal{A}$, we choose $a$, $b$ uniformly at random from $\Z_p$, and then we choose the $k$ random strings to be used as $\{ai+b\}_{1\leq i \leq k}$. Let $Y_i = ai +b$, and let $X_i$ denote the indicator random variable that is $1$ iff the algorithm $\mathcal{A}$ return $0$ when $Y_i$ is used as the random string. Since $Y_i$s are pairwise independent, the variables $X_i$s are also pairwise independent. Now, if an input $x$ is a no instance, then $\Pr[X_i = 1] \geq 1/2$. We are interested in the random variable $X = \sum_{i=1}^k X_i$ and the probability of the event $X = 0$. We can compute the expecation $\E[X] \geq k/2$.
+
+From the properties of variance that we saw earlier, we can show that if $X_i$s are pairwise independent, then
+\begin{align*}
+	\Var\left(\sum_{i=1}^k X_i \right) = \sum_{i=1}^k \Var(X_i).
+\end{align*}
+
+Now, the $X_i$ are Bernoulli random variables in this case, with $p \geq 1/2$. We can compute its variance as
+\begin{align*}
+	\Var(X_i) &= \E[(X-\E[X])^2] = p(1-p)^2 + (1-p)(-p)^2 = p(1-p).
+\end{align*}
+If $1-p \leq 1/2$, then $\Var(X_i) \leq 1/4$. Therefore, $\Var(X) \leq k/4$. Now, we can compute the error probability of our algorithm as 
+\begin{align*}
+	\Pr[X = 0] &\leq \Pr\left[|X - \E[X]| \geq \frac{k}{2}\right], \\
+	&\leq \frac{4\Var(X)}{k^2}, \text{ by Chebyshev's inequality}\\
+	&\leq \frac{1}{k}.
+\end{align*}
+
+Notice, that the number of random bits that we require is at most $2\log 2N \leq 2(n+1)$, and the error probability is at most $1/k$. If we had used independent random bits for each iteration, then we will require $kn$ random bits and the error probability goes down to $2^{-k}$. Probability amplification and reusing randomness is an important topic, and there are more sophisticated ways to do this. We will leave this discussion for now, and move to stronger concentration results. We will see that as we push towards stronger concentration inequalities, we will need to add more restrictions on the type of random variables that we are analyzing.
+
+\section{Chernoff-Hoeffding inequalities}
+
+In this section, we will some inequalities that give very strong concentration bounds for certain types of random variables. This is a tool that is used a lot in the design and analysis of randomized algorithms. In some cases, we might not be able to use the result directly, but Chernoff-Hoeffding type inequalities will still be useful. What this means is that the random variables may not satisfy the conditions to apply the Chernoff-Hoeffding inequalities, but a similar proof can be done (with small modifications) that will be applicable for that particular case. Thus, it is also important to understand the underlying ideas of the proof so that it can be applied in a new situation. 
+
+Let us start with $n$ indicator random variables $X_1, X_2, \ldots, X_n$ such that $\Pr[X_i]=p_i$. These random variables are known as \emph{Poisson trials}. Bernoulli trials are the case when all the $p_i$s are equal. We are interested in the random variable $X = \sum_{i=1}^n X_i$. For a parameter $t>0$, the function $e^{tX}$ is known as the \emph{moment generating function}. If we take the formal power series expansion of the expectation of this function, we have
+\begin{align*}
+	\E[e^{tX}] &= \E[\sum_{i \geq 0} \frac{t^i X^i}{i!}]\\
+	&= \sum_{i\geq 0} \frac{t^i}{i!} \E[X^i].
+\end{align*} 
+
+Now, we can say that for any $t>0$,
+\begin{align*}
+	\Pr[X > m] &= \Pr[e^{tX} > e^{tm}]\\
+	&\leq \frac{\E[e^{tX}]}{e^{tm}}, \text{ by Markov's inequality}.
+\end{align*}
+
+We will now compute the moment generating function as follows.
+\begin{align*}
+	\E[e^{tX}] &= \E[e^{t\sum_{i=1}^n X_i}]\\
+	&= \E\left[ \prod_{i=1}^n e^{tX_i} \right]\\
+	&= \prod_{i=1}^n \E[e^{tX_i}], \text{ since the $X_i$s are independent }\\
+	&= \prod_{i=1}^n\left( p_ie^t + 1 - p_i \right) = \prod_{i=1}^n\left( p_i(e^t -1) + 1 \right)
+\end{align*}
+
+Notice that $\sum_{i=1}^n p_i = \E[X]$ which we will denote as $\mu$. We can use the AM-GM inequality to say that
+\begin{align*}
+	\E[e^{tX}] &\leq \left( \sum_{i=1}^n \frac{p_i(e^t-1)+1}{n} \right)^n\\
+	&= (pe^t-q)^n,
+\end{align*}
+where $p = \sum_{i=1}^n p_i/n$ and $q = 1-p$. This inequality is tight when all the $p_i$s are equal, which corresponds to the case of sum of binomial random variables. Now, we can compute the probability 
+\begin{align*}
+	\Pr[X > (p+r)n] &\leq \frac{\E[e^tX]}{e^{tn(p+r)}} \leq \left( \frac{pe^t+q}{e^{t(p+r)}} \right)^n
+\end{align*}
+Since $t$ is a parameter that we can choose, we can minimize the right-hand side to obtain the crude form (and the tightest) Chernoff bounds as
+\begin{align*}
+	\Pr[X > (p+r)n] &\leq \left(\left( \frac{p}{p+t} \right)^{p+t} \left( \frac{q}{q-t} \right)^{q-t} \right)^n \\
+	&= \exp\left( -n \left( (p+t)\ln \frac{p+t}{p} + (q-t)\ln \frac{q-t}{q} \right) \right).
+\end{align*}
+While this bound has a nice interpretation in terms of a certain notion of distance between probability distributions, we will now write a version of the bound that is easy to use in the analysis of the algorithms that we will see in this course.
+
+\begin{theorem}
+	[Chernoff bounds]
+	Let $X_1, X_2, \ldots X_n$ be independent indicator random variables with $\Pr[X_i=1] = p_i$. Let $X = \sum_{i=1}^n X_i$ be the sum of the random variables. Then the following holds.
+	\begin{enumerate}
+		\item For every $t >0$,
+		\begin{align*}
+			\Pr[|X -\E[X]| > t] \leq e^{-2t^2/n}.
+		\end{align*}
+		\item For $\epsilon >0$
+		\begin{align*}
+			\Pr[X > (1+\epsilon)\E[X]] &\leq e^{-\epsilon^2\E[X]/3}, \\
+			\Pr[X < (1-\epsilon)\E[X]] &\leq e^{-\epsilon^2\E[X]/2}
+		\end{align*}
+	\end{enumerate}
+	\label{thm:chernoff}
+\end{theorem}
+
+Hoeffding extended the bounds using a similar proof of bounding the moment generating function to obtain the following strengthening of the bound. This is also useful in many situations that we will encounter in the analysis of randomized algorithms.
+
+\begin{theorem}
+	[Hoeffding's extension]
+	Let $X_1, X_2, \ldots, X_n$ be independent random variables that take values in the interval $[a,b]$ such that $\E[X_i] = \mu$. Then,
+	\begin{align*}
+		\Pr\left[ \left| \frac{1}{n}\sum_{i=1}^n X_i - \mu \right| \geq \epsilon  \right] \leq 2e^{-2n\epsilon^2/(b-a)^2}.
+	\end{align*}
+	\label{thm:hoeffding}
+\end{theorem}
+
+\subsection{Probability amplification}
+
+The randomized algorithms that we have seen so far had one-sided error. For some problems, we may also have two sided error. We will look at problems that have a yes/no answer for now. In a two-sided error algorithm $\mathcal{A}$, if the input $x$ is a yes instance then $\Pr[\mathcal{A}(x)=1] \geq 2/3$, and if $x$ is a no instance, then $\Pr[\mathcal{A}(x)=0] \geq 2/3$. In other words, the algorithm can err on both sides (yes and no), but the error probability is at most $2/3$. The following is simple way to amplify the success probability of this algorithm. For now, we will not worry about reducing the number of random bits.
+
+We will choose $k$ random strings independently and uniformly at random, and run the algorithm $\mathcal{A}$ with these $k$ random strings. We will then output the majority answer. If the original algorithm $\mathcal{A}$ had a running time $T(n)$, then this new algorithm has a running time of $O(kT(n))$. Let us calculate the error probability of this new algorithm.
+
+Let us define $k$ indicator random variables $X_1, X_2, \ldots, X_k$ where $X_i =1$ iff the $i^{th}$ iteration of $\mathcal{A}$ (with the $k^th$ random string) outputs the correct answer. Notice that the $X_i$s are Bernoulli random variables with parameter $p \geq 2/3$. Let $X = \sum_{i=1}^k X_i$ denote the number of times the algorithm answered correctly. Now, we have $\E[X] \geq 2k/3$. We want to compute the probability $\Pr[X \geq k/2]$. We can use a version of the Chernoff bounds here since
+\begin{align*}
+	\Pr\left[X < \frac{k}{2}\right] &= \Pr\left[ X < \left(1-\frac{1}{4}\right)\frac{2k}{3}  \right]
+\end{align*}
+
+Notice that here we don't know the exact value of the expectation of $X$, but rather a lower bound of this value. Therefore, we have
+\begin{align*}
+	\Pr\left[ X < \left(1 - \frac{1}{4}\right) \frac{2k}{3} \right] &\leq \Pr\left[ X < \left(1 - \frac{1}{4}\right) \E[X] \right]\\
+	&\leq e^{-\E[X]/32} \leq e^{-k/48}. 
+\end{align*}
+
+Thus if we repeat algorithm $\mathcal{A}$ $k$ times, there is an exponential fall in the error probability.
+
+\subsection{Load balancing}
+
+We will now look at the problem of load balancing, where we have a set of processors and jobs arrive for scheduling on the processors. Our job is to distribute the jobs to the processors so that no processor is overloaded. This system works in a distributed environment, and we are interested in an efficient decentralized solution. Obviously, if we have the resources to check the load of each machine and assign jobs to machines, then we will achieve the optimal load. This is a case of the paradigm of \emph{balls and bins} which is used to model various random processes.
+
+Let us assume that there are $k$ servers and $n$ jobs where $k$ is much smaller than $n$. We will look at the performance of a random job allocation algorithm where each job is assigned to a processor with probability $1/k$. Under this randomized strategy, each server has an expected load of $n/k$. This can happen in the worst case also under other cleverer strategies, but what we will see is that the randomized strategy will not be too far with high probability. The advantage being that we need not remember any state information while allocating jobs to servers. 
+
+First, let's start with a fix server, and compute how many jobs will be allotted to it. Let $X_i$ be the indicator random variables for the event that the $i^{th}$ job is allocated to the server. We are interested in the random variable $X = \sum_{i=1}^n X_i$. We know that $\E[X] = n/k$. Since the random variables $X_i$ are all independent, the variance $\Var(X) = n\frac{1}{k}\left(1 - \frac{1}{k} \right)$, which is approximately $n/k$. We can use Chernoff bounds to obtain the following.
+\begin{align*}
+	\Pr\left[ X > \frac{n}{k} + 3\sqrt{\frac{n\log k}{k}} \right] &= \Pr \left[ X > \frac{n}{k}\left( 1 + 3\sqrt{\frac{k\log k}{n}} \right) \right] \\
+	& \leq e^{-3\log k} \leq \frac{1}{k^3}.
+\end{align*}
+
+Let $E_i$ be the event that server $i$ has a load of at most $n/k + 3\sqrt{n\log k/k}$. Then we are interested in 
+\begin{align*}
+	\Pr\left[ \bigcap_{i=1}^k E_i \right] &= 1 - \Pr\left[ \bigcup_{i=1}^k \overline{E}_i \right]\\
+	& \geq 1 - \sum_{i=1}^k \Pr[\overline{E}_i], \text{ by the union bound }\\
+	& \geq 1 - \frac{1}{k^2}.
+\end{align*}
+
+We will see other settings of the balls and bins paradigms in a later part of the course.
+
+\subsection{Permutation routing on the hypercube}
+
+%Let us obtain a better bound for the coupon collector's problem that we studied in the last lecture. We had defined the random variable $X$ that counted the number of boxes that had to be bought to see all the $n$ different coupons. We saw that $\E[X] = \Theta(n\log n)$. Recall that $X = \sum X_i$ where $X_i$ is the number of boxes that had to be bought after to get the $i^{th}$ different coupon after $i-1$ coupons had been obtained. The random variables $X_i$ are independent and hence, to use Chebyshev's inequality we must compute the variance of a geometric random variable.
+%
+%\begin{theorem}
+%	Let $X$ be a geometric random variable with parameter $p$, then
+%	\begin{align*}
+%		\Var(X) = \frac{1-p}{p^2}.
+%	\end{align*}
+%\end{theorem}
+%\begin{proof}
+%	To calculate $\E[X^2]$, we use the same reasoning as in the last lecture. Let $Y$ be an indicator random variable that is $1$ if the first trial succeeded. Then, we have
+%	\begin{align*}
+%		\E[X^2] &= \Pr[Y=0]\E[X^2 | Y=0] + \Pr[Y=1]\E[X^2|Y=1]\\
+%		&= (1-p)\E[X^2|Y=0] + p\E[X^2|Y=1] \\
+%		&= (1-p)\E[X^2|Y=0] +p.
+%	\end{align*}
+%	If $Y=0$, then let $Z$ denote the number of trials after the first trial before success. Therefore, $X^2 = (Z+1)^2$, where $Z$ is a geometric random variable with parameter $p$. So, we can write
+%	\begin{align*}
+%		\E[X^2] &= (1-p)\E[(Z+1)^2] + p\\
+%		&= (1-p)\E[Z^2 +2Z +1] +p = (1-p)\E[X^2] + \frac{2(1-p)}{p} + 1\\
+%		&=\frac{2-p}{p^2}.
+%	\end{align*}
+%	Therefore, $\Var(X) = \frac{1-p}{p^2}$.
+%\end{proof}
+%
+%In the coupon collector problem, $X_i$ is a geometric random variable with parameter $\frac{n-i+1}{n}$. Therefore, the variance of $X_i$ is
+%\begin{align*}
+%	\Var(X_i) &= \frac{1}{p^2} - \frac{1}{p} \\
+%	&= \frac{n^2}{(n-i+1)^2} - \frac{n}{n-i+1}
+%\end{align*}

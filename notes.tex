@@ -50,16 +50,20 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\GF}{\mathbb{GF}}
 \newcommand{\vect}[1]{\mathbf{#1}}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\zeroes}{zeroes}
 \DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Cov}{Cov}
 \newcommand{\blank}{\sqcup}
 \newcommand{\lang}[1]{\mathsf{#1}}
 %%%%%%%%%%%%%%%%%%%%
 
 \newlength{\drop}
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 
 \newcommand*{\titleS}{\begingroup% Scripts, T&H p 151
 	\drop = 0.1\textheight
@@ -82,6 +86,7 @@
 \input{preface}
 \input{intro}
 \input{rand-vars}
+\input{concentration}
 
 
 \end{document}

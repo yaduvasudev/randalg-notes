@@ -80,3 +80,212 @@ Notice that the expectation here is a weighted mean over all the cut sizes. Cons
 This method of proving the existence of combinatorial objects using randomization is known as the \emph{probabilistic method}. It is a very powerful tool that can be used in a variety of settings that do not seem amenable to such techniques on first sight.
 
 Let us try to understand the random variables $\{X_e\}_{e\in E}$ a little better. Firstly, for two edges $e_1$ and $e_2$, $X_{e_1}$ and $X_{e_2}$ are independent. If $e_1$ and $e_2$ don't share a vertex, then it is obvious. Suppose that $e_1$ and $e_2$ share a vertex $u$. Even in this case, if given that $X_{e_1}$ is $0$ or $1$, the value of $X_{e_2}$ depends on where the other endpoint is placed. Thus $\Pr[X_{e_2}=1 | X_{e_1}=1] = \Pr[X_{e_2}=1 | X_{e_1}=0] = 1/2$. Now suppose that the edges $e_1, e_2$, and $e_3$ for a triangle on vertices $u,v$, and $w$. Now give the values of $X_{e_1}$ and $X_{e_2}$, the positions of all three vertices are fixed, and hence the value of $X_{e_3}$. Thus, the variables $\{X_e\}_{e\in E}$ are not fully independent. The linearity of expectation gave us a non-trivial bound, even when we had no information about the properties of the random variables involved other than their expectation.
+
+\subsection{\textcolor{red}{$\star$}~Constructing a large cut deterministically}
+
+We showed that a random partition of the vertices gives you a cut, that on expectation contains at least half of the edges in the graph. But, can you construct such a cut-set deterministically. Recall the analysis of the expectation. If you look at it carefully, you'll notice that we don't really require that the assignment of vertices to $V_1$ and $V_2$ need not be completely independent. For the analysis to go through, all we need is the following:
+\begin{align*}
+	\Pr[u \in V_1 \text{ and } v\in V_2] &= \Pr[u \in V_1] \Pr[v \in V_2], \\
+	\Pr[u \in V_2 \text{ and } v\in V_1] &= \Pr[u \in V_2] \Pr[v \in V_1]
+\end{align*}
+Thus, what we actually need is just pairwise independence, rather than full independence for the analysis to go through. Instead of choosing the part for each vertex uniformly at random, we do the following.
+
+Let $\vect{b} = b_1b_2\ldots b_k$ be a binary string such that $k=\log n$. We can associate subsets of $[k]$ with the $n$ vertices in the graph in a natural way. Let $S_u \subseteq [k]$ denote the set associated with vertex $u$. For a vertex $u$, we compute $b_u = \oplus_{i\in S_u} b_i$, and assign $u$ to $V_b$. Now, for any two $u$, $v$, the set $S_u$ and $S_v$ are different, and hence if $\vect{b}$ is chosen uniformly at random from $\{0,1\}^{\log n}$, the probability $\Pr[b_u \neq b_v] = 1/2$. Therefore, we can rewrite the maxcut algorithm as follows.
+
+\begin{algorithm}
+	\KwIn{Graph $G(V,E)$}
+	
+	Set $V_1, V_2 \gets \emptyset$
+	
+	Choose $b_1, b_2, \ldots, b_{\log n} \in_r \{0,1\}$
+		
+	\For{$u\in V$}{
+		Compute $b = \oplus_{i\in S_u} b_i$
+		
+		Set $V_b \gets V_b \cup \{u\}$.
+	}
+	
+	Output $X = |\{(u,v)\in E | u\in V_1, v\in V_2 \}|$.
+	\caption{Max-Cut Modified}
+	\label{alg:maxcut-modified}
+\end{algorithm}
+
+The analysis of this algorithm is identical to the original algorithm. But, now we can remove the randomness in the following way:
+
+\begin{algorithm}
+	\KwIn{Graph $G(V,E)$}
+	
+	Set $V_1, V_2 \gets \emptyset$
+	
+	\For{$\vect{b}=(b_1,b_2,\ldots,b_{\log n})$}{	
+		
+		\For{$u\in V$}{
+			Compute $b = \oplus_{i\in S_u} b_i$
+			
+			$V_b \gets V_b \cup \{u\}$
+		}
+		Compute $X_{\vect{b}} = |\{(u,v)\in E | u\in V_1, v\in V_2 \}|$
+	}
+	
+	Output $\max \{X_{\vect{b}}\}_{\vect{b} \in \{0,1\}^{\log n}}$
+
+	\caption{Max-Cut Deterministic}
+	\label{alg:maxcut-det}
+\end{algorithm}
+
+Since the expected value is at least $m/2$, the largest cut must have size at least $m/2$. Therefore, the output will be a cut of size at least $m/2$. Furthermore, the outer loop runs for $n$ steps, and hence we have a polynomial-time $1/2$-approximation algorithm.
+
+\section{Quicksort}
+
+We use the ideas from the previous section to analyze a randomized version of the Quicksort algorithm. Recall that in the deterministic Quicksort algorithm, we choose a pivot element in the array (say, the last element) and then partition the array into two parts based on whether the numbers are smaller or larger than the pivot. Then we recursively sort the two parts to obtain the final sorted array. The running time depends on the choice of the pivot since we want the pivot to divide the array into two arrays of similar sizes. 
+
+For instance, if the pivot is the largest element of the array each time, then the running time is $O(n^2)$. On the other hand, if we choose the median as the pivot at every step, then the running time is given by the recurrence
+\begin{align*}
+	T(n) = 2T\left( \frac{n}{2} \right) + O(n).
+\end{align*}
+
+Let us look at a randomized variant of Quicksort, where we choose a pivot element uniformly at random from the array. We hope that the algorithm will avoid the case of choosing a bad pivot at every step of the recursion. In this case, the running time of the algorithm, as measured by the number of comparisons that it makes, is a random variable. Let us analyze this random variable now.
+
+For this, let $\vect{a} = a_1, a_2, \ldots, a_n$ be the array given and let $\vect{b} = b_1, b_2, \ldots, b_n$ be the sorted version of the array. We will argue with respect to this array $\vect{b}$. Let $X$ denote the total number of comparisons performed ny the Quicksort algorithm while converting the array $\vect{a}$ to $\vect{b}$. It will be hard to argue directly about $X$, so we will express $X$ as a function of random variables that are easier to analyze. 
+
+To that end, let $X_{ij}$ denote an indicator random variable corresponding to the event that $b_i$ and $b_j$ are compared during the execution of randomized Quicksort. We can then write $X$ as
+\begin{align*}
+	X &= \sum_{1\leq i<j\leq n} X_{ij}, \text{ and hence, }\\
+	\E[X] &= \sum_{1\leq i<j\leq n} \E[X_{ij}].
+\end{align*} 
+Since $X_{ij}$ is an indicator random variable, $\E[X_{ij}] = \Pr[\text{$b_i$ and $b_j$ are compared}]$. 
+
+Let us try to analyse $X_{ij}$. Consider the elements $b_i \leq b_{i+1} \leq \ldots \leq b_j$. The only way that $b_i$ and $b_j$ are compared is that the first time a pivot is chosen from this interval, it is either $b_i$ or $b_j$. Since the pivot is chosen uniformly at random from the entire array, $E[X_{ij}] = \tfrac{2}{j-i+1}$. Thus we can write
+\begin{align*}
+	\E[X] &= \sum_{i=1}^{n-1} \sum_{j=i+1}^n \frac{2}{j-i+1}\\
+	&= \sum_{i=1}^{n-1} \sum_{k=2}^{n-i+1}\frac{2}{k} = \sum_{k=2}^n \sum_{i=1}^{n+1-k} \frac{2}{k} = \sum_{k=2}^n (n+1-k)\frac{2}{k}\\
+	&= 2(n+1)\sum_{k=2}^n \frac{1}{k} - 2(n-1)\\
+	&= 2(n+1)\sum_{k=1}^n \frac{1}{k} - 4n
+\end{align*}
+
+The sum $\sum_{k=1}^n \frac{1}{k}$ is the harmonic sum and is equal to $\ln n +\Theta(1)$. Therefore, we have $\E[X] = 2n\ln n + \Theta(n)$. If you recall analysis of algorithms, this might seem a little unsatisfactory. It is true that on expecation, Quicksort is fast, but how is the random variable actually distributed? Is it the case that the running time can vary wildly, and yet the expectation is $\Theta(n\log n)$? Or is the actual running time concentrated closely around the expectation? That would be a more useful analysis. For now, we will leave it here, but do a more careful analysis once we develop a few more tools.
+
+\section{Probability Mass Functions (PMF) and random variables}
+
+Till now, we have been looking at randomized algorithms, and defined random variables based on the algorithm at hand. Another way to define random variables (without looking at any random experiment) is to define the corresponding probability mass function. We will see come distributions that arise in many different scenarios, and will be useful in the analysis of randomized algorithms. Let us start with the formal definition of a Probability Mass Function (PMF).
+
+\begin{definition}
+	Let $X$ be a random variable. The PMF associate with $X$ is a function $p_X:\R \to \R$ defined as follows:
+	\begin{align*}
+		p_X(u) = \Pr[X=u].
+	\end{align*}
+	\label{defn:pmf}
+\end{definition}
+
+Notice that the value $p_X(u)=0$ if $u$ is not in the range of $X:\Omega \to \R$. The events $\{X = u\}$ is a partition of $\Omega$, and hence $\sum_{u \in \text{range}(X)} p_X(u) = 1$. The PMF of a random variable gives you all the information you need to analyze the random variable $X$. While analyzing a randomized algorithm, we usually don't have access to the PMF directly, but there are some common PMFs that arise in different random process. 
+
+\subsection{Binomial distribution}
+
+A common random experiment that arises in many scenarios is the following. Consider an experiment that succeeds with probability $p$ and fails with probability $1-p$. We can associate an indicator random variable with this experiment that is $1$ iff the experiment succeeds. Such an indicator random variable is known as a Bernoulli random variable. A natural question that comes up in many situations is to count the number of successes in a run of $n$ iterations of this experiment. This random variable is known as the binomial random variable and the associated PMF is the binomial distribution.
+
+\begin{definition}
+	A random variable $X$ is a binomial random variable with parameters $n$ and $p$ if the PMF of the random variable $X$ is given by 
+	\begin{align*}
+		p_X(i) = \binom{n}{i} p^i (1-p)^{n-i}
+	\end{align*}
+	for $i \in \{0,1,\ldots,n\}$ and $0$ otherwise.
+	\label{defn:binomial}
+\end{definition}
+
+Alternately, you can think of the binomial random variable being the sum of $n$ Bernoulli random variables, though the PMF defines the random variable completely as far as we are concerned. If we think of $X$ as the sum of $n$ Bernoulli random variables with parameter $p$, then by the linearity of expectation, we can easily conclude that $\E[X]=np$. If we were think of the binomial random variable purely in terms of its PMF, then we can explicitly compute its expectation as follows:
+\begin{align*}
+	\E[X] &= \sum_{i=0}^n i \binom{n}{i} p^i (1-p)^{n-i}\\
+	&= \sum_{i=1}^n \frac{n!}{(i-1)!(n-i)!} p^i (1-p)^{n-i} = np\sum_{i=1}^n \frac{(n-1)!}{(i-1)!(n-i)!}p^{i-1}(1-p)^{n-i}\\
+	&=np\sum_{j=0}^{n-1} \binom{n-1}{j}p^j(1-p)^{n-1-j} = np.
+\end{align*}
+
+\subsection{Geometric distribution}
+
+Consider a Bernoulli trial with parameter $p$. We are interested in the number of trials that has to be performed before the first success. The random variable that counts this number is known as a geometric random variable.
+
+\begin{definition}
+	A random variable $X$ is said to be a geometric random variable with parameter $p$ if the PMF associated with $X$ is given by
+	\begin{align*}
+		p_X(i) = (1-p)^{i-1} p.
+	\end{align*}
+\end{definition}
+
+Given the PMF, we can once again explicitly calculate the expectation from the definition.
+\begin{align*}
+	\E[X] &= \sum_{i\geq 1} i (1-p)^{i-1}p \\
+	&= \sum_{i \geq 1} \sum_{j=1}^i (1-p)^{i-1} p = \sum_{j\geq 1} \sum_{i\geq j} p(1-p)^{i-1}\\
+	&= \sum_{j \geq 1} p(1-p)^{j-1} \sum_{i\geq 0} (1-p)^{i} = \sum_{j \geq 1} (1-p)^{j-1}\\
+	&= \frac{1}{p}.
+\end{align*}
+
+An alternate way to compute this probability uses the definition of the random variable to prove the following property of geometric random variables: the probability that the first success will be after $n$ trials from now is independent of the number of failures that you have encountered. To formally state this, we introduce the notion of \emph{conditional expectation}.
+
+For random variables $X$ and $Y$, the conditional expectation of $X$ given that $Y=y$ is given by the sum
+\begin{align*}
+	\E[X|Y=y] &= \sum_{x} x \Pr[X=x|Y=y].
+\end{align*}
+In other words, given that the event $\{Y=y\}$ has occured, what is the new expected value of the random variable $X$. The following facts about conditional expectation is easy verify.
+\begin{fact}
+	For any two random variables $X$ and $Y$, 
+	\begin{align*}
+		\E[X] &= \sum_{y} \Pr[Y=y] \E[X|Y=y].
+	\end{align*}
+\end{fact}
+
+The linearity property naturally extends to conditional expectation as well.
+\begin{fact}
+	Let $X_1, X_2, \ldots, X_n$ be $n$ random variables with finite expectation  and $Y$ be any random variable. Then,
+	\begin{align*}
+		\E\left[ \left(\sum_i X_i\right) | Y=y \right] = \sum_i \E[X_i | Y=y]. 
+	\end{align*}
+\end{fact}
+
+We now formalize the property about geometric random variables stated above.
+\begin{theorem}
+	Let $X$ be a geometric random variable with parameter $p$. Then for any $n>0$, and $k$, we have
+	\begin{align*}
+		\Pr[X = n+k | X > k] = \Pr[X=n]
+	\end{align*}
+	\label{thm:geom-mem}
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		\Pr[X = n+k | X > k] &= \frac{\Pr[(X=n+k) \cap (X>k)]}{\Pr[X>k]}\\
+		&= \frac{\Pr[X=n+k]\Pr[X>k | X=n+k]}{\Pr[X>k]}\\
+		&= \frac{(1-p)^{n+k-1}p}{\sum_{i\geq k}(1-p)^kp} = (1-p)^{n-1}p.
+	\end{align*}
+\end{proof}
+
+We can now obtain a different derivation for the geometric random variable using conditional expectation and the property proved above. Let $X$ be a geometric random variable with parameter $p$, and let $Y$ be an indicator random variable that is $1$ if the first trial succeeded. Now, we can write $\E[X]$ as follows:
+\begin{align*}
+	\E[X] &= \Pr[Y=0]\E[X|Y=0] + \Pr[Y=1]\E[X|Y=1]\\
+	&= (1-p)\E[X|Y=0] + p\E[X|Y=1]
+\end{align*}
+
+If $Y=1$, then $X=1$ and hence $\E[X|Y=1] =1$. But, if $Y=0$, then we can write $X = Z+1$ where $Z$ is again a geometric random variable due to Theorem~\ref{thm:geom-mem}. Thus we have
+\begin{align*}
+	\E[X] &= (1-p)\E[Z+1] + p = (1-p)\E[Z] + 1 = (1-p)\E[X] +1\\
+	&=\frac{1}{p}
+\end{align*}
+
+\subsubsection{The coupon collector's problem}
+
+We will briefly study the coupon collector's problem, that is a special case of a more general paradigm, that arises in many situations in the analysis of randomized algorithms. The basic premise of the problem is the following: There are boxes of cereals, each of which contains one among $n$ different coupons. The coupons are assigned to boxes of cereals at random. In this case, how many boxes of cereals should you buy so that you have at least one coupon of each kind. We will calculate the expected number of boxes that you must buy to collect one coupon of each kind.
+
+So, we want to analyze the random variable $X$ which is number of boxes bought until one coupon of each kind is obtained. Instead of directly arguing about $X$, we try to write $X$ in terms of simpler random variables that can be analyzed easily. Let $X_i$ denote the number of boxes purchased after obtaining $i-1$ different coupons. Clearly, we can write $X = \sum_{i=1}^{n} X_i$, and hence $\E[X] = \sum_{i=1}^n \E[X_i]$. What we will see is that $X_i$ is a geometric random variable.
+
+If $i-1$ different coupons have been collected, then the probability that in the next step, a new coupon is obtained is $1-\frac{i-1}{n}$. Since, the coupons are distributed randomly among the boxes, this probability remains the same for the consequent steps as well. Thus, $X_i$ is a geometric random variable with parameter $p = 1 - \frac{i-1}{n}$. Therefore, $\E[X_i] = \frac{n}{n-i+1}$. Now, we have
+\begin{align*}
+	\E[X] &= \sum_{i=1}^n \E[X_i] = \sum_{i=1}^n \frac{n}{n-i+1}\\
+	&= n \sum_{i=1}^n \frac{1}{n-i+1} = n\sum_{i=1}^n \frac{1}{i}\\
+	&= n\ln n+ \Theta(n).
+\end{align*}
+
+As mentioned earlier, the expectation alone does not provide a satisfactory answer regarding a random variable. In particular, while analyzing randomized algorithms, we will need to measure how closely the random variable associated with the algorithm is concentrated around the expectation. In this particular case of the coupon collector problem, we can do a simpler analysis that shows that the number of boxes that have to be purchased in order to see all the coupons is close to $n\log n + \Theta(n)$ with good probability. 
+
+To do that, let $E_i$ be the event that the first coupon did not appear in the $k$ boxes that were bought. The probability for this event is $\Pr[E_i] = \left(  1- \frac{1}{n} \right)^k\leq e^{-k/n}$. When $k=n\log n + 10n$ say, this probability is bounded by $e^{-10}n^{-1}$. We are interested in the even $\cap \overline{E}_i$ which can be written as
+\begin{align*}
+	\Pr\left[\bigcap \overline{E}_i \right] &= 1 - \Pr\left[ \bigcup E_i \right]\\
+	&\geq 1 - \sum \Pr[E_i], \text{ by the union bound }\\
+	&\geq 1 - e^{-10}
+\end{align*}

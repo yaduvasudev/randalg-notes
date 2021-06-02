@@ -46,6 +46,20 @@ A generalization of this problem is the famous \textit{Polynomial Identity Testi
 
 Here by ${a_1, a_2, \ldots, a_n \in_r S}$ we mean that each $a_i$ is picked from $S$ with replacement. We will use this notation through the lecture notes. Observe that when $n=1$, then the lemma follows from the fundamental theorem of algebra. The lemma can be proved by an induction on $n$ (the number of variables). We will see this shortly.
 
+\subsection{Perfect matching in bipartite graphs}
+
+For a bipartite graph $G(L\cup R,E)$ with $|L| = |R| = n$, a perfect matching $M\subseteq E$ is a set of edges such that not two edges in $M$ share a vertex, and for every vertex $v \in L\cup R$, there is an edge in $M$ with one of the end points as $v$. The perfect matching thus gives a bijection between $L$ and $R$ via the edges in the graph. There are polynomial-time algorithms known for this problem (like the Edmonds-Karp algorithm). In fact, the idea of polynomial-time as the notion of efficiency was first described in a paper by Edmonds that gave a polynomial-time algorithm for the maximum matching problem. What we will see is that using randomization, and in particular PIT, we can give a simple algorithm for testing if a bipartite graph has a perfect matching.
+
+Let $A$ denote the bipartite adjacency matrix of $G$. I.e.\ $A$ is an $n\times n$-matrix with the rows indexed by the vertices in $L$ and the columns indexed by the vertices in $R$ such that $A[i,j] = 1$ iff $(i,j)\in E$. Define an $n\times n$-matrix $P$ as follows:
+\begin{align*}
+	P[i,j] &= A[i,j]x_{ij},
+\end{align*}
+where $x_{ij}$s are variables. Recall that the determinant of $P$ is defined as
+\begin{align*}
+	\Det(P) = \sum_{\pi \in S_n} (-1)^{sgn(\pi)} \prod_{i=1}^n P[i,\pi(i)].
+\end{align*}
+
+Observe that for the matrix $P$ defined as above, the determinant $\Det(P)$ is a polynomial on $n^2$ variables $(x_{ij})$. The monomials of this polynomial are the products $\prod_{i=1}^n P[i,\pi(i)]$. A monomial is non-zero precisely when $\pi$ is a perfect matching in the graph. Furthermore, two different monomials have at least one variable distinct from each other and hence do not cancel each other. Consequently, the polynomial $\Det(P)$ is non-zero precisely when $G$ has a perfect matching. So, the problem of checking the existence of a perfect matching reduces to polynomial identity testing, where the polynomial is the determinant polynomial. When values for the variables are fixed, then we know how to compute the determinant efficiently. Assuming the DeMillo-Lipton-Schwartz-Zippel lemma, this gives a simple randomized algorithm for checking whether a bipartite graph has a perfect matching.
 \section{Sample spaces, events, probability}
 
 Let us recall the notions of sample spaces, events and probability distributions. A randomized algorithm is a random process, and analyzing the algorithm will involve understand the sample space of the random process and the distribution over this sample space. Formally, a \textit{sample space} $\Omega$ is the set of possible outcomes of a random experiment. An \textit{event} $E$ is a subset of $\Omega$. A \textit{probability space} is a $3$-tuple $(\Omega, \mathcal{F},\Pr)$ where $\mathcal{F}$ is the set of subsets of $\Omega$ and $\Pr:\mathcal{F} \to \R$ is a function that satisfy the following conditions:
