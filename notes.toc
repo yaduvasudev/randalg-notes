@@ -21,4 +21,5 @@
 \contentsline {section}{\numberline {3.3}Chernoff-Hoeffding inequalities}{28}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Probability amplification}{30}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Load balancing}{30}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Permutation routing on the hypercube}{31}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Balls and Bins}{32}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Warm-up: Birthday problem}{32}{section.4.1}%

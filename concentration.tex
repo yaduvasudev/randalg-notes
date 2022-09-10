@@ -256,36 +256,4 @@ Let $E_i$ be the event that server $i$ has a load of at most $n/k + 3\sqrt{n\log
 	& \geq 1 - \frac{1}{k^2}.
 \end{align*}
 
-We will see other settings of the balls and bins paradigms in a later part of the course.
-
-\subsection{Permutation routing on the hypercube}
-
-%Let us obtain a better bound for the coupon collector's problem that we studied in the last lecture. We had defined the random variable $X$ that counted the number of boxes that had to be bought to see all the $n$ different coupons. We saw that $\E[X] = \Theta(n\log n)$. Recall that $X = \sum X_i$ where $X_i$ is the number of boxes that had to be bought after to get the $i^{th}$ different coupon after $i-1$ coupons had been obtained. The random variables $X_i$ are independent and hence, to use Chebyshev's inequality we must compute the variance of a geometric random variable.
-%
-%\begin{theorem}
-%	Let $X$ be a geometric random variable with parameter $p$, then
-%	\begin{align*}
-%		\Var(X) = \frac{1-p}{p^2}.
-%	\end{align*}
-%\end{theorem}
-%\begin{proof}
-%	To calculate $\E[X^2]$, we use the same reasoning as in the last lecture. Let $Y$ be an indicator random variable that is $1$ if the first trial succeeded. Then, we have
-%	\begin{align*}
-%		\E[X^2] &= \Pr[Y=0]\E[X^2 | Y=0] + \Pr[Y=1]\E[X^2|Y=1]\\
-%		&= (1-p)\E[X^2|Y=0] + p\E[X^2|Y=1] \\
-%		&= (1-p)\E[X^2|Y=0] +p.
-%	\end{align*}
-%	If $Y=0$, then let $Z$ denote the number of trials after the first trial before success. Therefore, $X^2 = (Z+1)^2$, where $Z$ is a geometric random variable with parameter $p$. So, we can write
-%	\begin{align*}
-%		\E[X^2] &= (1-p)\E[(Z+1)^2] + p\\
-%		&= (1-p)\E[Z^2 +2Z +1] +p = (1-p)\E[X^2] + \frac{2(1-p)}{p} + 1\\
-%		&=\frac{2-p}{p^2}.
-%	\end{align*}
-%	Therefore, $\Var(X) = \frac{1-p}{p^2}$.
-%\end{proof}
-%
-%In the coupon collector problem, $X_i$ is a geometric random variable with parameter $\frac{n-i+1}{n}$. Therefore, the variance of $X_i$ is
-%\begin{align*}
-%	\Var(X_i) &= \frac{1}{p^2} - \frac{1}{p} \\
-%	&= \frac{n^2}{(n-i+1)^2} - \frac{n}{n-i+1}
-%\end{align*}
+We will now see a more detailed analysis of the balls into bins process and its applications.

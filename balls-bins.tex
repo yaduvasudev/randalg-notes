@@ -1,0 +1,12 @@
+\chapter{Balls and Bins}
+
+In this part of the course, we will study the basic balls into bins process, and explore its applications. We will be interested mainly in the questions of the distribution of balls in bins when $n$ balls are thrown uniformly and independently at random into $n$ bins. We will also see that the bounds on the maximum load is related to the running time of hashing using chaining. 
+
+\section{Warm-up: Birthday problem}
+
+Suppose that we throw $m$ balls into $n$ bins. By the pigeonhole principle, we know that if $m > n$, then there surely must exist a bin that has more than one ball. But what should be the value of $m$ so that the probability of there existing a bin with more than one ball is at least $1/2$. It turns out that for this $m$ needs to be only $\Theta(\sqrt{n})$. 
+
+To analyze this problem, notice that for the second ball to land in a bin on its own, the probability is $(1 - 1/n)$. Following this argument further, if the first $i$ balls have all fallen in different bins, the probability of the $(i+1)^{st}$ ball landing in a bin of its own is $(1 - i/n)$. Thus, for all balls to fall into a bin of their own, the probability is given by the expression
+\begin{align*}
+	\left(1 - \frac{1}{n}\right) \left( 1 - \frac{2}{n}\right) \ldots \left(1 - \frac{m-1}{n}\right)
+\end{align*}

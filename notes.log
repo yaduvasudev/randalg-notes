@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.19)  1 JUN 2021 17:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.19)  10 SEP 2022 18:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1501,35 +1501,26 @@ LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 10.5pt on input line 84.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 7.9pt on input line 84.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 84.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\star' on input line 84.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 84.
-
-[15] [16] [17] [18] [19] [20] [21]) (./concentration.tex [22]
+ [15] [16] [17] [18] [19] [20] [21]) (./concentration.tex [22]
 chapter 3.
 [23
 
 ] [24] [25]
 Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
  line 130.
- [26] [27] [28] [29] [30]) [31] (./notes.aux)
+ [26] [27] [28] [29] [30]) (./balls-bins.tex [31]
+chapter 4.
+) [32
+
+] (./notes.aux)
 Package rerunfilecheck Info: File `notes.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 30736 strings out of 479014
- 578427 string characters out of 5863086
+ 30733 strings out of 479014
+ 578395 string characters out of 5863086
  1028603 words of memory out of 5000000
- 47415 multiletter control sequences out of 15000+600000
+ 47407 multiletter control sequences out of 15000+600000
  570688 words of font info for 208 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,15n,130p,10631b,523s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1554,10 +1545,10 @@ blic/newtx/txexs.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txmia
 X.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/txfonts/txsya.pfb><c:/texl
 ive/2020/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb><c:/texlive/2020/texmf
 -dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on notes.pdf (31 pages, 579813 bytes).
+Output written on notes.pdf (32 pages, 581048 bytes).
 PDF statistics:
- 483 PDF objects out of 1000 (max. 8388607)
- 413 compressed objects within 5 object streams
- 154 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 459 PDF objects out of 1000 (max. 8388607)
+ 389 compressed objects within 4 object streams
+ 156 named destinations out of 1000 (max. 500000)
+ 133 words of extra memory for PDF output out of 10000 (max. 10000000)
 
