@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.19)  10 SEP 2022 18:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.19)  26 SEP 2022 09:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1218,82 +1218,103 @@ Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 \@enLab=\toks51
 )
+(c:/texlive/2020/texmf-dist/tex/latex/blkarray/blkarray.sty
+Package: blkarray 2015/02/27 v0.07 Block array (dpc)
+\c@BAenumi=\count328
+\BA@col=\count329
+\BA@block@cnt=\count330
+\BA@final@box=\box143
+\BA@first@box=\box144
+\BA@colsep=\dimen284
+\BA@ftn=\toks52
+\BAextrarowheight=\dimen285
+\BAextraheightafterhline=\dimen286
+\BAarrayrulewidth=\dimen287
+\BAdoublerulesep=\dimen288
+\BAfootskip=\dimen289
+\BA@dashbox=\box145
+\BA@ddashbox=\box146
+)
+(c:/texlive/2020/texmf-dist/tex/latex/multirow/bigstrut.sty
+Package: bigstrut 2021/03/15 v2.8 Provide larger struts in tabulars
+\bigstrutjot=\dimen290
+)
 \drop=\skip96
 LaTeX Font Info:    Trying to load font information for T1+LinuxLibertineT-OsF 
-on input line 80.
+on input line 85.
 
 (c:/texlive/2020/texmf-dist/tex/latex/libertine/T1LinuxLibertineT-OsF.fd
 File: T1LinuxLibertineT-OsF.fd 2017/03/20 (autoinst) Font definitions for T1/Li
 nuxLibertineT-OsF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 80.
+(Font)              scaled to size 12.0pt on input line 85.
 
 (./notes.aux)
 \openout1 = `notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 80.
+LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 85.
 LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line
- 80.
+ 85.
  (c:/texlive/2020/texmf-dist/tex/latex/newtx/omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 85.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
-80.
+85.
 
 (c:/texlive/2020/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 85.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 80.
+ 85.
 
 (c:/texlive/2020/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 85.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 80.
+e 85.
 
 (c:/texlive/2020/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-Package scrbase Info: activating english \contentsname on input line 80.
-Package scrbase Info: activating english \listfigurename on input line 80.
-Package scrbase Info: activating english \listtablename on input line 80.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+Package scrbase Info: activating english \contentsname on input line 85.
+Package scrbase Info: activating english \listfigurename on input line 85.
+Package scrbase Info: activating english \listtablename on input line 85.
 
 (c:/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count328
-\scratchdimen=\dimen284
-\scratchbox=\box143
-\nofMPsegments=\count329
-\nofMParguments=\count330
-\everyMPshowfont=\toks52
-\MPscratchCnt=\count331
-\MPscratchDim=\dimen285
-\MPnumerator=\count332
-\makeMPintoPDFobject=\count333
-\everyMPtoPDFconversion=\toks53
+\scratchcounter=\count331
+\scratchdimen=\dimen291
+\scratchbox=\box147
+\nofMPsegments=\count332
+\nofMParguments=\count333
+\everyMPshowfont=\toks53
+\MPscratchCnt=\count334
+\MPscratchDim=\dimen292
+\MPnumerator=\count335
+\makeMPintoPDFobject=\count336
+\everyMPtoPDFconversion=\toks54
 ) (c:/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1303,9 +1324,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@mv@tabular=\count334
-\c@mv@boldtabular=\count335
-Package hyperref Info: Link coloring ON on input line 80.
+\c@mv@tabular=\count337
+\c@mv@boldtabular=\count338
+Package hyperref Info: Link coloring ON on input line 85.
 
 (c:/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1316,11 +1337,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (c:/texlive/2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count336
+\c@section@level=\count339
 )
-LaTeX Info: Redefining \ref on input line 80.
-LaTeX Info: Redefining \pageref on input line 80.
-LaTeX Info: Redefining \nameref on input line 80.
+LaTeX Info: Redefining \ref on input line 85.
+LaTeX Info: Redefining \pageref on input line 85.
+LaTeX Info: Redefining \nameref on input line 85.
 
 (./notes.out) (./notes.out)
 \@outlinefile=\write4
@@ -1333,24 +1354,24 @@ Class scrreprt Info: loading recommended package `bookmark'.
 (scrreprt)           `bookmarkpackage=false' before \begin{document} and
 (scrreprt)           you can avoid this message adding:
 (scrreprt)             \usepackage{bookmark}
-(scrreprt)           before \begin{document} on input line 80.
+(scrreprt)           before \begin{document} on input line 85.
 
 (c:/texlive/2020/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
 
 (c:/texlive/2020/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
-\BKM@id=\count337
+\BKM@id=\count340
 ))
 \Etoc@tf=\read4
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 24.88pt on input line 82.
+(Font)              scaled to size 24.88pt on input line 87.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/sc' will be
-(Font)              scaled to size 24.88pt on input line 82.
+(Font)              scaled to size 24.88pt on input line 87.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 82.
+(Font)              scaled to size 14.4pt on input line 87.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
-(Font)              scaled to size 14.4pt on input line 82.
+(Font)              scaled to size 14.4pt on input line 87.
 \tf@toc=\write5
 \openout5 = `notes.toc'.
 
@@ -1358,57 +1379,57 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
 
 {c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-OsF o
-n input line 86.
+n input line 91.
 
 (c:/texlive/2020/texmf-dist/tex/latex/libertine/T1LinuxBiolinumT-OsF.fd
 File: T1LinuxBiolinumT-OsF.fd 2017/03/20 (autoinst) Font definitions for T1/Lin
 uxBiolinumT-OsF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 86.
+(Font)              scaled to size 12.0pt on input line 91.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 86.
+(Font)              scaled to size 12.0pt on input line 91.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/b/n' will be
-(Font)              scaled to size 24.88pt on input line 86.
+(Font)              scaled to size 24.88pt on input line 91.
 LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TLF
- on input line 86.
+ on input line 91.
 
 (c:/texlive/2020/texmf-dist/tex/latex/libertine/OT1LinuxLibertineT-TLF.fd
 File: OT1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for OT1/
 LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 86.
+(Font)              scaled to size 12.0pt on input line 91.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.8pt on input line 86.
+(Font)              scaled to size 8.8pt on input line 91.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 86.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 86.
+(Font)              scaled to size 6.6pt on input line 91.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 91.
 
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 91.
 
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-86.
+91.
 
 (c:/texlive/2020/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-86.
+91.
 
 (c:/texlive/2020/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-86.
+91.
 
 (c:/texlive/2020/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
@@ -1510,45 +1531,75 @@ Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
  line 130.
  [26] [27] [28] [29] [30]) (./balls-bins.tex [31]
 chapter 4.
-) [32
+) (./online.tex [32
 
-] (./notes.aux)
+]
+chapter 5.
+[33
+
+] [34] [35] [36]
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/m/it' will be
+(Font)              scaled to size 12.0pt on input line 94.
+ [37]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 129.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 129.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 7.3pt on input line 129.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 5.5pt on input line 129.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 10.0pt on input line 129.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 7.3pt on input line 129.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 5.5pt on input line 129.
+ [38]
+Package hyperref Info: bookmark level for unknown corollary defaults to 0 on in
+put line 164.
+ [39] [40] [41] [42]
+Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
+line 257.
+ [43] [44]) [45] (./notes.aux)
 Package rerunfilecheck Info: File `notes.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 30733 strings out of 479014
- 578395 string characters out of 5863086
- 1028603 words of memory out of 5000000
- 47407 multiletter control sequences out of 15000+600000
- 570688 words of font info for 208 fonts, out of 8000000 for 9000
+ 31147 strings out of 479014
+ 583905 string characters out of 5863086
+ 1033125 words of memory out of 5000000
+ 47736 multiletter control sequences out of 15000+600000
+ 601934 words of font info for 245 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,15n,130p,10631b,523s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_fygcup.enc}{c:/tex
-live/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc}{c:/texlive/2020
-/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{c:/texlive/2020/texmf-di
-st/fonts/enc/dvips/libertine/lbtn_urpt4g.enc}{c:/texlive/2020/texmf-dist/fonts/
-enc/dvips/libertine/lbtn_ouu7z6.enc}{c:/texlive/2020/texmf-dist/fonts/enc/dvips
+{c:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_ouu7z6.enc}{c:/tex
+live/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_fygcup.enc}{c:/texlive/2020
+/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc}{c:/texlive/2020/texmf-di
+st/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{c:/texlive/2020/texmf-dist/fonts/
+enc/dvips/libertine/lbtn_urpt4g.enc}{c:/texlive/2020/texmf-dist/fonts/enc/dvips
 /libertine/lbtn_6mhf45.enc}{c:/texlive/2020/texmf-dist/fonts/enc/dvips/libertin
 e/lbtn_ulngvd.enc}{c:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_vp
 eqwl.enc}<c:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.p
 fb><c:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI7.pfb><c
 :/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathRM.pfb><c:/texl
-ive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTB.pfb><c:/texlive/
-2020/texmf-dist/fonts/type1/public/libertine/LinLibertineMT.pfb><c:/texlive/202
-0/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb><c:/texlive/2020/te
-xmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb><c:/texlive/2020/texmf
--dist/fonts/type1/public/libertine/LinLibertineTI.pfb><c:/texlive/2020/texmf-di
-st/fonts/type1/public/libertine/LinLibertineTZ.pfb><c:/texlive/2020/texmf-dist/
-fonts/type1/public/newtx/NewTXMI.pfb><c:/texlive/2020/texmf-dist/fonts/type1/pu
-blic/newtx/txexs.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txmia
-X.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/txfonts/txsya.pfb><c:/texl
-ive/2020/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb><c:/texlive/2020/texmf
--dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on notes.pdf (32 pages, 581048 bytes).
+ive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb><c:/texlive/2
+020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTB.pfb><c:/texlive/2020/
+texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb><c:/texlive/2020/texm
+f-dist/fonts/type1/public/libertine/LinLibertineMT.pfb><c:/texlive/2020/texmf-d
+ist/fonts/type1/public/libertine/LinLibertineT.pfb><c:/texlive/2020/texmf-dist/
+fonts/type1/public/libertine/LinLibertineTB.pfb><c:/texlive/2020/texmf-dist/fon
+ts/type1/public/libertine/LinLibertineTI.pfb><c:/texlive/2020/texmf-dist/fonts/
+type1/public/libertine/LinLibertineTZ.pfb><c:/texlive/2020/texmf-dist/fonts/typ
+e1/public/newtx/NewTXMI.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/newt
+x/txexs.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb><c:
+/texlive/2020/texmf-dist/fonts/type1/public/txfonts/txsya.pfb><c:/texlive/2020/
+texmf-dist/fonts/type1/public/txfonts/txsyb.pfb><c:/texlive/2020/texmf-dist/fon
+ts/type1/public/newtx/txsys.pfb>
+Output written on notes.pdf (45 pages, 698806 bytes).
 PDF statistics:
- 459 PDF objects out of 1000 (max. 8388607)
- 389 compressed objects within 4 object streams
- 156 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 626 PDF objects out of 1000 (max. 8388607)
+ 537 compressed objects within 6 object streams
+ 227 named destinations out of 1000 (max. 500000)
+ 181 words of extra memory for PDF output out of 10000 (max. 10000000)
 

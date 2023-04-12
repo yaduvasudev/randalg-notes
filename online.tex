@@ -1,0 +1,335 @@
+\chapter{Online algorithms}
+
+This part of the course deals with \emph{online algorithms}. By this we mean that the input is revealed one at a time to the algorithm, and the algorithm must make an irrevocable decision every time it is revealed a part of the input. The algorithm does not have the benefit of hindsight to go back and correct a locally optimal decision it had made earlier. 
+
+To measure the performance of such an algorithm, we calculate its \emph{competitive ratio}. This quantity measures the value output by the online algorithm on a particular sequence of input to the value that is output by the optimal algorithm for the same sequence. This optimal algorithm could even by offline, in the sense that it can make its decisions after seeing all the input. Formally, we define the notion of competitive ratio as follows.
+
+\begin{definition}
+	[Competitive ratio]
+	An online algorithm $A$ for a computational problem $\mathcal{P}$ is said to have a competitive ratio of $c$ if there exists a constant $\delta$ such that for every input sequence $\sigma_1, \sigma_2, \ldots, \sigma_n$, the value return by $A$, given by $f_A(\sigma_1, \sigma_2, \ldots, \sigma_n)$ is such that
+	\begin{align*}
+		f_A(\sigma_1,\sigma_2,\ldots,\sigma_n) \leq c\cdot f_{\opt}(\sigma_1,\sigma_2,\ldots,\sigma_n) + \delta.
+	\end{align*}
+	\label{def:comp-ratio}
+\end{definition}
+
+We will start with a small warm-up problem to set the stage.
+
+\section{Warm up: Bipartite matching}
+
+Let us start with the problem on online bipartite matching. In this problem, we have a bipartite graph $G(L\cup R, E)$ where the vertices in the set $L$ is known beforehand. The set of vertices in $R$ is revealed one at a time. When a vertex $v \in R$ is revealed, then all the neighbors $N(v)$ of $v$ are revealed. Let us start with a deterministic algorithm. We will see that the deterministic algorithm achieves a competitive ratio of $1/2$, and that this is the best ratio achievable by any deterministic algorithm.
+
+Consider the following greedy algorithm. When a new vertex $v$ is revealed with the edges, choose an edge arbitrarily that can be included in the current matching. We start with the the empty matching. Note that this algorithm is the greedy algorithm to construct a maximal matching.
+
+\begin{theorem}
+	The greedy algorithm for maximal matching is $2$-competitive.
+	\label{thm:maximal}
+\end{theorem}
+\begin{proof}
+	If $M$ is a maximal matching and $M^\star$ is a maximum matching, we will see that $|M^\star| \leq 2|M|$. This follows from the following two observations.
+	\begin{enumerate}
+		\item For every edge $(u,v) \in M^\star - M$, one of the edges incident on $v$ or $u$ must be in the maximal matching, since otherwise $M$ cannot be maximal.
+		\item For every edge $(u,v) \in M - M^\star$, at most $2$ edges incident on $u$ and $v$ can be in the maximum matching $M^\star$.
+	\end{enumerate}
+	Both the observations together imply that $|M^\star| \leq 2|M|$.
+\end{proof}
+
+We can also see that this is the best ratio achievable by any deterministic online algorithm for bipartite matching. To see this, consider the graph where $L$ consists of two vertices $u_1, u_2$. Now the first vertex $v_1$ in $R$ that comes is connected to both $u_1$ and $u_2$. No matter which edge the deterministic algorithm chooses in the matching, say $(u_1, v_1)$, the next vertex $v_2$ will be connected to $u_1$. So, the graph looks as follows.
+
+Clearly, the maximum matching is of size $2$, whereas the deterministic algorithm gives a matching of size $1$.
+
+Online bipartite matching is a special case of a more general problem that has received a lot attention in recent years. This is the AdWords problem. Consider the way a company like Google generates the revenue through ads. Whenever a user searches a keyword, the search engine displays a bunch of ads related to the searched keywords together with the search results. If the user clicks on any of the ads, the entity that displays the ad pays Google some revenue. This is modelled as follows: There is a set of $n$ sellers that are known beforehand. Whenever a new keyword is searched, the $n$ sellers provide the bid for that item. The job of the search engine is to assign that keyword to one of the sellers whose ad will be displayed. Each keyword can be assigned to at most one seller, and the aim of the search engine is to maximize its revenue. The sellers are constrained by a budget, and hence cannot be assigned keywords such that the sum exceeds its budget. Bipartite matching is a special case, where each seller has unit budget, and make a $0-1$ bid for every keyword that appears.
+
+We will see that if we allow randomization, then online bipartite matching has an algorithm with competitive ratio $1 - 1/e$. Furthermore, this is the best that can be achieved by any online algorithm for bipartite matching. We will see this a little later.
+
+\section{Online paging}
+
+Consider the problem of maintaining a cache memory of size $k$ in response to a sequence of requests. If the request corresponds to a page already present in the cache, then it can be serviced quickly and is known as a \emph{hit}. If the request is not present in the cache, then the page has to be brought in from say the main memory, which is a slow memory, into the cache. This is known as a \emph{cache miss} or a \emph{fault}. At every cache fault, we must necessarily evict an item from the cache to make room for the new item. The goal is to design a scheme that chooses the best item to evict so that the number of cache faults is minimized. It is not hard to see that for any deterministic online paging algorithm, it is possible to construct a sequence of request adversarially such that the algorithm faults on every request. We will see this when we prove lower bounds on the competitive ratio of paging algorithms.
+
+\subsection{Deterministic online paging}
+First, we will start with some deterministic algorithms. A simple algorithm, that is also used a lot in practice, is the LRU (Least-Recently-Used) scheme. In this algorithm, whenever a request for a page that is not in the cache comes, we choose the page that was requested farthest in the past to evict. We will see that LRU is $k$-competitive, and that any deterministic algorithm that is $c$-competitive must have $c \geq k$. What does an optimal (possibly offline) algorithm for paging look like? This is obtained by the LFD (Longest-Future-Distance) scheme, where we choose the item that will be requested farthest in the future to be evicted in case of a cache fault. Notice that this is necessarily an offline algorithm.
+
+\begin{theorem}
+	The LRU algorithm is $k$-competitive.
+	\label{thm:paging-det-ub}
+\end{theorem}
+\begin{proof}
+	We will divide the sequence of requests $\sigma_1,\sigma_2,\ldots,\sigma_n$ into rounds where a round is a maximal set of requests that generate $k$ cache misses for the LRU algorithm. We will then show that in each round, the optimal algorithm must fault at least once. This will prove the bound on the competitiveness ratio.
+	
+	Consider an arbitrary round $i$. We will consider two cases.
+	\begin{enumerate}
+		\item Case 1: There is a page $\sigma_j$ that generated two faults in round $i$. Consider the sequence between these two faults for $\sigma_j$. The reason for the second fault is that even though $\sigma_j$ was brought into the cache, it was evicted at some later stage. Since LRU evicts a page that was requested farthest in the past, this means that there must have been at least $k-1$ different requests before $\sigma_j$ was evicted. Hence, in round $i$ there must have been at least $k+1$ different requests - one for the first $\sigma_j$ request, then the $k-1$ other requests before $\sigma_j$ was evicted, and finally the request for $\sigma_j$ that brought it back into the cache. Since the cache size is only $k$, no matter what the optimal algorithm does it must fault at least once on $k+1$ requests.
+		\item Case 2: Suppose that all the $k$ faults in round $i$ were for distinct items. Now let $\sigma_i$ be the last request in round $i-1$. Notice that the page $\sigma_i$ is present in the cache for the LRU algorithm and the optimal algorithm. Suppose that $\sigma_i$ was not one of the $k$ faults in round $i$. This means that there are $k$ distinct page requests other than $\sigma_i$, and hence the optimal algorithm must fault at least once. 
+		
+		On the other hand, if $\sigma_i$ was one of the $k$ distinct faults. This means that on one of the requests in round $i$, $\sigma_i$ was evicted. Since LRU evicts the least recently used element, and $\sigma_i$ was the last request in round $i-1$, there must have been at least $k-1$ different requests before that. Together with the request that evicted $\sigma_i$ and the request for $\sigma_i$ that generated a miss, this means there were $k+1$ distinct requests in round $i$. Hence, the optimal algorithm must have faulted at least once.
+	\end{enumerate}
+\end{proof}
+
+We will now see that this is the best achievable if we restrict ourselves to deterministic algorithm. The idea is to show that given a deterministic algorithm, we can always generate a sequence of requests that forces the algorithm to miss on every request. 
+
+For concreteness let $A$ be a fixed deterministic online paging algorithm, and suppose we start with a cache with $k$ items. The first request will be an element that is not one of these elements. Thus, we have a set $S$ of $k+1$ elements such that every request will be an item from this set. In particular, the $i^{th}$ request will be the elements currently not in the cache according to the algorithm $A$. Thus, the algorithm has a cache miss on each of the requests. To understand the behaviour of the optimal algorithm, let us divide the request sequence into rounds where a round is a maximal sequence of requests that contain $k$ distinct requests. Note that $A$ has at least $k$ faults in a round. Let us now argue that the optimal algorithm (LFD) will miss at most once in a round. 
+
+Since a round contains $k$ distinct requests, there is some element in $S$ that was never requested in that round. The optimal algorithm will then evict that item at the first miss in the round. This guarantees that there are no more misses in that round. Thus, we have shown the following.
+
+\begin{theorem}
+	For any $c$-competitive deterministic paging algorithm must have $c \geq k$.
+	\label{thm:paging-det-lb}
+\end{theorem}
+
+\subsection{Randomized online paging}
+
+In this part, we will see that randomized algorithms can achieve better guarantees on the competitive ratio. To study randomized algorithms, we need a suitable way to define the competitive ratio. Notice that in the case of a deterministic algorithm, the adversary who constructs the requests have complete information about the algorithm, and hence can tell clearly the request that the algorithm will make in any step.
+
+In the case of a randomized algorithm, the algorithm has access to random coins. Now, even if the adversary knows the randomized algorithms, it might still not know the exact sequence of the pages evicted by the algorithm since that also depends on the random coins of the algorithm. This can potentially mean that we have an algorithm that has a better competitive ratio. To formalize this notion, let us define what an \emph{oblivious adversary} is.
+
+We can think of an oblivious adversary as someone who knows the randomized algorithm, but has no access to the random coins that is used by the algorithm in its execution. Thus we can think of an oblivious adversary looking at the source code of the randomized algorithm and generating a sequence of requests. The oblivious adversary then runs the optimal (possibly offline) algorithm on this sequence. Notice that the outcome of the optimal algorithm is deterministic. But now, the outcome of the online algorithm is a random variable that depends on its internal coin tosses. Like before, we say that a randomized online algorithm has a competitive ratio of $c$ if there is a $\delta$ such that for every sequence $\sigma_1, \sigma_2, \ldots, \sigma_n$, we have
+\begin{align*}
+	\E(f_A(\sigma_1,\sigma_2,\ldots,\sigma_n)) \leq c. f_{\opt}(\sigma_1, \sigma_2, \ldots, \sigma_n) + \delta.
+\end{align*}
+Here the expectation is over the internal coin tosses on the algorithm $A$. We will show that there is an online paging algorithm with a competitive ratio of $2H_k$, and that there is an almost matching lower bound. First we will describe the randomized paging algorithm.
+
+This is known as the \marker algorithm. In this algorithm, we have a marker bit associated with each cache location. The algorithm is divided into rounds. Each round start with the marker bits all set to $0$. When a cache request comes, if the element is present in the cache, the corresponding bit is set to $1$, if it is not already so. If the request is a miss, we choose a location uniformly at random from all the positions whose bits are $0$, evict that item and put the new item in that location. The corresponding bit is set to $1$. Once all the bits are set to $1$, the round is completed when a cache request to an item not currently in the cache arrives. At this stage all the marker bits are set to $0$, and the next round starts.
+
+\begin{theorem}
+	The \marker algorithm is $2H_k$-competitive.
+	\label{thm:rand-paging-ub}
+\end{theorem}
+\begin{proof}
+	Our analysis is quite similar to what we saw earlier. We will divide the sequence of requests into rounds, then give an upper bound on the expected number of cache misses by the \marker algorithm and lower bound for the number of misses by the optimal algorithm. Here the notion of a round is what is defined by the \marker algorithm. In a particular round $i$, let $I_O$ denote the items that were requested in round $i$ and in round $i-1$, and let $I_N$ denote the items that were requested in round $i$, but not in round $i-1$. 
+	
+	Firstly, note that for each item in $I_N$, the \marker algorithm will fault. This is because round $i-1$ ended when the first request to an element not in cache arrived with all the marker bits set to $1$. The only way a marker bit is set to $1$ is when that particular element is requested. Once the marker bit is set to $1$, the corresponding element is never evicted in that round. 
+	
+	Our aim is to find the expected number of elements in $I_O$ that faults in round $i$. Consider the $j^{th}$ element in $I_O$ when it is first requested in round $i$. Now, the positions where the first $j-1$ elements of $I_O$ were occupied at the start of round $i$ have their bit set to $1$ since either one of the $j-1$ elements is already present there and was requested, or it was evicted and a new element from $I_N$ is placed there and the bit is set to $1$. So, out of the at most $|I_N| + j - 1$ distinct requests preceding the request for the $j^{th}$ item in $I_O$, $j-1$ requests have been placed in the position corresponding to the first $j-1$ elements in $I_O$. The remaining at most $|I_N|$ requests are placed in the remaining $k - j + 1$ positions, one of which is the position where item $j$ is. Therefore, the probability that there is a cache miss on item $j$ is at most $|I_N|/(k - j + 1)$. Let us call $|I_N| = n_i$, the number of new requests in round $i$. Thus, we have the probability of a cache miss on item $j$ to be $n_i/(k-j+1)$.
+	
+	Thus the expected number of cache misses in round $i$ of the algorithm is given by
+	\begin{align*}
+		n_i + \sum_{j=1}^{k-n_i} \frac{n_i}{k-j+1} &= n_i + n_i\sum_{\ell = n_i + 1}^k \frac{1}{\ell}\\
+		&= n_i + n_i(H_k - H_{n_i})\\
+		&\leq n_i H_k.
+	\end{align*}
+	The total number of misses across the entire request sequence is therefore $H_k \sum_{i=1}^p n_i$ where $p$ is the number of rounds.
+	
+	Now, let us look at the case of the optimal paging algorithm and the number of its cache misses. Consider a round $i$, and let $n_i$ be the new items that were requested in round $i$. Suppose that $d_i$ was the number of elements present in the cache of the offline algorithm that are not present in the cache of the \marker algorithm at the start of a round $i$. This means that the offline algorithm has at least $n_i - d_i$ cache misses in round $i$. Similarly, the offline algorithm has $d_{i+1}$ elements in the cache after round $i$ that are not in the \marker algorithm. Now, every element in the cache of the \marker algorithm was requested in round $i$. So, if there are $d_{i+1}$ elements in the offline algorithm that are not in the cache of the \marker algorithm, there must have been at least $d_{i+1}$ cache misses for the offline algorithm. So, we can say that the number of cache misses in round $i$ is at least $(n_i - d_i + d_{i+1})/2$. At the start of round $1$, both the algorithms start with the same cache content, and hence $d_1 = 0$. Thus the total number of cache misses by the offline algorithm is at least $(\sum_{i=1}^p n_i)/2$, and this gives the $2H_k$ bound on the competitive ratio.
+\end{proof}
+
+\section{Yao's minimax principle and lower bounds}
+
+We will now see a generic method to prove lower bounds against randomized models of computation, and use it to show that any paging algorithm must have a competitive ratio of at least $H_k$. 
+
+Consider a \emph{two-player zero-sum game} between a row player $(R)$ and a column player $(C)$. By a zero-sum game, we mean that every play has a winner and an associated payoff that the loser gives to the winner. Such a game can be characterized by an $m\times n$ matrix $M$ known as the \emph{payoff matrix}. The $m$ rows of $M$ correspond to the actions of $R$, and the $n$ columns of $M$ correspond to the actions of $C$. Then entry $M_{ij}$ corresponds to the payoff that $R$ received from $C$ when $R$ plays $i$ and $C$ plays $j$. For instance, the classical rock-paper-scissors game can be characterized by the following payoff matrix: $-1$ indicates that the column player wins and the row player has to pay the payoff to the column player.
+\begin{align*}
+\begin{blockarray}{cccc}
+	& Rock & Paper & Scissors \\
+	\begin{block}{c[ccc]}
+		Rock & 0 & -1 & 1 \\
+		Paper & 1 & 0 & -1 \\
+		Scissors & -1 & 1 & 0 \\
+	\end{block}
+\end{blockarray}
+\end{align*}
+
+What would a good strategy for $R$ look like? There are $3$ possible actions, and for each there is a minimum payoff that he/she receives irrespective of the actions of the player $C$. If $R$ is unaware of the actions of $C$, then the best possible strategy for $R$ is to choose the action that maximizes the minimum payoff that he/she can receive. Similarly for the column player $C$, he/she plays the action that minimizes the maximum payoff that $C$ has to pay $R$ among all his/her actions. The game is said to have a value if 
+\begin{align*}
+	\max_{i} \min_{j} M_{ij} = \min_{j} \max_{i} M_{ij}.
+\end{align*}
+In other words, if there exists such an action, then this is the best possible strategy for either of the players if they do not now know the action of the other player. Notice that not all games have such a value - see the example of the rock-paper-scissors game. There $\max_{i} \min_{j} M_{ij} = -1$ and $\min_{j} \max_{i} M_{ij} = 1$.
+
+In particular, it is possible to observe the following statement.
+\begin{lemma}
+	For every payoff matrix $M$ of a two-player zero-sum game, we have
+	\begin{align*}
+		\max_{i} \min_{j} M_{ij} \leq \min_{j} \max_{i} M_{ij}.
+	\end{align*}
+	\label{lem:pure-strat}
+\end{lemma}
+
+A strategy where the player choose a fixed action is known as a \emph{pure strategy}. What we have seen is that there need not exist an equilibrium pure strategy for the game. On the other, if we look at \emph{mixed strategies}, then indeed such equilibriums exist. A mixed strategy is a probability distribution over the actions of the corresponding player. The player then chooses an action according to this probability distribution. 
+
+Consider a distribution $\dist{p}$ over the rows of $M$, and a distribution $\dist{q}$ over the columns of $M$. Now, instead of looking at the payoff directly, we will be interested in the expected payoff. This can be easily seen to be
+\begin{align*}
+	\sum_{i=1}^m \sum_{j=1}^n p_i q_j M_{ij} = \dist{p}^TM\dist{q}.
+\end{align*}
+Like in the case of pure strategies, the goal of the row player is to choose a distribution $\dist{p}$ such that irrespective of the mixed strategy of $C$, the expected payoff is maximized. But, unlike in the case of pure strategies, there is always an equilibrium for mixed strategies. 
+\begin{theorem}[von Neumann Minimax Theorem]
+	Let $M$ be a payoff matrix for a two-player zero-sum game. Then,
+	\begin{align*}
+		\max_{\dist{p}} \min_{\dist{q}} \dist{p}^T M \dist{q} = \min_{\dist{q}} \max_{\dist{p}} \dist{p}^TM\dist{q}.
+	\end{align*}
+	\label{thm:vn-minimax}
+\end{theorem}
+
+Notice that if $\dist{p}$ is fixed, then $\dist{p}^TM \dist{q}$ is a convex sum of the elements of the row vector $\dist{p}^TM$. Consequently, the distribution $\dist{q}$ that minimizes the inner product is the one that puts all the mass on the index with the smallest value. Thus, we have a simply corollary to the minimax theorem that we will use to build the framework for our lower bound proofs.
+
+\begin{corollary}
+	Let $M$ be a payoff matrix for a two-player zero-sum game. Then,
+	\begin{align*}
+		\max_{\dist{p}}\min_j \dist{p}^TM\dist{e}_j = \min_{\dist{q}}\max_i \dist{e}_i^TM \dist{q}.
+	\end{align*}
+\end{corollary}
+
+Yao's minimax principle is essentially a restatement of the minimax theorem, when a randomized algorithm is viewed as a game. We can think of a game between an algorithm designer and an adversary in the following way: the aim of the designer is to come up with an algorithm that has good performance guarantees on every input, whereas the goal of the adversary is to come up with an input where the algorithm fares poorly. We can think of this as a zero-sum game with a payoff matrix where rows are indexed by the inputs $\mathcal{I}$ and the columns are indexed by algorithms $\mathcal{A}$. The value $M_{ij}$ is the cost of the algorithm $A_j$ on the input $I_i$. For caching algorithms, the cost will be the number of cache misses for the caching algorithm $A_j$ on the input sequence $I_i$.
+
+Observe that we can think of a randomized algorithm as a distribution $\dist{a}$ over the set of all deterministic algorithms on inputs of length $n$, say. Thus, the minimax theorem tells us that 
+\begin{align*}
+	\max_{\dist{i}} \min_{\dist{A}} \E_{\substack{A\sim \dist{a}\\ I\sim \dist{i}}}[c(A,I)] = \min_{\dist{a}} \max_{\dist{i}} \E_{\substack{A\sim \dist{a}\\ I\sim \dist{i}}}[c(A,I)].
+\end{align*}
+where $c(A,I)$ is the number of misses for the deterministic algorithm $A$ on the input $I$. Furthermore, from the corollary of the minimax theorem, we can say that
+\begin{align*}
+	\max_{\dist{i}} \min_A \E_{I\sim \dist{i}} [c(A,I)] = \min_{\dist{a}} \max_I \E_{A\sim \dist{a}} [c(A,I)].
+\end{align*}
+From this, we can conclude the following about any distribution $\dist{a}$ and $\dist{i}$.
+\begin{align*}
+	\min_A \E_{I\sim \dist{i}}[c(A,I)] \leq \max_I\E_{A\sim \dist{a}}[c(A,I)].
+\end{align*}
+Notice that the right-hand side of the inequality is the worst-case expected number of cache misses for a randomized algorithm $\dist{a}$, and the left-hand side is the minimum number of expected misses for any deterministic paging algorithm when the input sequence is distributed according to $i$. Thus, we can conclude the following, which is referred to as Yao's minimax principle.
+\begin{theorem}[Yao's minimax principle]
+	Suppose there exists a distribution $\dist{i}$ over inputs such that every deterministic algorithm incurs an expected cost (over the input distribution) of $c$. Then, any randomized algorithm will incur an expected cost of at least $c$.
+	\label{thm:yao}
+\end{theorem}
+
+We will now apply Yao's minimax principle to obtain a lower bound on the expected number of cache misses for any paging algorithm.
+
+\subsection{Lower bound for online paging}
+
+We will prove the following theorem in this subsection. The idea is to design a distribution over inputs such that every deterministic paging algorithm will incur a large number of cache misses in expectation, and conclude using the minimax principle. 
+
+\begin{theorem}
+	If an online algorithm for paging (randomized or deterministic) is $c$-competitive, then $c \leq H_k$.
+	\label{thm:lb-pagin}
+\end{theorem}
+\begin{proof}
+	We start by defining a distribution over inputs such that any deterministic paging algorithm will incur a large cost. Let $S$ be the set of elements in the cache at the start, and let $i$ be some element that is not present in the cache. Our cache request will be from the set $I = S \cup \{i\}$. The first request will be the element $i$. Thereafter, if the current request was $\sigma_i$, then the next request will be an item chosen uniformly at random from $I \setminus \sigma_i$. 
+	
+	Once again, we will divide the request sequence into rounds where a round consists of $k$ distinct requests, and end just before the $k+1^{st}$ distinct element is requested. We will argue that any deterministic algorithm will have at least $H_k$ cache misses, whereas the optimal algorithm will have at most one cache miss per round. 
+	
+	The bound for the optimal algorithm is essentially the same as what we saw before. Since the $k+1^{st}$ distinct element is requested only in the next round and since all the requests are from a set of $k+1$ elements, we can evict the $k+1^{st}$ if there is a cache miss. Now we can be sure that there will be no more cache misses in the current round.
+	
+	For any deterministic algorithm, the state of the algorithm at a step $i$ of the request sequence is fully characterized by the element not present in the cache at that point. The deterministic algorithm will have a cache miss iff the next element in the sequence is the element that is outside the cache. Since we never request the same element twice in a row, and the requested element is chosen at random from the remaining elements, the probability of a cache miss is $1/k$. To complete, we need to bound the expected length of a round.
+	
+	To do this, think of the complete graph on the vertex set $I$. At the beginning of a round we are at a vertex $v \in I$, and every request consists of choosing random neighbor and moving to that neighbor. The round ends precisely when we have visited every vertex in the graph. Once we have visited $i$ vertices, the probability that the next vertex will be an unvisited vertex is $(k-i+1)/k$. Thus the expected number of steps before visiting and unvisited vertex is $k/(k-i+1)$. Thus, similar to the bound on the coupon collector problem, we can conclude that the expected length of a round is $kH_k$. This concludes the argument that the expected number of cache misses for any deterministic algorithm is at most $H_k$ per round.
+\end{proof}
+
+\section{Bipartite matching revisited}
+
+Let us go back to the online bipartite matching problem. We will start with an observation that any deterministic algorithm for online bipartite matching cannot achieve a competitive ratio better than $2$. This follows from the following simple example. Suppose that $L$ consists of two vertices $u_1$ and $u_2$. Now, the first vertex in $R$ is $v_1$ and its edges are $(u_1, v_1)$ and $(u_2, v_1)$. The online algorithm must choose one of these edges in the matching, say $(u_1, v_1)$. Now, the adversary will reveal $v_2$ with the edge $(u_1, v_2)$. This edge cannot be added to the matching and hence the size of the matching obtained is $1$ whereas the best offline algorithm gives a matching of size $2$. 
+
+The bipartite matching problem is a special case of a more general problem known as the AdWords problem, where you have a set of sellers $L$ and a set of keywords $K$. Each seller $l_i$ has a valuation $v_j$ for the $j^{th}$ keyword - this is the amount the seller is willing to pay for their ad to be displayed when the keyword is searched. Now, the keywords come online and the valuations for each of the sellers for that keyword is revealed. You have to assign the keyword to a seller and you receive the revenue you receive is the valuation of that keyword given by the seller. Your goal is to maximize the revenue, subject to the constraint that every seller has a budget beyond which he/she is not willing to buy a keyword. It is easy to see that the bipartite matching problem is an instance of the AdWords problem when each seller has unit budget and has a valuation that is either $0$ or $1$ for every keyword.
+
+We will now see a randomized online algorithm for bipartite matching that achieves a competitive ratio of $1 - 1/e$. It can also be shown using the minimax principle that this is the best bound achievable by any online algorithm. We now describe this algorithm, \ranking, first described by Karp, Vazirani and Vazirani.
+
+\begin{algorithm}[h]
+	\KwIn{$G(L,R,E)$, where $L$ is known and $R$ is revealed online}
+	
+	Choose a permutation $\pi$ uniformly at random and order vertices of $L$ according to $\pi$
+	
+	$M \gets \emptyset$
+	
+	\ForEach{$v\in R$ and its neighbors $N(v)$ revealed online}{
+		Find the first vertex $u \in N(v)$ (according to $\pi$) that is unmatched
+		
+		$M \gets M \cup \{u,v\}$
+	}
+	\label{alg:ranking}
+	\caption{\ranking}
+\end{algorithm}  
+
+We will show that the matching computed by \ranking is a $1-1/e$-approximation of a maximum matching. More precisely, we will show that the expected size of the matching computed by \ranking (where the expectation is over the random permuation in Step~$1$) is at least $(1-1/e)\cdot \opt$, where $\opt$ is the size of the maximum matching.
+
+To that end, we will view this algorithm as a market process between buyers and items. Let $L$ be a set of items such that each item $i$ has a price $p_i$. Now, $R$ consists of a set of buyers where each buyer $j$ has a valuation $v_j(i)$ for each item item $i \in N(j)$. The utility of an item $i$ for a buyer $j$, denoted by $u_j(i) = v_j(i) - p(i)$. The buyers arrive in an online fashion, and buyer $i$ purchases the item with the highest utility in $N(i)$ that has not yet been sold. We will assume that the prices are set in a randomly, by first sampling a number $w$ uniformly at random from the interval $[0,1]$ and setting the price $p_i$ to be $e^{w-1}$. The valuation $v_j(i)$ is set to $1$ for each buyer $j$ and item $i$. 
+
+Since we are sampling from a distribution with no point mass, there are no two prices that are same, and it induces an ordering on the items in $L$. Thus, the market process corresponds to running the \ranking algorithm with the permutation corresponding to what is given by the prices. In other words, if $M$ is the matching given by the \ranking algorithm and $M'$ the matching given by the market process, we have
+\begin{align*}
+	\E_\pi [M] = \E_w[M'].
+\end{align*}
+
+To analyze this algorithm, let us first write the size of the matching given by the market process using the utility obtained by the buyers and the revenue generated. For a price list $\dist{w}$ generated as above, let us define the utility for the user $i$ to be $1 - p_j$ if the user has bought item $j$ and $0$ otherwise. For an item $j$, we will define the revenue to be $r_j$ is the item was purchased during the market process. Observe that we can write the size of the matching $M'$ as follows:
+\begin{align*}
+	|M'| = \sum_{i\in L} r_i + \sum_{j\in R} u_j
+\end{align*}
+Let $M^*$ be a maximum matching, we can then write
+\begin{align*}
+	\E[|M'|] &= \E\left[\sum_{i\in L} r_i + \sum_{j\in R} u_j \right] \geq \E\left[ \sum_{(i,j)\in M^*} (r_i + u_j) \right]\\
+	&= \sum_{(i,j)\in M^*} \E[r_i + u_j]
+\end{align*}
+
+To complete the proof, we need to prove the following claim.
+\begin{claim}
+	Let $(i,j)$ be any edge in the graph $G$. Then $\E[r_i + u_j] \geq 1 - 1/e$.
+\end{claim}
+\begin{proof}
+	Consider the same market process with the same sequence except the item $i$. Let $M'_i$ be the matching generated by the market process in this case. Let $p^* = e^{w^* - 1}$ be the price of the item purchased by the buyer $j$ in $M'_j$. If $j$ does not purchase any item, then set $p^* = 1$. 
+	
+	Notice that if $p_i < p^*$, then the item $i$ is purchased by some buyer in $M'$. This is because if it was not purchased by the time buyer $j$ arrives, then the utility $u_j(i) = 1 - p_i > 1 - p^*$ and hence $j$ will purchase $i$. Furthermore, the utility of $j$ in $M'$, $u_j > 1 - p^*$ since adding a new item cannot reduce the utility. Therefore, $\E[u_j] > 1 - p^*$. 
+	
+	Now $\E[r_i] = \E[p_i I_[\text{$i$ is purchased}]] \geq \E[p_i I[p_i < p^*]]$. The final inequality follows from the first observation in the last paragraph. Thus, we can write
+	\begin{align*}
+		\E[r_i] \geq \int_{0}^{w^*} e^{w-1} dw = p^* - \frac{1}{e}.
+	\end{align*}
+    Thus, we have $\E[r_i + u_j] \geq 1 - 1/e$ and this concludes the proof.
+\end{proof}
+
+\section{The Multiplicative Weights Update (MWU) method}
+
+In this part we will look at a generic meta-algorithm known as the multiplicative weights update (MWU) method. The method is fairly elementary, but very many different algorithms can be seen as instantiations of this meta-algorithm. We start with an  online decision making problem.
+
+\subsection{The weighted majority algorithm}
+
+Consider a decision making problem where you have to make a yes/no decision everyday, and if you make the wrong decision you have to pay a thousand rupees to an adversary. If you make the correct decision, then you do not have to pay anything. Now, the catch is that the adversary can reveal to you the correct answer only after you say your decision. Clearly, this game is loaded in favor of your adversary for he/she can force you to pay up at every step.
+
+Now consider the case that there are $n$ experts $e_1, e_2, \ldots, e_n$ whom you can listen to while making a decision. Instead of measuring your performance in the worst-case scenario, you would like to measure it in terms of the performance of the best experts among the $n$. In other words, we are interested in the quantity
+\begin{align*}
+	\min_{i\in [n]} \{ m^{(i)}_T \} - m_T,
+\end{align*}
+where $m^{(i)}_T$ is the number of times that the $i^{th}$ expert made a wrong decision and $m_T$ is the number of times you made the wrong decision in $T$ steps. We would like to make this as small as possible. Let us start with a simple warm-up that we will generalize.
+
+\subsubsection*{Omniscient expert}
+
+Assume that among the $i$ experts, there exists an omniscient expert who can make the correct decision every time. We will see we can find the identity of such an expert in $\log n$ steps where we made an incorrect decision, and hence $\min_{i\in [n]} \{ m^{(i)}_T \} - m_T \leq \log n$. The idea is that at every step we take the majority decision of the remaining experts, and once the correct decision is revealed we throw away all the experts who gave incorrect answers at that stage. The omniscient expert is never thrown away, and furthermore if we make an incorrect decision, this means that at least half of the experts in that stage can be identified as bad experts and thrown away.
+
+\subsubsection*{General case}
+
+In the general case, there need not be any omniscient expert. We also cannot make any assumptions on how the experts are correlated. For instance, maybe there is a clique of $k$ experts who always give the same answer. The idea of the weighted majority algorithm is fairly simple. Initially, we are unaware of which of the experts really know what they are talking about. So, we trust each of their decisions equally well. But then once we see how they fare, we factor that in and re-weight our trust in the experts. This is described in Algorithm~\ref{alg:wgtd-maj}.
+
+\begin{algorithm}%[h]
+	Set $w_i^{(1)} \gets 1$ for every $i \in [n]$
+	
+	\For{$t = 1$ to $T$}{
+		Let $S_0$ be the experts who say no, and let $S_1$ be the expert who says yes.
+		
+		\leIf{$\sum_{i\in S_0} w_i^{(t)} \geq \sum_{i\in S_1} w_i^{(t)}$}{
+			decide no
+		}{
+			decide yes
+		}
+		
+        \ForEach{wrong expert $i$}{set $w_i^{(t+1)} \gets (1-\epsilon)w_i^{(t)}$}
+	}
+	\caption{\textsc{Weighted Majority}}
+	\label{alg:wgtd-maj}
+\end{algorithm}
+
+In the first step we take the majority vote, but after that we scale down the weight of wrong experts. The factor $\epsilon$ in the algorithm is a weighting factor that decides by how much we should rescale a wrong experts advice. We can show that this simple algorithm already achieves almost the best that we can achieve by deterministic algorithms.
+
+\begin{theorem}
+	Let $m_T$ be the number of mistakes made by the weighted majority algorithm after in $T$ steps, and let $m^{(i)}_T$ be the number of mistakes made by expert $i$ in $T$ steps. Then, for every $i \in [n]$ we have
+	\begin{align*}
+		m_T \leq 2(1+\epsilon)m^{(i)}_T + \frac{\log n}{\epsilon}.
+	\end{align*}
+	\label{thm:wgtd-maj}
+\end{theorem}
+\begin{proof}
+	The proof is similar in spirit to the case of the omniscient expert. Let us define a potential function $\Phi(t) = \sum_{i=1}^n w_i^{(t)}$. We will show that at each time step that we make an erroneous decision the potential function reduces by a constant factor.
+	
+	Firstly, notice that for any expert $i$, we have $w_i^{(t)} = (1-\epsilon)^{m_T^{(i)}}$. If at time step $t$, the algorithm makes a wrong decision (say the algorithm said no w.lo.g), then we can write
+	\begin{align*}
+		\Phi(t+1) &= \sum_{i\in S_0} w_i^{(t+1)} + \sum_{i\in S_1} w_i^{(t+1)}\\
+		&= (1-\epsilon)\sum_{i\in S_0} w_i^{(t)} + \sum_{i\in S_1} w_i^{(t)}\\
+		&\leq \left( 1 - \frac{\epsilon}{2}\right)\Phi(t).
+	\end{align*}
+
+	Thus, after $T$ steps, for every $i\in [n]$ we have
+	\begin{align*}
+		(1-\epsilon)^{m_i{(T)}} \leq \Phi(T) \leq \left(1 - \frac{\epsilon}{2} \right)^{m_T}n
+	\end{align*}
+	The bound follows from taking logarithm on both sides and using the approximation for $\ln(1-x)$.
+\end{proof}

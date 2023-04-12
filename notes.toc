@@ -23,3 +23,13 @@
 \contentsline {subsection}{\numberline {3.3.2}Load balancing}{30}{subsection.3.3.2}%
 \contentsline {chapter}{\numberline {4}Balls and Bins}{32}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Warm-up: Birthday problem}{32}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Online algorithms}{33}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Warm up: Bipartite matching}{33}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Online paging}{34}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Deterministic online paging}{35}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Randomized online paging}{36}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Yao's minimax principle and lower bounds}{38}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Lower bound for online paging}{40}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}Bipartite matching revisited}{41}{section.5.4}%
+\contentsline {section}{\numberline {5.5}The Multiplicative Weights Update (MWU) method}{43}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}The weighted majority algorithm}{44}{subsection.5.5.1}%
