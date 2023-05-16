@@ -1,4 +1,5 @@
-\documentclass[a4paper,12pt]{scrreport}
+\documentclass[a4paper,notoc,openany]{tufte-book}%{scrreport}
+%\usepackage[fontsize=11pt]{fontsize}
 \usepackage{graphicx}
 %\usepackage{draftwatermark}
 \usepackage{amsfonts}
@@ -11,11 +12,11 @@
 \usepackage[T1]{fontenc}
 \useosf
 \linespread{1.05}
-\usepackage{marginnote}
-\renewcommand{\marginfont}{\tiny\textit}
+%\usepackage{marginnote}
+%\renewcommand{\marginfont}{\tiny\textit}
 \usepackage[linesnumbered,ruled]{algorithm2e}
 \usepackage{xfrac}
-\usepackage[dvipsnames,table]{xcolor}
+%\usepackage[dvipsnames,table]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc, automata, positioning, arrows}
 \usepackage{xr-hyper} %for using references to lemmas/theorems from other documents.
@@ -25,18 +26,45 @@
 	linkcolor=MidnightBlue,
 	citecolor=Aquamarine}
 \usepackage{etoc}
+\geometry{
+  textwidth=28pc, left=0.75in
+}
+
+\titleformat{\section}%
+{\normalfont\Large\itshape\color{OrangeRed}}
+{\thesection}
+{1em}
+{}
+[]
+
+\titleformat{\chapter}
+{\huge\rmfamily\itshape\color{Sepia}}
+{\thechapter}
+{1em}
+{}
+[]
+
+\titleformat{\subsection}
+{\normalfont\rmfamily\itshape\color{OrangeRed}}
+{\thesubsection}
+{1em}
+{}
+[]
+
 
 \usepackage{scribe}
 \usepackage{array}
 \usepackage{enumerate}
 \usepackage{blkarray, bigstrut}
 
+\setcounter{secnumdepth}{2} % Add section/chapter numbers
+
 %\SetWatermarkText{DRAFT}
 %\SetWatermarkScale{0.7}
 %\SetWatermarkColor[gray]{.95}
 
 \tikzset{->,  % makes the edges directed
-	>=stealth, % makes the arrow heads bold
+  >=stealth, % makes the arrow heads bold
 	node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
 	every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
 	initial text=$ $, % sets the text that appears on the start arrow
@@ -78,9 +106,11 @@
 	{\large CS6170}\\[\baselineskip]
 	\vfill
 	\rule{0.4\textwidth}{0.4pt}\\[\baselineskip]
-	{\large\itshape Jul - Nov 2021, Dept. of CSE, IIT Madras}\par
+	{\large\itshape  Dept. of Computer Science and Engineering\\ IIT Madras}\par
 	\vspace*{\drop}
 	\endgroup}
+
+
 
 \begin{document}
 

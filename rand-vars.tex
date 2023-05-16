@@ -65,23 +65,28 @@ Firstly, if we analyze this algorithm with respect to a fixed cut $C$, then the 
 	By the linearity of expectation, $\E[X] = \sum_{e\in E} \E[X_e]$. So, all that remains now is to compute the expectation of $X_e$. For this we use the observation that for an indicator random variable, the expectation is equal to the probability of the occurrence of the corresponding event. In this case, we have $\E[X_e] = \Pr[\text{$e$ is a cut edge}]$. Suppose that $e=(u,v)$, then we have
 	\begin{align*}
 		\Pr[\text{$e$ is a cut edge}] &= \Pr[(u \in V_1 \text{ and } v\in V_2) \cup (u \in V_2 \text{ and } v\in V_1)]\\
-		&= \Pr[(u \in V_1 \text{ and } v\in V_2)] + \Pr[(u \in V_2 \text{ and } v\in V_1)] = \frac{1}{2}.
+		&= \Pr[(u \in V_1 \text{ and } v\in V_2)] + \Pr[(u \in V_2 \text{ and } v\in V_1)] \\ &= \frac{1}{2}.
 	\end{align*}
 	Consequently, $\E[X] = |E|/2$.
 \end{proof}
 
 Notice that the expectation here is a weighted mean over all the cut sizes. Consequently, if the weighted mean is greater than a number $r$, then there must actually exists such a cut of size at least $r$. In fact, this observation gives us the following highly non-trivial theorem about cuts in graphs.
 
+\marginnote{
+  This method of proving the existence of combinatorial objects using
+randomization is known as the \emph{probabilistic method}. It is a very powerful
+tool that can be used in a variety of settings that do not seem amenable to such
+techniques on first sight.
+}
 \begin{theorem}
 	Every graph $G$ with $m$ edges has a cut of size at least $m/2$.
 	\label{thm:maxcut}
 \end{theorem}
 
-This method of proving the existence of combinatorial objects using randomization is known as the \emph{probabilistic method}. It is a very powerful tool that can be used in a variety of settings that do not seem amenable to such techniques on first sight.
 
 Let us try to understand the random variables $\{X_e\}_{e\in E}$ a little better. Firstly, for two edges $e_1$ and $e_2$, $X_{e_1}$ and $X_{e_2}$ are independent. If $e_1$ and $e_2$ don't share a vertex, then it is obvious. Suppose that $e_1$ and $e_2$ share a vertex $u$. Even in this case, if given that $X_{e_1}$ is $0$ or $1$, the value of $X_{e_2}$ depends on where the other endpoint is placed. Thus $\Pr[X_{e_2}=1 | X_{e_1}=1] = \Pr[X_{e_2}=1 | X_{e_1}=0] = 1/2$. Now suppose that the edges $e_1, e_2$, and $e_3$ for a triangle on vertices $u,v$, and $w$. Now give the values of $X_{e_1}$ and $X_{e_2}$, the positions of all three vertices are fixed, and hence the value of $X_{e_3}$. Thus, the variables $\{X_e\}_{e\in E}$ are not fully independent. The linearity of expectation gave us a non-trivial bound, even when we had no information about the properties of the random variables involved other than their expectation.
 
-\subsection{\textcolor{red}{$\star$}~Constructing a large cut deterministically}
+\subsection{Constructing a large cut deterministically}
 
 We showed that a random partition of the vertices gives you a cut, that on expectation contains at least half of the edges in the graph. But, can you construct such a cut-set deterministically. Recall the analysis of the expectation. If you look at it carefully, you'll notice that we don't really require that the assignment of vertices to $V_1$ and $V_2$ need not be completely independent. For the analysis to go through, all we need is the following:
 \begin{align*}
@@ -136,7 +141,6 @@ The analysis of this algorithm is identical to the original algorithm. But, now 
 Since the expected value is at least $m/2$, the largest cut must have size at least $m/2$. Therefore, the output will be a cut of size at least $m/2$. Furthermore, the outer loop runs for $n$ steps, and hence we have a polynomial-time $1/2$-approximation algorithm.
 
 \section{Quicksort}
-
 We use the ideas from the previous section to analyze a randomized version of the Quicksort algorithm. Recall that in the deterministic Quicksort algorithm, we choose a pivot element in the array (say, the last element) and then partition the array into two parts based on whether the numbers are smaller or larger than the pivot. Then we recursively sort the two parts to obtain the final sorted array. The running time depends on the choice of the pivot since we want the pivot to divide the array into two arrays of similar sizes. 
 
 For instance, if the pivot is the largest element of the array each time, then the running time is $O(n^2)$. On the other hand, if we choose the median as the pivot at every step, then the running time is given by the recurrence
@@ -268,7 +272,7 @@ If $Y=1$, then $X=1$ and hence $\E[X|Y=1] =1$. But, if $Y=0$, then we can write 
 	&=\frac{1}{p}
 \end{align*}
 
-\subsubsection{The coupon collector's problem}
+\subsection{The coupon collector's problem}
 
 We will briefly study the coupon collector's problem, that is a special case of a more general paradigm, that arises in many situations in the analysis of randomized algorithms. The basic premise of the problem is the following: There are boxes of cereals, each of which contains one among $n$ different coupons. The coupons are assigned to boxes of cereals at random. In this case, how many boxes of cereals should you buy so that you have at least one coupon of each kind. We will calculate the expected number of boxes that you must buy to collect one coupon of each kind.
 

@@ -282,11 +282,11 @@ Now consider the case that there are $n$ experts $e_1, e_2, \ldots, e_n$ whom yo
 \end{align*}
 where $m^{(i)}_T$ is the number of times that the $i^{th}$ expert made a wrong decision and $m_T$ is the number of times you made the wrong decision in $T$ steps. We would like to make this as small as possible. Let us start with a simple warm-up that we will generalize.
 
-\subsubsection*{Omniscient expert}
+\subsection{Omniscient expert}
 
 Assume that among the $i$ experts, there exists an omniscient expert who can make the correct decision every time. We will see we can find the identity of such an expert in $\log n$ steps where we made an incorrect decision, and hence $\min_{i\in [n]} \{ m^{(i)}_T \} - m_T \leq \log n$. The idea is that at every step we take the majority decision of the remaining experts, and once the correct decision is revealed we throw away all the experts who gave incorrect answers at that stage. The omniscient expert is never thrown away, and furthermore if we make an incorrect decision, this means that at least half of the experts in that stage can be identified as bad experts and thrown away.
 
-\subsubsection*{General case}
+\subsection{General case}
 
 In the general case, there need not be any omniscient expert. We also cannot make any assumptions on how the experts are correlated. For instance, maybe there is a clique of $k$ experts who always give the same answer. The idea of the weighted majority algorithm is fairly simple. Initially, we are unaware of which of the experts really know what they are talking about. So, we trust each of their decisions equally well. But then once we see how they fare, we factor that in and re-weight our trust in the experts. This is described in Algorithm~\ref{alg:wgtd-maj}.
 

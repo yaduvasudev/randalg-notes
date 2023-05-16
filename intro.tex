@@ -148,7 +148,9 @@ The algorithm is quite simple to state: Choose a random vector $r \in \{0,1\}^n$
 	\end{align*}
 \end{proof}
 
-An intuitive way to understand the proof is as follows. Suppose that you don't choose all the $r_i$s together; rather you choose them one at a time. Say that we choose $r_2, r_3, \ldots, r_n$ one at a time. Once all of these are fixed, then the probability that you will choose the value for $r_1$ which will make the sum non-zero is $1/2$. This intuition is sometimes referred to as the \textit{principle of deferred decisions}, and the way to formalize it is through the conditional probability calculations as illustrated above.
+An intuitive way to understand the proof is as follows. Suppose that you don't choose all the $r_i$s together; rather you choose them one at a time. Say that we choose $r_2, r_3, \ldots, r_n$ one at a time.
+\marginnote{This intuition is sometimes referred to as the \textit{principle of deferred decisions}, and the way to formalize it is through the conditional probability calculations as illustrated above.}
+Once all of these are fixed, then the probability that you will choose the value for $r_1$ which will make the sum non-zero is $1/2$.
 
 Another bothersome point for you might be the guarantee of the algorithm. The analysis shows that the algorithm correctly answers with probability $\geq 1/2$, which does not seem much. Notice that this algorithm has \textit{one-sided error}. Therefore, to reduce the error probability of the algorithm, we need to just repeat it many times with vectors $\vect{r}_1, \vect{r}_2, \ldots \vect{r}_k$ chosen at random and with replacement and check whether $AB\vect{r}_i \neq C\vect{r}_i$ for even one of them. Let $E_i$ be the event that $AB\vect{r}_i = C\vect{r}_i$. We are interested in the event $\bigcup_{i=1}^{k} \overline{E}_i$. First we compute
 \begin{align*}
