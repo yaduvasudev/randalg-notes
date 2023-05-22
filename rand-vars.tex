@@ -140,6 +140,63 @@ The analysis of this algorithm is identical to the original algorithm. But, now 
 
 Since the expected value is at least $m/2$, the largest cut must have size at least $m/2$. Therefore, the output will be a cut of size at least $m/2$. Furthermore, the outer loop runs for $n$ steps, and hence we have a polynomial-time $1/2$-approximation algorithm.
 
+\subsection{Method of conditional expectations}
+
+The method of conditional expectations is a fairly generic way to derandomize a
+lot of randomized algorithms. We will see it applied to our maxcut algorithm. As
+the name suggests, we will write the expected value $\E[X]$ of the cut using
+conditional expectations. Let us order the vertices $v_1, v_2, \ldots, v_n$. We
+can consider the algorithm as taking vertices sequentially in this order and
+putting them in one of the two parts $V_1, V_2$ uniformly at random. Thus, we can write the expectation $\E[X]$ as follows:
+\begin{align*}
+  \E[X] &= \E[X|v_1 \in V_1]\cdot \Pr[v_1 \in V_1] + \E[X|v_1 \in V_2]\cdot \Pr[v_1\in V_2]\\
+  &= \frac{1}{2} \left( \E[X|v_1 \in V_1] + \E[X|v_1 \in V_2] \right)
+\end{align*}
+
+Since we know that $\E[X] \geq |E|/2$, either $\E[X|v_1\in V_1]$ or
+$\E[X|v_1\in V_2]$ is at least $|E|/2$. If we find which of these is larger,
+then we can put $v_1$ in the corresponding set and proceed further.
+\marginnote{Actually you only want some good lower bounds for these conditional
+  expectations that can be easily computed. These are called \emph{pessimistic
+    estimators}.}
+For making this method work, we need a way to compute these
+conditional expectations.
+
+Let us see how to compute $\E[X|v_1\in V_1]$. In this initial case, every edge
+crosses the cut with probability exactly $1/2$. In other words, it doesn't
+matter where you place $v_1$. Let us assume that we placed $v_1$ in the set
+$V_1$. Consequently, $\E[X|v_1 \in V_1] \geq |E|/2$. In the next step, we can
+use the conditional expectations once more to write the following:
+\begin{align*}
+  \E[X|v_1\in V_1] &= \E[X|v_1\in V_1, v_2\in V_1] \cdot \Pr[v_2\in V_1]~ +~ \\
+                   &\qquad\qquad  \E[X|v_1\in V_1, v_2\in V_2] \cdot \Pr[v_2\in V_2]\\
+ &= \frac{1}{2} \left(\E[X|v_1\in V_1, v_2\in V_1] + \E[X|v_1\in V_1, v_2\in V_2] \right)
+\end{align*}
+
+To compute $\E[X| v_1 \in V_1, v_2 \in V_1]$ we observe the following: if
+$(v_1, v_2)\in E$, then $(v_1, v_2)$ is not in the cut and every other edge is
+in the cut with probability $1/2$. Similarly, for
+$\E[X|v_1\in V_1, v_2\in V_2]$, if $(v_1,v_2)\in E$ then it is in the cut and
+every other edge is in the cut with probability $1/2$. In particular, we can see
+that if $(v_1, v_2)\in E$ then the conditional expectation is maximized when
+$v_2$ is placed in $V_2$.
+
+In the $i^{th}$ step of this process, we want to find the $V_{b_i}$ such that
+the conditional expection
+$\E[X|v_1 \in V_{b_1}, v_2\in V_{b_2}, \ldots, v_i\in V_{b_i}]$ is
+maximized. This can be computed since for every edge $(v_j,v_k)$ such that
+$1\leq j,k\leq i$, it is already known whether it is in the cut or not. Every
+other edge is in the cut with probability $1/2$. Just like before, to maximize
+the conditional expectation, $v_i$ must be placed in the part $V_{b_i}$ that
+maximizes the number of cut edges between itself and the vertices
+$v_1, v_2, \ldots, v_{i-1}$.
+
+This leads us to the following greedy algorithm: Order the vertices
+$v_1, v_2, \ldots, v_n$ arbitrarily. For each $i$ in order, place $v_i$ in the
+part that maximizes the cut edges incident on it and the previous $i-1$
+vertices. The argument described above using conditionl expectations guarantees
+that this process will give a cut of size at least $|E|/2$.
+
 \section{Quicksort}
 We use the ideas from the previous section to analyze a randomized version of the Quicksort algorithm. Recall that in the deterministic Quicksort algorithm, we choose a pivot element in the array (say, the last element) and then partition the array into two parts based on whether the numbers are smaller or larger than the pivot. Then we recursively sort the two parts to obtain the final sorted array. The running time depends on the choice of the pivot since we want the pivot to divide the array into two arrays of similar sizes. 
 
@@ -293,3 +350,8 @@ To do that, let $E_i$ be the event that the first coupon did not appear in the $
 	&\geq 1 - \sum \Pr[E_i], \text{ by the union bound }\\
 	&\geq 1 - e^{-10}
 \end{align*}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

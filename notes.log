@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.3.31)  16 MAY 2023 12:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.3.31)  22 MAY 2023 15:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1196,48 +1196,40 @@ Package xr-hyper Warning: Load package `hyperref' after `xr-hyper'.
 
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 27.
- (/usr/share/texlive/texmf-dist/tex/latex/etoc/etoc.sty
-Package: etoc 2021/09/23 v1.09e Completely customisable TOCs (JFB)
-\Etoc@toctoks=\toks51
-\c@etoc@tocid=\count338
-\c@etoc@tocdepth=\count339
-\etoc@framed@titlebox=\box143
-\etoc@framed@contentsbox=\box144
-) (./scribe.sty
-\c@lecture=\count340
-\c@theorem=\count341
-\c@exercise=\count342
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+ (./scribe.sty
+\c@lecture=\count338
+\c@theorem=\count339
+\c@exercise=\count340
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \col@sep=\dimen299
-\ar@mcellbox=\box145
+\ar@mcellbox=\box143
 \extrarowheight=\dimen300
-\NC@list=\toks52
+\NC@list=\toks51
 \extratabsurround=\skip119
 \backup@length=\skip120
-\ar@cellbox=\box146
+\ar@cellbox=\box144
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
-\@enLab=\toks53
+\@enLab=\toks52
 )
 (/usr/share/texlive/texmf-dist/tex/latex/blkarray/blkarray.sty
 Package: blkarray 2015/02/27 v0.07 Block array (dpc)
-\c@BAenumi=\count343
-\BA@col=\count344
-\BA@block@cnt=\count345
-\BA@final@box=\box147
-\BA@first@box=\box148
+\c@BAenumi=\count341
+\BA@col=\count342
+\BA@block@cnt=\count343
+\BA@final@box=\box145
+\BA@first@box=\box146
 \BA@colsep=\dimen301
-\BA@ftn=\toks54
+\BA@ftn=\toks53
 \BAextrarowheight=\dimen302
 \BAextraheightafterhline=\dimen303
 \BAarrayrulewidth=\dimen304
 \BAdoublerulesep=\dimen305
 \BAfootskip=\dimen306
-\BA@dashbox=\box149
-\BA@ddashbox=\box150
+\BA@dashbox=\box147
+\BA@ddashbox=\box148
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/bigstrut.sty
 Package: bigstrut 2021/03/15 v2.8 Provide larger struts in tabulars
@@ -1245,64 +1237,64 @@ Package: bigstrut 2021/03/15 v2.8 Provide larger struts in tabulars
 )
 \drop=\skip121
 LaTeX Font Info:    Trying to load font information for T1+LinuxLibertineT-OsF 
-on input line 115.
+on input line 121.
 
 (/usr/share/texlive/texmf-dist/tex/latex/libertine/T1LinuxLibertineT-OsF.fd
 File: T1LinuxLibertineT-OsF.fd 2017/03/20 (autoinst) Font definitions for T1/Li
 nuxLibertineT-OsF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 115.
+(Font)              scaled to size 10.0pt on input line 121.
 
 (./notes.aux)
 \openout1 = `notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 115.
+LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 121.
 LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line
- 115.
+ 121.
  (/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 121.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
-115.
+121.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 121.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 115.
+ 121.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 121.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 115.
+e 121.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 115.
-Package hyperref Info: Link coloring ON on input line 115.
+LaTeX Font Info:    ... okay on input line 121.
+Package hyperref Info: Link coloring ON on input line 121.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1313,11 +1305,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count346
+\c@section@level=\count344
 )
-LaTeX Info: Redefining \ref on input line 115.
-LaTeX Info: Redefining \pageref on input line 115.
-LaTeX Info: Redefining \nameref on input line 115.
+LaTeX Info: Redefining \ref on input line 121.
+LaTeX Info: Redefining \pageref on input line 121.
+LaTeX Info: Redefining \nameref on input line 121.
 
 (./notes.out) (./notes.out)
 \@outlinefile=\write4
@@ -1361,17 +1353,17 @@ LaTeX Info: Redefining \nameref on input line 115.
 \langwohyphens=\language87
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count347
+\scratchcounter=\count345
 \scratchdimen=\dimen308
-\scratchbox=\box151
-\nofMPsegments=\count348
-\nofMParguments=\count349
-\everyMPshowfont=\toks55
-\MPscratchCnt=\count350
+\scratchbox=\box149
+\nofMPsegments=\count346
+\nofMParguments=\count347
+\everyMPshowfont=\toks54
+\MPscratchCnt=\count348
 \MPscratchDim=\dimen309
-\MPnumerator=\count351
-\makeMPintoPDFobject=\count352
-\everyMPtoPDFconversion=\toks56
+\MPnumerator=\count349
+\makeMPintoPDFobject=\count350
+\everyMPtoPDFconversion=\toks55
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1381,84 +1373,83 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@mv@tabular=\count353
-\c@mv@boldtabular=\count354
-\Etoc@tf=\read4
+\c@mv@tabular=\count351
+\c@mv@boldtabular=\count352
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 24.0pt on input line 117.
+(Font)              scaled to size 24.0pt on input line 123.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/sc' will be
-(Font)              scaled to size 24.0pt on input line 117.
+(Font)              scaled to size 24.0pt on input line 123.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 117.
+(Font)              scaled to size 12.0pt on input line 123.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 117.
-\tf@toc=\write5
-\openout5 = `notes.toc'.
-
+(Font)              scaled to size 12.0pt on input line 123.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 121.
+(Font)              scaled to size 10.0pt on input line 128.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 20.74pt on input line 121.
+(Font)              scaled to size 20.74pt on input line 128.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
-(Font)              scaled to size 20.74pt on input line 121.
+(Font)              scaled to size 20.74pt on input line 128.
+ (./notes.toc
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 121.
+(Font)              scaled to size 10.0pt on input line 1.
 LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TLF
- on input line 121.
+ on input line 2.
 
 (/usr/share/texlive/texmf-dist/tex/latex/libertine/OT1LinuxLibertineT-TLF.fd
 File: OT1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for OT1/
 LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 121.
+(Font)              scaled to size 10.0pt on input line 2.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 121.
+(Font)              scaled to size 7.3pt on input line 2.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 121.
+(Font)              scaled to size 5.5pt on input line 2.
 LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
-121.
+2.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 121.
+(Font)              scaled to size 10.42007pt on input line 2.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.60664pt on input line 121.
+(Font)              scaled to size 7.60664pt on input line 2.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.73103pt on input line 121.
+(Font)              scaled to size 5.73103pt on input line 2.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 121.
+(Font)              scaled to size 10.42007pt on input line 2.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.60664pt on input line 121.
+(Font)              scaled to size 7.60664pt on input line 2.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.73103pt on input line 121.
+(Font)              scaled to size 5.73103pt on input line 2.
 LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-121.
+2.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-121.
+2.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-121.
+2.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
-) (./preface.tex
-[2
+))
+\tf@toc=\write5
+\openout5 = `notes.toc'.
 
-]) (./intro.tex [3
+ (./intro.tex
+[2
 
 ]
 Chapter 1.
@@ -1479,31 +1470,23 @@ t available
 tead on input line 13.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineMonoT-TLF/regular/n' will be
 (Font)              scaled to size 10.0pt on input line 13.
- [4
+ [3
 
 ]
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 30.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
-(Font)              scaled to size 12.0pt on input line 30.
- [5]
 Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input 
 line 39.
-
-Underfull \vbox (badness 1117) has occurred while \output is active []
-
- [6]
+ [4]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
 65.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ufplmbb.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
-)
+) [5]
 Package hyperref Info: bookmark level for unknown fact defaults to 0 on input l
 ine 75.
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
 t line 93.
- [7] [8]
+
+[6] [7]
 Overfull \hbox (51.43715pt too wide) detected at line 148
 []
  []
@@ -1513,7 +1496,7 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 152.
 
-LaTeX Warning: Marginpar on page 9 moved.
+LaTeX Warning: Marginpar on page 8 moved.
 
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 10.0pt on input line 155.
@@ -1521,16 +1504,11 @@ LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 7.3pt on input line 155.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 5.5pt on input line 155.
-[9]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 (Font)              scaled to size 7.3pt on input line 159.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 159.
-
-Underfull \vbox (badness 1642) has occurred while \output is active []
-
- [10])
-(./rand-vars.tex [11]
+[8] [9]) (./rand-vars.tex [10]
 Chapter 2.
 
 Overfull \hbox (6.68678pt too wide) in paragraph at lines 1--1
@@ -1540,25 +1518,29 @@ Overfull \hbox (6.68678pt too wide) in paragraph at lines 1--1
 
 Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
 nput line 10.
+[11
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+] [12]
 
- [12
+LaTeX Warning: Marginpar on page 13 moved.
 
-]
 [13]
 
 LaTeX Warning: Marginpar on page 14 moved.
 
-[14] [15]
-Underfull \vbox (badness 1142) has occurred while \output is active []
+[14]
+Overfull \hbox (0.11884pt too wide) in paragraph at lines 194--199
+[]\T1/LinuxLibertineT-OsF/m/n/10 This leads us to the fol-low-ing greedy al-go-
+rithm: Or-der the ver-tices $\OML/nxlmi/m/it/10 v[]\OT1/LinuxLibertineT-TLF/m/n
+/10 , \OML/nxlmi/m/it/10 v[]\OT1/LinuxLibertineT-TLF/m/n/10 , [] , \OML/nxlmi/m
+/it/10 v[]$ 
+ []
 
- [16]
-[17]
+[15] [16] [17] [18]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [18]
-[19]) (./concentration.tex [20]
+ [19])
+(./concentration.tex [20]
 Chapter 3.
 
 Overfull \hbox (6.79044pt too wide) in paragraph at lines 1--1
@@ -1571,16 +1553,95 @@ n|
 ] [22] [23]
 Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
  line 130.
- [24] [25]
+ [24]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26]
-[27]) (./balls-bins.tex [28] [29]
+ [25]
+[26] [27]) (./balls-bins.tex [28]
 Chapter 4.
-) (./online.tex [30
+[29
+
+] [30]
+
+LaTeX Warning: Marginpar on page 31 moved.
+
+[31] [32]
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 229.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.2pt on input line 229.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 8.0pt on input line 229.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 6.2pt on input line 229.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 229.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.46043pt on input line 229.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 229.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.46043pt on input line 229.
+
+
+LaTeX Warning: Marginpar on page 33 moved.
+
+[33]
+
+LaTeX Warning: Marginpar on page 34 moved.
+
+LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-OsF
+ on input line 300.
+(/usr/share/texlive/texmf-dist/tex/latex/libertine/TS1LinuxLibertineT-OsF.fd
+File: TS1LinuxLibertineT-OsF.fd 2017/03/20 (autoinst) Font definitions for TS1/
+LinuxLibertineT-OsF.
+)
+LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-OsF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 300.
+
+
+LaTeX Warning: Marginpar on page 34 moved.
+
+Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
+input line 335.
+[34]) (./hashing.tex [35]
+Chapter 5.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 12.0pt on input line 9.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 8.8pt on input line 9.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.6pt on input line 9.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 12.0pt on input line 9.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 8.8pt on input line 9.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 6.6pt on input line 9.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 9.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.16966pt on input line 9.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.87724pt on input line 9.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 9.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.16966pt on input line 9.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.87724pt on input line 9.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 9.
+
+) (./online.tex [36
 
 ]
-Chapter 5.
+Chapter 6.
 
 Overfull \hbox (32.72678pt too wide) in paragraph at lines 9--10
 \T1/LinuxLibertineT-OsF/m/it/10 that for ev-ery in-put se-quence $\OML/nxlmi/m/
@@ -1592,13 +1653,9 @@ t/10 , given by $\OML/nxlmi/m/it/10 f[]\LMS/ntxsy/m/n/10 π\OML/nxlmi/m/it/10 ^^
 eT-TLF/m/n/10 , [] , \OML/nxlmi/m/it/10 ^^[[]\LMS/ntxsy/m/n/10 ∫$ 
  []
 
+[37
 
-Underfull \vbox (badness 2521) has occurred while \output is active []
-
- [31
-
-]
-[32] [33] [34]
+] [38] [39]
 LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-OsF o
 n input line 91.
 
@@ -1608,37 +1665,18 @@ uxBiolinumT-OsF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 91.
+
+[40]
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 94.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [35]
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 129.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 129.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 8.0pt on input line 129.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 6.2pt on input line 129.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 129.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.46043pt on input line 129.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 129.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.46043pt on input line 129.
-
-[36]
+ [41] [42]
 Package hyperref Info: bookmark level for unknown corollary defaults to 0 on in
 put line 164.
+ [43] [44]
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
- [37]
-[38] [39]
+
 Overfull \hbox (17.10214pt too wide) in paragraph at lines 236--237
 []\T1/LinuxLibertineT-OsF/m/n/10 We will show that the match-ing com-puted by \
 T1/LinuxBiolinumT-OsF/m/n/10 RANK-ING \T1/LinuxLibertineT-OsF/m/n/10 is a $\OT1
@@ -1647,64 +1685,58 @@ n/10 1\LMS/ntxsy/m/n/10 ù\OML/nxlmi/m/it/10 e$\T1/LinuxLibertineT-OsF/m/n/10 -a
 pproximation 
  []
 
-
-Underfull \vbox (badness 6428) has occurred while \output is active []
-
- [40]
+[45]
 Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
 line 257.
-
-Underfull \vbox (badness 1881) has occurred while \output is active []
-
- [41]
-[42])
+ [46] [47] [48])
 
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-[43] (./notes.aux)
+[49] (./notes.aux)
 Package rerunfilecheck Info: File `notes.out' has not changed.
-(rerunfilecheck)             Checksum: D9E65D5D917B6246A7BE3CB6762F7E98;3928.
+(rerunfilecheck)             Checksum: BE4E40F1E2A72327ED84AA074E79BCCC;5748.
  ) 
 Here is how much of TeX's memory you used:
- 31927 strings out of 478287
- 596642 string characters out of 5849289
- 868274 words of memory out of 5000000
- 49167 multiletter control sequences out of 15000+600000
- 669452 words of font info for 223 fonts, out of 8000000 for 9000
+ 31585 strings out of 478287
+ 591272 string characters out of 5849289
+ 859413 words of memory out of 5000000
+ 48768 multiletter control sequences out of 15000+600000
+ 689342 words of font info for 280 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,15n,94p,1271b,551s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 94i,19n,94p,1271b,542s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_ouu7z6.enc}{/us
-r/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_fygcup.enc}{/usr/shar
-e/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist
-/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc}{/usr/share/texlive/texmf-dist/fonts
-/enc/dvips/libertine/lbtn_oexx6f.enc}{/usr/share/texlive/texmf-dist/fonts/enc/d
-vips/libertine/lbtn_urpt4g.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/l
-ibertine/lbtn_6mhf45.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/liberti
-ne/lbtn_vpeqwl.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbt
-n_ulngvd.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineM
-athMI.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMath
-MI5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathMI
-7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathRM.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineMT.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineTI.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineTZ.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI7.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfont
-s/txsya.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on notes.pdf (43 pages, 658722 bytes).
+r/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_75c3wo.enc}{/usr/shar
+e/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_fygcup.enc}{/usr/share/texl
+ive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts
+/enc/dvips/libertine/lbtn_dhi6qf.enc}{/usr/share/texlive/texmf-dist/fonts/enc/d
+vips/libertine/lbtn_oexx6f.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/l
+ibertine/lbtn_urpt4g.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/liberti
+ne/lbtn_6mhf45.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbt
+n_vpeqwl.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_ulng
+vd.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathMI5.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathMI7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathRM.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineMT.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineTI.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/libertine/LinLibertineTZ.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/newtx/NewTXMI7.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/mathpazo/fplmbb.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy
+a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on notes.pdf (49 pages, 690390 bytes).
 PDF statistics:
- 628 PDF objects out of 1000 (max. 8388607)
- 537 compressed objects within 6 object streams
- 224 named destinations out of 1000 (max. 500000)
- 2229 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 728 PDF objects out of 1000 (max. 8388607)
+ 629 compressed objects within 7 object streams
+ 259 named destinations out of 1000 (max. 500000)
+ 2293 words of extra memory for PDF output out of 10000 (max. 10000000)
 

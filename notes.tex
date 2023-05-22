@@ -11,7 +11,7 @@
 \usepackage[libertine]{newtxmath}
 \usepackage[T1]{fontenc}
 \useosf
-\linespread{1.05}
+%\linespread{1.05}
 %\usepackage{marginnote}
 %\renewcommand{\marginfont}{\tiny\textit}
 \usepackage[linesnumbered,ruled]{algorithm2e}
@@ -25,13 +25,15 @@
 	colorlinks=true,
 	linkcolor=MidnightBlue,
 	citecolor=Aquamarine}
-\usepackage{etoc}
+%\usepackage{etoc}
+
 \geometry{
   textwidth=28pc, left=0.75in
 }
 
+
 \titleformat{\section}%
-{\normalfont\Large\itshape\color{OrangeRed}}
+{\normalfont\Large\itshape\color{Emerald}}
 {\thesection}
 {1em}
 {}
@@ -45,7 +47,7 @@
 []
 
 \titleformat{\subsection}
-{\normalfont\rmfamily\itshape\color{OrangeRed}}
+{\normalfont\rmfamily\itshape\color{Emerald}}
 {\thesubsection}
 {1em}
 {}
@@ -93,36 +95,43 @@
 \newcommand{\marker}{\textsf{Marker} }
 \newcommand{\dist}[1]{\mathbf{#1}}
 \newcommand{\ranking}{{\textsf{RANKING}} }
+\newcommand{\comp}[1]{\overline{#1}}
+\newcommand{\set}[1]{\{1,2,\ldots,#1\}}
 %%%%%%%%%%%%%%%%%%%%
 
 \newlength{\drop}
 \setcounter{tocdepth}{1}
 
 \newcommand*{\titleS}{\begingroup% Scripts, T&H p 151
-	\drop = 0.1\textheight
-	\centering
-	\vspace*{\drop}
-	{\Huge \textsc{Randomized Algorithms}}\\[\baselineskip]
-	{\large CS6170}\\[\baselineskip]
-	\vfill
-	\rule{0.4\textwidth}{0.4pt}\\[\baselineskip]
-	{\large\itshape  Dept. of Computer Science and Engineering\\ IIT Madras}\par
+  \drop = 0.1\textheight \vspace*{\drop}
+  {\Huge \textsc{Randomized Algorithms}}\\[\baselineskip]
+  {\Large CS 6170}\\[\baselineskip]
+  \vfill
+  \rule{0.4\textwidth}{0.4pt}\\[\baselineskip]
+  {\Large\itshape Dept. of Computer Science and Engineering\\ IIT Madras}\par
 	\vspace*{\drop}
 	\endgroup}
 
-
+%\title{\Huge Randomized Algorithms\\ \noindent \Large CS 6170}
+%\date{CS 6170}
+%%\author{Yadu Vasudev}
+%\publisher{\Large Department of Computer Science and Engineering\\ \noindent IIT Madras}
+%
 
 \begin{document}
 
 \titleS
 
+%\maketitle
+
 %\newpage
 \tableofcontents
-\input{preface}
+%\input{preface}
 \input{intro}
 \input{rand-vars}
 \input{concentration}
 \input{balls-bins}
+\input{hashing}
 \input{online}
 
 

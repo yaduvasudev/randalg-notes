@@ -245,8 +245,8 @@ Let us assume that there are $k$ servers and $n$ jobs where $k$ is much smaller 
 
 First, let's start with a fix server, and compute how many jobs will be allotted to it. Let $X_i$ be the indicator random variables for the event that the $i^{th}$ job is allocated to the server. We are interested in the random variable $X = \sum_{i=1}^n X_i$. We know that $\E[X] = n/k$. Since the random variables $X_i$ are all independent, the variance $\Var(X) = n\frac{1}{k}\left(1 - \frac{1}{k} \right)$, which is approximately $n/k$. We can use Chernoff bounds to obtain the following.
 \begin{align*}
-	\Pr\left[ X > \frac{n}{k} + 3\sqrt{\frac{n\log k}{k}} \right] &= \Pr \left[ X > \frac{n}{k}\left( 1 + 3\sqrt{\frac{k\log k}{n}} \right) \right] \\
-	& \leq e^{-3\log k} \leq \frac{1}{k^3}.
+	\Pr\left[ X > \frac{n}{k} + 3\sqrt{\frac{n\log k}{k}} \right] &= \Pr \left[ X > \frac{n}{k}\left( 1 + 3\sqrt{\frac{k\log k}{n}} \right) \right] %\\
+	 \leq e^{-3\log k} \leq \frac{1}{k^3}.
 \end{align*}
 
 Let $E_i$ be the event that server $i$ has a load of at most $n/k + 3\sqrt{n\log k/k}$. Then we are interested in 

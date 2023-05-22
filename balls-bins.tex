@@ -2,7 +2,7 @@
 
 In this part of the course, we will study the basic balls into bins process, and explore its applications. We will be interested mainly in the questions of the distribution of balls in bins when $n$ balls are thrown uniformly and independently at random into $n$ bins. We will also see that the bounds on the maximum load is related to the running time of hashing using chaining. 
 
-\section{Warm-up: Birthday problem}
+\section{Warm-up: Birthday problem and maximum load}
 
 Suppose that we throw $m$ balls into $n$ bins. By the pigeonhole principle, we know that if $m > n$, then there surely must exist a bin that has more than one ball. But what should be the value of $m$ so that the probability of there existing a bin with more than one ball is at least $1/2$. It turns out that for this $m$ needs to be only $\Theta(\sqrt{n})$. 
 
@@ -10,3 +10,351 @@ To analyze this problem, notice that for the second ball to land in a bin on its
 \begin{align*}
 	\left(1 - \frac{1}{n}\right) \left( 1 - \frac{2}{n}\right) \ldots \left(1 - \frac{m-1}{n}\right)
 \end{align*}
+
+Using the approximation that $1-x \leq e^{-x}$, we can upper bound the
+probability by $\prod_{i=1}^{m-1} e^{-i/n}$. So, for at least two balls to fall
+in a bin with probability at least $1/2$, we would require that
+$e^{-\sum_{i=1}^{m-1} i/n} < 1/2.$ Thus, if $m = \sqrt{2n\ln 2}$, then
+probability of two bins having at least two balls is at least $1/2$.
+
+It also not very difficult to show that $m = \Omega(\sqrt{n})$ for every bin to
+have at least two balls.  Suppose $E_i$ is the probability that the $i^{th}$
+ball did not land in the same bin as any of the previous $i-1$ balls. The event
+$E = \comp{E}_i \cup \comp{E}_2 \cup \cdots \cup \comp{E}_m$ corresponds to
+outcome that there is a bin that contains at least two balls. We can use
+union-bound to write this probability as follows:
+\begin{align*}
+  \Pr[E] &\leq \sum_{i=1}^m \Pr[\comp{E}_i] = \sum_{i=1}^m \frac{i-1}{n}\\
+  &\leq \frac{m(m-1)}{2n}
+\end{align*}
+
+Thus if $m \leq \sqrt{n}$, then the probability that there is some bin
+containing at least two balls is only at most $1/2$.
+
+Now consider the scenario where we throw $n$ balls into $n$ bins uniformly at
+random. We know from the earlier discussion that there will be bins with more
+than one balls in them. But, what is the maximum number of balls that can land
+up in any bin. You could think of this as a load-balancing scenario, where there
+is a process that allots jobs to services completely at random. We would like to
+know what the maximum load of any server will be when such an oblivious
+load-balancing is done.
+
+Firstly, what is the average load on a fixed bin $k$? If we denote $X_i$ the
+indicator random variable that is $1$ when the $i^{th}$ ball lands in bin $k$,
+then $\E[X_i] = 1/n$. Consequently, the average load on any fixed bin is
+$1$. Now, let $Y_i$ denote the number of balls that end in bin $i$ when $n$
+balls are thrown randomly into $n$ bins. The maximum load is given by the random
+variable $Y = \max\{Y_1, Y_2, \ldots, Y_n\}$. For any bin $i$, we can bound the
+probability of it containing more than $k$ balls as follows:
+\begin{align*}
+  \Pr[Y_i \geq k] &\leq \binom{n}{k} \left( \frac{1}{n} \right)^k \leq \left( \frac{ne}{k} \right)^k  \left( \frac{1}{n} \right)^k
+\end{align*}
+
+The event $Y \geq k$ occurs if there is some $i$ such that $Y_i \geq k$, and
+thus using the union bound, we can write the following:
+\begin{align*}
+  \Pr[Y \geq k] \leq n\left(\frac{e}{k} \right)^k
+\end{align*}
+
+Choosing $k = 3\ln n/\ln \ln n$, we can see that this probability
+$\Pr[Y \geq k] \leq 1/n$. Is this bound a relic of the analysis that we are
+doing or is it true that there will exist a bin with this load? To understand
+this scenario better, let us look at the distribution of balls in bins more
+closely.
+
+\section{Poisson approximation}
+
+Let $X_1, X_2, \ldots, X_n$ denote the number of balls in bins when $n$ balls
+are thrown uniformly and independently at random into $n$ bins. Notice that
+$\sum_{i=1}^n X_i = n$ and these random variables are dependent. When analyzing
+events arising from processes modelled as balls-in-bins, it is easier if these
+random variables can be thought of as being independent. While it is not true,
+we can approximate these random variables by a different distribution which has
+these nice independence properties.
+
+To start off, let us consider the number of bins with no balls when $n$ balls
+are thrown into $n$ bins. Suppose that we want to find a good concentration
+bound on the number of bins that do not contain any ball. We could start by
+defining an indicator random variable $Y_i$ which $1$ when $X_i =0$, and then
+analyze the random variable $Y = \sum_{i=1}^n Y_i$. In this case, we can write
+$\E[Y_i] = \Pr[X_i=0] = (1-\tfrac{1}{n})^n$. Thus,
+$\E[Y] = n(1-\tfrac{1}{n})^n$. But, now if want to bound the probability that
+$Y \in [(1-\delta)\E[Y], (1+\delta)\E[Y]]$, we cannot proceed with the standard
+Chernoff bounds since $Y$ is no longer the sum of independent random
+variables. Let us now describe the \emph{Poisson distribution} and see how it
+approximates the distribution given by balls-in-bins. We will see that we have
+nice Chernoff-like bounds for sum of Poisson random variables
+
+\subsection{Poisson distribution}
+
+Before defining the distribution formally, let us compute the probability that a bin $i$ has $k$ balls when $m$ balls are thrown into $n$ bins. This follows the binomial distribution with parameter $p = 1/n$, and we can write this probability as follows:
+\begin{align*}
+  \binom{m}{k}\left(\frac{1}{n} \right)^k \left(1-\frac{1}{n} \right)^{m-k} &= \frac{1}{k!} \frac{m(m-1)(n-2)\cdots (m-k+1)}{n^k} \left(1-\frac{1}{n} \right)^{m-k}
+ % &= \frac{1}{k!} \prod_{i=0}^{k-1} \left( 1 - \frac{i}{n} \right) \left( 1 - \frac{1}{n}\right)^{n-k}
+\end{align*}
+
+If $k \ll m$, then we can approximate this value as $\tfrac{1}{k!}(m/n)^ke^{-m/n}$. This approximation can be formalized by saying that this value is actual the \emph{limit of the binomial distribution}.
+
+\begin{theorem}
+  Let $X$ be a binomial random variable with parameter $n$ and $p$ such that
+  $\lim_{n\to \infty} np = \lambda$, where $\lambda$ is a constant independent
+  of $n$. Then for any fixed number $k$, we have
+  $\lim_{n\to \infty} \Pr[X=k] = \frac{e^{-\lambda} \lambda^k}{k!}$.
+  \label{thm:binom-poi}
+\end{theorem}
+
+Let us now formally define the Poisson distribution. The above theorem states
+that the Poisson distribution is the limit of the binomial distribution.
+
+\begin{definition}
+  A random variable $X$ is said to be distributed according to the Poisson
+  distribution with parameter $\lambda$, if it takes non-negative integer
+  values, and the probability is given by
+  %\begin{align*}
+   $\Pr[X = k] = \frac{e^{-\lambda} \lambda^k}{k!}$.
+  %\end{align*}
+  \label{defn:poisson}
+\end{definition}
+
+You can verify that this is indeed a probability distribution, and that
+$\E[X] = \lambda$ for a Poisson random variable. Another nice property is that
+the sum of two Poisson random variables with parameter $\lambda_1$ and
+$\lambda_2$ is a Poisson random variable with parameter $\lambda_1 + \lambda_2$.
+\marginnote{Inductively, the sum of a finite number of Poisson random variables
+  is a Poisson random variable.}
+\begin{lemma}
+  Let $X_1$ and $X_2$ be two independent Poisson random variables with parameters
+  $\lambda_1$ and $\lambda_2$. Then $X = X_1 + X_2$ is a Poisson random variable
+  with parameter $\lambda_1 + \lambda_2$.
+  \label{lem:sum-poisson}
+\end{lemma}
+\begin{proof}
+  This follows from the following calculation.
+  \begin{align*}
+    \Pr[X = k] &= \sum_{i=0}^k \Pr[X_1 = i] \Pr[X_2 = k-i]\\
+               &= \sum_{i=0}^k \frac{e^{-\lambda_1}\lambda_1^{i}}{i!} \frac{e^{-\lambda_2} \lambda_2^{k-i}}{(k-i)!}\\
+               &= \frac{e^{-(\lambda_1+\lambda_2)}}{k!}\sum_{i=0}^k \binom{k}{i} \lambda_1^i \lambda_2^{k-i}\\
+    &= \frac{e^{-(\lambda_1+\lambda_2)}(\lambda_1 + \lambda_2)^k}{k!}
+  \end{align*}
+\end{proof}
+
+We can use the moment generating functions to prove Chernoff-type bounds for
+Poisson random variables as well.
+% The proof is left out, and is available in the textbook.
+\begin{theorem}
+  Let $X$ be a Poisson random variable with parameter $\lambda$. The following
+  statement hold for $X$.
+  \begin{enumerate}
+  \item If $k > \lambda$, then $\Pr[X \geq k] \leq \frac{e^{-\lambda}(e\lambda)^k}{k^k}$.
+  \item If $k < \lambda$, then $\Pr[X \leq k] \leq \frac{e^{-\lambda}(e\lambda)^k}{k^k}$.
+  \item For $\delta > 0$ $\Pr[X \geq (1+\delta)\lambda] \leq \left(\frac{e^\delta}{(1+\delta)^{(1+\delta)}} \right)^\lambda$.
+  \item For $\delta < 1$ $\Pr[X \leq (1-\delta)\lambda] \leq \left(\frac{e^{-\delta}}{(1-\delta)^{(1-\delta)}} \right)^\lambda$.
+  \end{enumerate}
+  \label{thm:poi-chernoff}
+\end{theorem}
+
+\subsection{Approximating the Balls-in-Bins distribution}
+
+We saw that the probability of a bin $i$ containing $k$ balls is
+well-approximated by the Poisson distribution when $k\ll m$. We will see that
+instead of studying the balls-in-bins process we can instead study the
+distribution over the bins assuming that each bin receives $k$ balls chosen
+according to the Poisson distribution. Let us make this precise with the
+following theorem.
+
+\begin{theorem}
+  Let $X_1^m, X_2^m, \ldots, X_n^m$ denote the distribution of balls in bins
+  when $m$ balls are thrown into $n$ bins indepedently and uniformly at
+  random. Let $Y_1^m$, $Y_2^m$, $\ldots$, $Y_n^m$ be $n$ independent Poisson random
+  variables with parameter $m/n$.
+
+  The distribution $Y_1^m$, $Y_2^m$, $\ldots$, $Y_n^m$, conditioned on $\sum_{i=1}^n Y_i^m = k$ is identical to the distribution $X_1^k$, $X_2^k$, $\ldots$, $X_n^k$, irrespective of the value of $m$.
+  \label{thm:poi-bb-dist}
+\end{theorem}
+\begin{proof}
+  First let us compute $\Pr[(X_1^k,X_2^k,\ldots,X_n^k)=(k_1,k_2,\ldots,k_n)]$,
+  where $\sum_{i=1}^n k_i = k$.
+  \begin{align*}
+    \Pr[(X_1^k,X_2^k,\ldots,X_n^k)=(k_1,k_2,\ldots,k_n)] &= \binom{k}{k_1} \binom{k-k_1}{k_2} \cdots \binom{k-k_1-\cdots-k_{n-1}}{k_n} \cdot \frac{1}{n^k}\\
+    &= \frac{k!}{k_1! k_2! \cdots k_n!} \cdot \frac{1}{n^k}
+  \end{align*}
+
+  Each of $Y_i^m$ is independent Poisson random variable. So, we have
+  $$\Pr[Y_i^m = k_i] = \frac{e^{-m/n} (m/n)^{k_i}}{k_i!}.$$
+  We are interested in computing the following probability.
+  \begin{align*}
+    \Pr\left[ \bigcap_{i=1}^nY_i^m = k_i \Big| \sum_{i=1}^n Y_i^m = k\right] &= \frac{\Pr\left[\bigcap_{i=1}^nY_i^m = k_i \right]\cdot \Pr\left[\sum_{i=1}^n Y_i^m = k \Big| \bigcap_{i=1}^nY_i^m = k_i  \right]}{\Pr\left[\sum_{i=1}^n Y_i^m = k \right]}
+  \end{align*}
+  Since $Y_i^m$ are all independent, the first term in the numerator is a
+  product of the corresponding probabilities. The second probability in the
+  numerator is $1$ since $\sum_{i=1}^n k_i = k$. Since sum of Poisson random
+  variables is another Poisson random variable, the denominator can be directly
+  computed as well. Thus we can combine all of this to write
+
+  \begin{align*}
+    \Pr\left[ \bigcap_{i=1}^nY_i^m = k_i \Big| \sum_{i=1}^n Y_i^m = k\right] &= \frac{\prod_{i=1}^n \Pr\left[Y_i^m = k_i \right]}{e^{-m}m^k} \cdot k!\\
+    &= \frac{\prod_{i=1}^n\left( \frac{e^{-m/n} (m/n)^{k_i}}{k_i!}\right) }{e^{-m}m^k} \cdot k! = \frac{k!}{k_1! k_2! \cdots k_n!} \cdot \frac{1}{n^k}
+  \end{align*}
+\end{proof}
+
+To use this approximation to give bounds on events for the balls-in-bins process
+we need the following theorem.
+
+\begin{theorem}
+  Let $X_1^m$, $X_2^m$, $\ldots$, $X_n^m$, and $Y_1^m$, $Y_2^m$, $\ldots$,
+  $Y_n^m$ be as defined earlier. Let $f(x_1,x_2,\ldots,x_n)$ be any non-negative
+  function. Then, we have the following:
+  \begin{align*}
+    \E[f(X_1^m, X_2^m, \ldots, X_n^m)] \leq e\sqrt{m} \E[f(Y_1^m, Y_2^m, \ldots, Y_n^m)].
+  \end{align*}
+  \label{thm:bb-poi-bound}
+\end{theorem}
+\begin{proof}
+  We can write the expectation $\E[f(Y_1^m, Y_2^m, \ldots, Y_n^m)]$ using
+  conditional expectations as follows:
+  \begin{align*}
+    \E[f(Y_1^m, Y_2^m, \ldots, Y_n^m)] &= \sum_{k \geq 0} \E\left[f(Y_1^m, Y_2^m, \ldots, Y_n^m) \Big| \sum_{i=1}^n Y_i^m = k  \right]\cdot \Pr\left[ \sum_{i=1}^n Y_i^m = k \right]
+  \end{align*}
+  From Theorem~\ref{thm:poi-bb-dist}, we know that conditioned on
+  $\sum_{i=1}^n Y_i^m = k$ the two distributions $(X_1^m,X_2^m,\ldots,X_n^m)$
+  and $(Y_1^m, Y_2^m, \ldots, Y_n^m)$ are identical. So, we can rewrite the
+  equation as follows:
+  \begin{align*}
+    \E[f(Y_1^m, Y_2^m, \ldots, Y_n^m)] &= \sum_{k \geq 0} \E[f(X_1^k, X_2^k, \ldots, X_n^k)]\cdot \Pr\left[ \sum_{i=1}^n Y_i^m = k \right]\\
+                                       &\geq \E[f(X_1^m, X_2^m,\ldots,X_n^m)] \cdot \Pr\left[\sum_{i=1}^n Y_i^m = m \right]\\
+                                       &= \frac{e^{-m}m^m}{m!} \E[f(X_1^m, X_2^m,\ldots,X_n^m)] \\
+    &\geq \frac{1}{e\sqrt{m}} \E[f(X_1^m, X_2^m,\ldots,X_n^m)]
+  \end{align*}
+  
+  \marginnote{We are using the bound that $m!$ is at most $e\sqrt{m} \left(\frac{m}{e} \right)^m$.}
+  
+\end{proof}
+
+As a consequence of this result, let us prove that the bound on maximum load
+that we obtained earlier for the balls-in-bins process is optimal.
+
+\section{Lower bound for maximum load}
+
+Let us now use the Poisson approximation to say that if we throw $n$ balls into
+$n$ bins independently and uniformly at random, then at least one bin will have
+$\Omega(\log n/\log \log n)$ balls with high probability. Instead of analyzing
+the balls-in-bins process we will assume that the balls are distributed
+according to the Poisson distribution and use Theorem~\ref{thm:bb-poi-bound}.
+
+\begin{theorem}
+  If we throw $n$ balls into $n$ bins independently and uniformly at random,
+  then, with probability at least $1 - 1/n$, at least one of the bins will have
+  $\Omega(\log n/\log \log n)$ many balls in it.
+  \label{thm:load-lb}
+\end{theorem}
+\begin{proof}
+  Let $\{X_i\}_{1\leq i\leq n}$ denote the random variables denoting the number
+  of balls in bin $i$ when $n$ balls are thrown into $n$ bins. Let
+  $\{Y_i\}_{1 \leq i\leq n}$ denote $n$ independent Poisson random variables
+  with parameter $1$. Let $k$ be some integer, and define the function
+  $f(x_1, x_2, \ldots, x_n)$ as follows.
+  \begin{align*}
+    f(x_1, x_2, \ldots, x_n) &=
+                               \begin{cases}
+                                 1 & \text{ if $\forall i$, $x_i < k$},\\
+                                 0 & \text{ otherwise}
+                               \end{cases}
+  \end{align*}
+  Now, $\E[f(X_1, X_2, \ldots, X_n)]$ is precisely the probability that no bin
+  has load at least $k$. To bound this probability, it is sufficient to bound
+  $\E[f(Y_1, Y_2, \ldots, Y_n)]$. We can write this expectation as follows.
+  \begin{align*}
+    \E[f(Y_1, Y_2, \ldots, _n)] &= \prod_{i=1}^n \Pr[Y_i < k] \\
+    &= \prod_{i=1}^n \left(1 - \Pr[Y_i \geq k] \right)
+  \end{align*}
+  Since $Y_i$s are Poisson random variables with parameter $1$,
+  $\Pr[Y_i = k] = \frac{1}{ek!}$. Thus, $\Pr[Y_i \geq k] \geq \frac{1}{ek!}$.
+  Therefore,
+  \begin{align*}
+    \E[f(Y_1, Y_2, \ldots, Y_n)] &\leq \left(1 - \frac{1}{ek!} \right)^n \leq e^{-\frac{n}{ek!}}.
+  \end{align*}
+
+  Suppose $k = \ln n/\ln\ln n$. Then using the inequality that $k! < k (k/e)^k$,
+  we can conclude that $\E[f(Y_1, Y_2, \ldots, Y_n)] \leq 1/n^2$, and
+  consequently $$\E[f(X_1, X_2, \ldots, X_n)] \leq 1/n.$$
+\end{proof}
+
+A straightforward consequence of this theorem is that if we use a completely
+random hash function to do hashing with chaining, then the worst-case search
+time is $O(\ln n/\ln \ln n)$, with high probability. This bound is not very
+appealing since storing a perfectly random hash function already requires an
+amount of space comparable to the universe from which the elements come. A more
+practical algorithm would be to use a hash function that is not completely
+random, and hence can be stored efficiently, and for which the maximum load is
+small. Now we look at an elegant data structure for checking \emph{set membership}.
+
+\section{Bloom filters}
+\marginnote{The letter B in Bloom filter is capitalized since the data structure is
+  named after Burton Bloom.}
+
+Suppose you have a set $S\subseteq \mathcal{U}$. The universe $\mathcal{U}$ is a
+large set that cannot be stored efficiently. You want a data structure that can
+perform an approximate set membership for an $x\in \mathcal{U}$ effectively with
+the following conditions:
+\begin{itemize}
+\item If $x\in S$, then you should always answer correctly.
+\item If $x\notin S$, then probability that you will answer incorrectly is small.
+\end{itemize}
+
+This is an example of a static dictionary. The set $S$ is fixed, and the goal is
+to store $S$ efficiently so that membership queries can be answered quickly,
+preferably in $O(1)$-time. We will see more of this later on.
+
+\marginnote{Here is one such use from the Wikipedia article - ``Fruit flies use
+  a modified version of Bloom filters to detect novelty of odors, with
+  additional features including similarity of novel odor to that of previously
+  experienced examples, and time elapsed since previous experience of the same
+  odor.''}  Bloom filters are used as a first level of filter in many
+applications.  The Wikipedia article on Bloom filters includes a number of
+applications for the data structure. Standard hashing would require storing the
+actual elements in the set $S$. Bloom filters save space by not storing the
+elements themselves, but a bit indicating whether the element is present or
+not. We will assume that we have access to perfectly random hash functions, and
+will not worry about the cost of storing these hash functions. We will later
+look at how $O(1)$-wise independent hash families are sufficient to obtain
+comparable guarantees in the space required and the error probability.
+
+For storing a set $S$ with $m$ elements, the Bloom filter has a bit array $B$ of
+length $n$, and $k$ hash functions
+$h_1,h_2,\ldots,h_k: \mathcal{U} \to \{1,2,\ldots,n\}$. We will fix the
+relationship between $n$, $m$ and $k$ soon. We store the set $S$ as follows: for
+each $x\in S$, we set $B[h_i(x)] = 1$ for every $1\leq i\leq k$. If the same
+position is mapped to by multiple hash functions, and by multiple elements in
+$S$, it is set to $1$ only once.
+
+A membership query is answered as follows: given $x\in \mathcal{U}$, answer yes
+if $B[h_i(x)]=1$ for every $1 \leq i\leq k$. The following observation is easy
+to see.
+
+\begin{proposition}
+  Let $x\in S$. Then the membership query to the Bloom filter answers yes with probability $1$.
+  \label{prop:bf-positives}
+\end{proposition}
+
+The interesting case is when $x\notin S$. The Bloom filter might still say yes
+if the corresponding bits in the array $B$ is set by a different element or by
+other hash functions. We will now bound the error for such \emph{false
+  positives}.
+
+For an element $x\notin S$, we want to bound the probability that
+$B[h_i(x)] = 1$ for every $i \leq k$. After hashing all the elements in $S$, for a fixed position $j\in \set{n}$ we can write
+\begin{align*}
+  \Pr[B[j] = 0] = \left(1 - \frac{1}{n} \right)^{km}.
+\end{align*}
+
+Therefore, the probability of a false positive is
+\begin{align*}
+  \left(1 - \left(1 - \frac{1}{n} \right)^{km}  \right)^k.
+\end{align*}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:
