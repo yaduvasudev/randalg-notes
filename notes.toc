@@ -29,20 +29,23 @@
 \contentsline {section}{\numberline {4.3}Lower bound for maximum load}{33}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Bloom filters}{34}{section.4.4}%
 \contentsline {chapter}{\numberline {5}Hashing and dictionaries}{36}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Universal hashing and hash families}{36}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Static dictionaries: FKS hashing}{36}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Dynamic dictionaries: Cuckoo hashing}{36}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Open addressing: linear probing with $5$-wise independence}{36}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Online algorithms}{37}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Warm up: Bipartite matching}{37}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Online paging}{38}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Deterministic online paging}{39}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Randomized online paging}{40}{subsection.6.2.2}%
-\contentsline {section}{\numberline {6.3}Yao's minimax principle and lower bounds}{42}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Lower bound for online paging}{44}{subsection.6.3.1}%
-\contentsline {section}{\numberline {6.4}Bipartite matching revisited}{45}{section.6.4}%
-\contentsline {section}{\numberline {6.5}The Multiplicative Weights Update (MWU) method}{47}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}The weighted majority algorithm}{47}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Omniscient expert}{47}{subsection.6.5.2}%
-\contentsline {subsection}{\numberline {6.5.3}General case}{48}{subsection.6.5.3}%
+\contentsline {section}{\numberline {5.1}Universal hash families}{36}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Dynamic dictionaries using $2$-universal families}{37}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Explicit constructions}{38}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Perfect hashing}{39}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}FKS hashing}{40}{subsection.5.2.1}%
+\contentsline {section}{\numberline {5.3}Open addressing with linear probing}{40}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Cuckoo hashing}{43}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Online algorithms}{46}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Warm up: Bipartite matching}{46}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Online paging}{47}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Deterministic online paging}{48}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Randomized online paging}{49}{subsection.6.2.2}%
+\contentsline {section}{\numberline {6.3}Yao's minimax principle and lower bounds}{51}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Lower bound for online paging}{53}{subsection.6.3.1}%
+\contentsline {section}{\numberline {6.4}Bipartite matching revisited}{54}{section.6.4}%
+\contentsline {section}{\numberline {6.5}The Multiplicative Weights Update (MWU) method}{56}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}The weighted majority algorithm}{56}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Omniscient expert}{56}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}General case}{57}{subsection.6.5.3}%
 \contentsfinish 

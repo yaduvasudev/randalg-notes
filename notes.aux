@@ -131,51 +131,83 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Universal hashing and hash families}{36}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Static dictionaries: FKS hashing}{36}{section.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Dynamic dictionaries: Cuckoo hashing}{36}{section.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Open addressing: linear probing with $5$-wise independence}{36}{section.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Online algorithms}{37}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Universal hash families}{36}{section.5.1}\protected@file@percent }
+\@writefile{loe}{\addvspace {10\p@ }}
+\@writefile{loe}{\contentsline {definition}{\ifthmt@listswap Definition\nobreakspace  {}5.1\else \numberline {5.1}Definition\fi }{36}{definition.5.1}\protected@file@percent }
+\newlabel{defn:univ-hash}{{5.1}{36}{}{definition.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Dynamic dictionaries using $2$-universal families}{37}{subsection.5.1.1}\protected@file@percent }
+\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}5.2\else \numberline {5.2}Lemma\fi }{37}{lemma.5.2}\protected@file@percent }
+\newlabel{lem:dyn-dict-chain}{{5.2}{37}{}{lemma.5.2}{}}
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}5.3\else \numberline {5.3}Theorem\fi }{38}{theorem.5.3}\protected@file@percent }
+\newlabel{thm:dy-dict-bound}{{5.3}{38}{}{theorem.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Explicit constructions}{38}{subsection.5.1.2}\protected@file@percent }
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}5.4\else \numberline {5.4}Theorem\fi }{38}{theorem.5.4}\protected@file@percent }
+\newlabel{thm:2-univ}{{5.4}{38}{}{theorem.5.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Perfect hashing}{39}{section.5.2}\protected@file@percent }
+\@writefile{loe}{\contentsline {definition}{\ifthmt@listswap Definition\nobreakspace  {}5.5\else \numberline {5.5}Definition\fi }{39}{definition.5.5}\protected@file@percent }
+\newlabel{defn:perfect-hash}{{5.5}{39}{}{definition.5.5}{}}
+\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}5.6\else \numberline {5.6}Lemma\fi }{39}{lemma.5.6}\protected@file@percent }
+\newlabel{lem:ph-lb}{{5.6}{39}{}{lemma.5.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}FKS hashing}{40}{subsection.5.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Open addressing with linear probing}{40}{section.5.3}\protected@file@percent }
+\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}5.7\else \numberline {5.7}Lemma\fi }{41}{lemma.5.7}\protected@file@percent }
+\newlabel{lem:conc-4-wise}{{5.7}{41}{}{lemma.5.7}{}}
+\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}5.8\else \numberline {5.8}Lemma\fi }{41}{lemma.5.8}\protected@file@percent }
+\newlabel{lem:linear-probe-run}{{5.8}{41}{}{lemma.5.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Cuckoo hashing}{43}{section.5.4}\protected@file@percent }
+\@writefile{loe}{\contentsline {proposition}{\ifthmt@listswap Proposition\nobreakspace  {}5.9\else \numberline {5.9}Proposition\fi }{43}{proposition.5.9}\protected@file@percent }
+\newlabel{prop:cuckoo-more-edges}{{5.9}{43}{}{proposition.5.9}{}}
+\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}5.10\else \numberline {5.10}Lemma\fi }{43}{lemma.5.10}\protected@file@percent }
+\newlabel{lem:cukoo-insert}{{5.10}{44}{}{lemma.5.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Connecting two trees. The second figure shows the new graph after the insertion of $x$ to the position on its left.}}{44}{Item.12}\protected@file@percent }
+\newlabel{fig:cuckoo-insert-1}{{5.1}{44}{Cuckoo hashing}{Item.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Inserting an element $x$ that connects a tree with a component with a single cycle. The second figure is the final connected component with the directions. Here $h_1(x)$ is the vertex to the left of $x$.}}{44}{Item.14}\protected@file@percent }
+\newlabel{fig:cuckoo-insert-2}{{5.2}{44}{Cuckoo hashing}{Item.14}{}}
+\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}5.11\else \numberline {5.11}Lemma\fi }{45}{lemma.5.11}\protected@file@percent }
+\newlabel{lem:cuckoo-cc}{{5.11}{45}{}{Item.16}{}}
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}5.12\else \numberline {5.12}Theorem\fi }{45}{theorem.5.12}\protected@file@percent }
+\newlabel{thm:random-graph-equiv}{{5.12}{45}{}{theorem.5.12}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Online algorithms}{46}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
 \@writefile{loe}{\addvspace {10\p@ }}
-\@writefile{loe}{\contentsline {definition}{\ifthmt@listswap Definition\nobreakspace  {}6.1\else \numberline {6.1}Definition\fi \thmtformatoptarg {Competitive ratio}}{37}{definition.6.1}\protected@file@percent }
-\newlabel{def:comp-ratio}{{6.1}{37}{Competitive ratio}{definition.6.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Warm up: Bipartite matching}{37}{section.6.1}\protected@file@percent }
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.2\else \numberline {6.2}Theorem\fi }{37}{theorem.6.2}\protected@file@percent }
-\newlabel{thm:maximal}{{6.2}{37}{}{theorem.6.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Online paging}{38}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Deterministic online paging}{39}{subsection.6.2.1}\protected@file@percent }
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.3\else \numberline {6.3}Theorem\fi }{39}{theorem.6.3}\protected@file@percent }
-\newlabel{thm:paging-det-ub}{{6.3}{39}{}{theorem.6.3}{}}
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.4\else \numberline {6.4}Theorem\fi }{40}{theorem.6.4}\protected@file@percent }
-\newlabel{thm:paging-det-lb}{{6.4}{40}{}{theorem.6.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Randomized online paging}{40}{subsection.6.2.2}\protected@file@percent }
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.5\else \numberline {6.5}Theorem\fi }{41}{theorem.6.5}\protected@file@percent }
-\newlabel{thm:rand-paging-ub}{{6.5}{41}{}{theorem.6.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Yao's minimax principle and lower bounds}{42}{section.6.3}\protected@file@percent }
-\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}6.6\else \numberline {6.6}Lemma\fi }{42}{lemma.6.6}\protected@file@percent }
-\newlabel{lem:pure-strat}{{6.6}{42}{}{lemma.6.6}{}}
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.7\else \numberline {6.7}Theorem\fi \thmtformatoptarg {von Neumann Minimax Theorem}}{43}{theorem.6.7}\protected@file@percent }
-\newlabel{thm:vn-minimax}{{6.7}{43}{von Neumann Minimax Theorem}{theorem.6.7}{}}
-\@writefile{loe}{\contentsline {corollary}{\ifthmt@listswap Corollary\nobreakspace  {}6.8\else \numberline {6.8}Corollary\fi }{43}{corollary.6.8}\protected@file@percent }
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.9\else \numberline {6.9}Theorem\fi \thmtformatoptarg {Yao's minimax principle}}{44}{theorem.6.9}\protected@file@percent }
-\newlabel{thm:yao}{{6.9}{44}{Yao's minimax principle}{theorem.6.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Lower bound for online paging}{44}{subsection.6.3.1}\protected@file@percent }
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.10\else \numberline {6.10}Theorem\fi }{44}{theorem.6.10}\protected@file@percent }
-\newlabel{thm:lb-pagin}{{6.10}{44}{}{theorem.6.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}Bipartite matching revisited}{45}{section.6.4}\protected@file@percent }
-\newlabel{alg:ranking}{{6}{46}{Bipartite matching revisited}{AlgoLine.6.6}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {6}{\ignorespaces {\textsf  {RANKING}} }}{46}{algocf.6}\protected@file@percent }
-\@writefile{loe}{\contentsline {claim}{\ifthmt@listswap Claim\nobreakspace  {}6.11\else \numberline {6.11}Claim\fi }{46}{claim.6.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.5}The Multiplicative Weights Update (MWU) method}{47}{section.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}The weighted majority algorithm}{47}{subsection.6.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.2}Omniscient expert}{47}{subsection.6.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.3}General case}{48}{subsection.6.5.3}\protected@file@percent }
-\@writefile{loa}{\contentsline {algocf}{\numberline {7}{\ignorespaces \textls  [50]{\textsmallcaps  {Weighted Majority}}}}{48}{algocf.7}\protected@file@percent }
-\newlabel{alg:wgtd-maj}{{7}{48}{General case}{algocf.7}{}}
-\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.12\else \numberline {6.12}Theorem\fi }{48}{theorem.6.12}\protected@file@percent }
-\newlabel{thm:wgtd-maj}{{6.12}{48}{}{theorem.6.12}{}}
+\@writefile{loe}{\contentsline {definition}{\ifthmt@listswap Definition\nobreakspace  {}6.1\else \numberline {6.1}Definition\fi \thmtformatoptarg {Competitive ratio}}{46}{definition.6.1}\protected@file@percent }
+\newlabel{def:comp-ratio}{{6.1}{46}{Competitive ratio}{definition.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Warm up: Bipartite matching}{46}{section.6.1}\protected@file@percent }
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.2\else \numberline {6.2}Theorem\fi }{46}{theorem.6.2}\protected@file@percent }
+\newlabel{thm:maximal}{{6.2}{46}{}{theorem.6.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Online paging}{47}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Deterministic online paging}{48}{subsection.6.2.1}\protected@file@percent }
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.3\else \numberline {6.3}Theorem\fi }{48}{theorem.6.3}\protected@file@percent }
+\newlabel{thm:paging-det-ub}{{6.3}{48}{}{theorem.6.3}{}}
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.4\else \numberline {6.4}Theorem\fi }{49}{theorem.6.4}\protected@file@percent }
+\newlabel{thm:paging-det-lb}{{6.4}{49}{}{theorem.6.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Randomized online paging}{49}{subsection.6.2.2}\protected@file@percent }
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.5\else \numberline {6.5}Theorem\fi }{50}{theorem.6.5}\protected@file@percent }
+\newlabel{thm:rand-paging-ub}{{6.5}{50}{}{theorem.6.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Yao's minimax principle and lower bounds}{51}{section.6.3}\protected@file@percent }
+\@writefile{loe}{\contentsline {lemma}{\ifthmt@listswap Lemma\nobreakspace  {}6.6\else \numberline {6.6}Lemma\fi }{51}{lemma.6.6}\protected@file@percent }
+\newlabel{lem:pure-strat}{{6.6}{51}{}{lemma.6.6}{}}
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.7\else \numberline {6.7}Theorem\fi \thmtformatoptarg {von Neumann Minimax Theorem}}{52}{theorem.6.7}\protected@file@percent }
+\newlabel{thm:vn-minimax}{{6.7}{52}{von Neumann Minimax Theorem}{theorem.6.7}{}}
+\@writefile{loe}{\contentsline {corollary}{\ifthmt@listswap Corollary\nobreakspace  {}6.8\else \numberline {6.8}Corollary\fi }{52}{corollary.6.8}\protected@file@percent }
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.9\else \numberline {6.9}Theorem\fi \thmtformatoptarg {Yao's minimax principle}}{53}{theorem.6.9}\protected@file@percent }
+\newlabel{thm:yao}{{6.9}{53}{Yao's minimax principle}{theorem.6.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Lower bound for online paging}{53}{subsection.6.3.1}\protected@file@percent }
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.10\else \numberline {6.10}Theorem\fi }{53}{theorem.6.10}\protected@file@percent }
+\newlabel{thm:lb-pagin}{{6.10}{53}{}{theorem.6.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}Bipartite matching revisited}{54}{section.6.4}\protected@file@percent }
+\newlabel{alg:ranking}{{6}{55}{Bipartite matching revisited}{AlgoLine.6.6}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {6}{\ignorespaces {\textsf  {RANKING}} }}{55}{algocf.6}\protected@file@percent }
+\@writefile{loe}{\contentsline {claim}{\ifthmt@listswap Claim\nobreakspace  {}6.11\else \numberline {6.11}Claim\fi }{55}{claim.6.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}The Multiplicative Weights Update (MWU) method}{56}{section.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}The weighted majority algorithm}{56}{subsection.6.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.2}Omniscient expert}{56}{subsection.6.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.3}General case}{57}{subsection.6.5.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {7}{\ignorespaces \textls  [50]{\textsmallcaps  {Weighted Majority}}}}{57}{algocf.7}\protected@file@percent }
+\newlabel{alg:wgtd-maj}{{7}{57}{General case}{algocf.7}{}}
+\@writefile{loe}{\contentsline {theorem}{\ifthmt@listswap Theorem\nobreakspace  {}6.12\else \numberline {6.12}Theorem\fi }{57}{theorem.6.12}\protected@file@percent }
+\newlabel{thm:wgtd-maj}{{6.12}{57}{}{theorem.6.12}{}}
 \ttl@finishall
-\gdef \@abspage@last{49}
+\gdef \@abspage@last{58}

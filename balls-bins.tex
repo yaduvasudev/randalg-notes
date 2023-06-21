@@ -6,7 +6,12 @@ In this part of the course, we will study the basic balls into bins process, and
 
 Suppose that we throw $m$ balls into $n$ bins. By the pigeonhole principle, we know that if $m > n$, then there surely must exist a bin that has more than one ball. But what should be the value of $m$ so that the probability of there existing a bin with more than one ball is at least $1/2$. It turns out that for this $m$ needs to be only $\Theta(\sqrt{n})$. 
 
-To analyze this problem, notice that for the second ball to land in a bin on its own, the probability is $(1 - 1/n)$. Following this argument further, if the first $i$ balls have all fallen in different bins, the probability of the $(i+1)^{st}$ ball landing in a bin of its own is $(1 - i/n)$. Thus, for all balls to fall into a bin of their own, the probability is given by the expression
+To analyze this problem, notice that for the second ball to land in a bin on its
+own, the probability is $(1 - 1/n)$. Following this argument further, if the
+first $i$ balls have all fallen in different bins, the probability of the
+$(i+1)^{st}$ ball landing in a bin of its own is $(1 - i/n)$. Thus, for all
+balls to fall into a bin of their own, the probability is given by the
+expression
 \begin{align*}
 	\left(1 - \frac{1}{n}\right) \left( 1 - \frac{2}{n}\right) \ldots \left(1 - \frac{m-1}{n}\right)
 \end{align*}
@@ -344,16 +349,49 @@ other hash functions. We will now bound the error for such \emph{false
 For an element $x\notin S$, we want to bound the probability that
 $B[h_i(x)] = 1$ for every $i \leq k$. After hashing all the elements in $S$, for a fixed position $j\in \set{n}$ we can write
 \begin{align*}
-  \Pr[B[j] = 0] = \left(1 - \frac{1}{n} \right)^{km}.
+  \Pr[B[j] = 0] = \left(1 - \frac{1}{n} \right)^{km} \approx e^{-km/n}.
 \end{align*}
 
-Therefore, the probability of a false positive is
+This process is equivalent to throwing $mk$ balls into $n$ bins, and therefore
+the events that $B[j]=0$ for different $j$s are not independent. Nonetheless, we
+can use the Poisson approximation from the earlier section to analyze this case
+as though they are independent. Let's formalize this now. Assume that
+$Y_1, Y_2$, $\ldots$, $Y_n$ are $n$ independent Poisson random variables with
+parameter $mk/n$. We have $\Pr[Y_i = 0] = e^{-km/n}$. Let $Y$ be the number of
+indices $j$ such that $B[j] = 0$. Then, we can say that $\E[Y] = ne^{-km/n}$.
+\marginnote{We can define $Y_i' = 1$ if $Y_i = 0$, and $0$ otherwise. These are
+  $0-1$ independent random variables and $Y = \sum_{i=1}^n Y_i'$.}
+Since $Y$ can be considered as the sum of independent identically distributed
+$0-1$ random variables, we can apply the standard Chernoff bounds here to say
+that
 \begin{align*}
-  \left(1 - \left(1 - \frac{1}{n} \right)^{km}  \right)^k.
+  \Pr[ |Y - ne^{-km/n}| \geq \epsilon n ] \leq 2\exp\left(-\frac{n\epsilon^2e^{km/n}}{3} \right).
 \end{align*}
 
+Let $\eta = e^{-km/n}$ denote the expected fraction of indices $j$ that are
+empty when we assign bits according to the Poisson distribution. If we consider
+the event that $Y/n \geq \eta + \epsilon$, then using
+Theorem~\ref{thm:bb-poi-bound}, we can say that the probability that fraction of
+indices $j$ such that $B[j] = 0$ in a Bloom filter is at least $\eta + \epsilon$
+is at most $2e\sqrt{km}\exp\left(-\frac{n\epsilon^2e^{km/n}}{3} \right)$.
 
+Therefore, with high probability, the fraction of indices $j$ such that
+$B[j] = 0$ is close to $\eta = e^{-km/n}$. Hence, the probability of a false
+positive for a Bloom filter is well-approximated by the term
+$(1-e^{-km/n})^k$. Taking the derivatives, this probability is minimized when
+$k = \tfrac{n}{m}\ln 2$. For this value of $k$, the false positive probability
+is $2^{-k}$. Therefore, if we have a Bloom filter where $n = 10m$, we have
+$k \approx 7$, and false positive probability of $1/128$, which is less that
+$1\%$.
 
+In other words, we have a data structure for testing membership to an
+$m$-element set that requires $O(m)$-space, where the membership query can be
+answered in $O(1)$-time in the worst case with a false positive probability of
+about $1\%$. We will now spend more time on the dictionary problem, and data
+structures to achieve good bounds on the space and query-time. Note that we have
+assumed that the hash function we have is completely random. In practice this is
+never the case. While we study the dictionary problem, we will also encounter
+hash families that are not fully random, but \emph{appear random}.
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "notes"
