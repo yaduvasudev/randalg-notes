@@ -623,25 +623,27 @@ increase the size of the connected components.
 
 We will prove the following statements about the size of the connected
 components in the cuckoo graph.
-\begin{lemma}
+\begin{theorem}
   Let $G$ be a cuckoo graph with $n$ vertices and $m = \frac{1-\epsilon}{2} n$
   edges for some constant $\epsilon > 0$. Then, the following statements hold.
   \begin{enumerate}
   \item With probability $1 - 1/n$, the largest component in $G$ has size $O(\log n)$.
   \item The expected size of any connected component in $G$ is $O(1)$.
   \end{enumerate}
-  \label{lem:cuckoo-cc}
-\end{lemma}
+  \label{thm:cuckoo-cc}
+\end{theorem}
 
 Instead of proving this statement for graphs in $G_{n,m}$, we are going to prove
 this for graphs in $G_{n,p}$. To that end, we will first show a connection
 between the two graph distributions.
 
-\begin{theorem}
+\begin{lemma}
   Let ${\cal P}$ be a any \emph{monotone graph property}. \marginnote{A monotone
     graph property is one where if $G\in {\cal P}$ and $G \subseteq G'$, then
-    $G' \in {\cal P}$. For instance, connectivity is a monotone graph property.}
-  Suppose that $P(n,m)$ and $P(n,p)$ be probability values defined as follows:
+    $G' \in {\cal P}$. For instance, connectivity is a monotone graph property
+    since if $G$ is connected and we add more edges to $G$ to obtain $G'$, then
+    $G'$ will also be connected.}
+  Suppose that $P(n,m)$ and $P(n,p)$ are probability values defined as follows:
   \begin{align*}
     P(n,m) &= \Pr_{G\sim G_{n,m}}[G \in {\cal P}], \\
     P(n,p) &= \Pr_{G \sim G_{n,p}}[G \in {\cal P}]
@@ -649,11 +651,92 @@ between the two graph distributions.
   Let $p^{+} = (1+\epsilon)\frac{m}{\binom{n}{2}}$ and
   $p^- = (1-\epsilon)\frac{m}{\binom{n}{2}}$, for some constant $0 < \epsilon < 1$. Then,
   \begin{align*}
-    P(n,p^-) - e^{-O(n)} < P(n,m) < P(n,p^+) + e^{-O(n)}
+    P(n,p^-) - e^{-O(m)} < P(n,m) < P(n,p^+) + e^{-O(m)}
   \end{align*}
-  \label{thm:random-graph-equiv}
-\end{theorem}
+  \label{lem:random-graph-equiv}
+\end{lemma}
 \begin{proof}
+  Let us first consider $P(n,p^-)$. Let $X$ be the number of edges in $G$
+  sampled from $G_{n,p^-}$. Conditioned on $X=m$, the distribution of
+  $G\sim G_{n,p^-}$ is identical to $G_{n,m}$. Thus, we can write the
+  probability $P(n,p^-)$ as follows.
+  \begin{align*}
+    P(n,p^-) &= \sum_{k\geq 0} P(n,k)\cdot \Pr[X=k]
+  \end{align*}
+  Since ${\cal P}$ is a monotone graph property, if $k \leq k'$, then
+  $P(n,k) \leq P(n,k')$. Therefore, we can split the sum as follows.
+  \begin{align*}
+    P(n,p^-) &\leq P(n,m) + \Pr[X > m].
+  \end{align*}
+  Notice that $\E[X] = p^+ \binom{n}{2}$, and it is the sum of independent
+  Poisson trials. Therefore, we can apply Chernoff bounds to upper bound
+  $\Pr[X>m]$.
+  \begin{align*}
+    \Pr[X > m] &= \Pr\left[ X \geq \frac{1}{1-\epsilon}\E[X]  \right] \leq
+                 \Pr\left[ X \geq (1+\epsilon)\E[X] \right]\\
+               &= \exp\left( \frac{-\epsilon^2\E[X]}{3} \right) =
+                 \exp\left( \frac{-(1+\epsilon)\epsilon^2 m}{3}  \right).
+  \end{align*}
+  A similar calculation for $p^+$ will show the other side of the inequality in
+  the lemma.
+\end{proof}
+
+Now we prove Theorem~\ref{thm:cuckoo-cc} for random graphs obtained from
+$G_{n,p}$. From the lemma above this suffices, since the property of a graph
+having a connected component of size at least $k$ is a monotone property.
+
+\begin{proof}
+  [Proof of Theorem~\ref{thm:cuckoo-cc}]
+  In our case, we have $m = \frac{1-\epsilon}{2} n$, and we will use
+  Lemma~\ref{lem:random-graph-equiv} with
+  $p^+ = (1+\epsilon) \frac{m}{\binom{n}{2}} =
+  \frac{(1+\epsilon)(1-\epsilon)}{n-1}$. To upper bound the size of the
+  connected component, let us start by looking at a BFS starting from a fixed
+  vertex $v$. The number of neighbors of $v$ in a graph in $G_{n,p^+}$ is a
+  binomial random variable with parameters $n-1$ and $p^+$. For the $i^{th}$
+  vertex $v_i$ in the BFS, let $N_i$ be the number of new neighbors of $v_i$ that
+  are present in $G_{n,p^+}$ conditioned on the first $i-1$ vertices $v_1$,
+  $v_2$, $\ldots$, $v_{i-1}$.
+
+  The key observation here is that $N_i$ is \emph{statistically dominated} by
+  the binomial random variable $B_i$ with parameters $n-1$ and $p^+$. To see
+  this, notice that the random variable $N_i$ is distributed between $1$ and
+  $n-i$ and each new vertex is a neighbor of $v_i$ indepenedently with
+  probability $p^+$. Thus, we can say that
+  $$\Pr[N_i \geq k] \leq \Pr[B_i \geq k].$$
+
+  To bound the probability that the largest component is of size at most $s$, we
+  need to upper-bound the probability of the event $\sum_{i=1}^s N_i > s$. We
+  will do this by bounding the probability of the event $\sum_{i=1}^s B_i > s$
+  and using the observation above.  \marginnote{ If $X$ and $Y$ are binomial
+    random variables with parameters $n$ and $p$, then both $X$ and $Y$ can be
+    expressed as the sum of $n$ independent Bernoulli random variables with
+    parameter $p$, and hence $X+Y$ is the sum of $2n$ independent Bernoulli
+    random variables with parameter $p$.  } Observe that the sum of $s$ binomial
+  random variables with parameters $n-1$ and $p^+$ is another binomial random
+  variable, say $B$, with parameter $s(n-1)$ and $p^+$. Also,
+  $\E[B] = s(n-1)p^+ = (1-\epsilon^2) s$. Thus, we can use Chernoff bounds to
+  upper bound the probability as follows.
+  \begin{align*}
+    \Pr\left[\sum_{i=1}^s B_i > s  \right] &= \Pr\left[ B > s \right] = \Pr\left[ B \geq \frac{\E[B]}{1-\epsilon^2}  \right]\\
+    &\leq \Pr\left[ B \geq (1+\epsilon^2)\E[B] \right] \leq e^{-\epsilon^2 \E[B]/3}
+  \end{align*}
+  Thus, if $s \geq \frac{4\ln n}{\epsilon^2 (1-\epsilon^2)}$, we have
+  $\Pr[B \geq s] \leq n^{-2}$. Thus, the probability that there is some vertex
+  $v$ such that a BFS from $v$ will find a component of size more than $s$ is at
+  most $1/n$.
+
+  To prove Part (2) of the theorem, let $S$ denote the size of the connected
+  component containing a fixed vertex $v$ in a graph sampled according to
+  $G_{n,m}$, and let $S'$ denote the size of the connected component containing
+  the vertex $v$ in a graph sampled according to $G_{n,p^+}$. From
+  Lemma~\ref{lem:random-graph-equiv}, we can say that
+  $Pr[S \geq s] \leq \Pr[S' \geq s] + e^{-O(m)}$. Since
+  $\E[S] = \sum_{k=1}^n \Pr[S \geq k]$, we can write
+  \begin{align*}
+    \E[S] \leq \sum_{k=1}^n \Pr[S' \geq k] + ne^{-O(m)} = \E[S'] + ne^{-O(m)}.
+  \end{align*}
+
   
 \end{proof}
 

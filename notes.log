@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.3)  7 JUN 2023 18:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.3)  19 JUL 2023 07:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1448,8 +1448,10 @@ File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 \tf@toc=\write5
 \openout5 = `notes.toc'.
 
- (./intro.tex
+ (./preface.tex
 [2
+
+]) (./intro.tex [3
 
 ]
 Chapter 1.
@@ -1470,23 +1472,23 @@ t available
 tead on input line 13.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineMonoT-TLF/regular/n' will be
 (Font)              scaled to size 10.0pt on input line 13.
- [3
+ [4
 
 ]
 Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input 
 line 39.
- [4]
+ [5]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
 65.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
-) [5]
+) [6]
 Package hyperref Info: bookmark level for unknown fact defaults to 0 on input l
 ine 75.
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
 t line 93.
 
-[6] [7]
+[7] [8]
 Overfull \hbox (51.43715pt too wide) detected at line 148
 []
  []
@@ -1496,7 +1498,7 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 152.
 
-LaTeX Warning: Marginpar on page 8 moved.
+LaTeX Warning: Marginpar on page 9 moved.
 
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 10.0pt on input line 155.
@@ -1508,7 +1510,7 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 (Font)              scaled to size 7.3pt on input line 159.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 159.
-[8] [9]) (./rand-vars.tex [10]
+[9] [10]) (./rand-vars.tex [11]
 Chapter 2.
 
 Overfull \hbox (6.68678pt too wide) in paragraph at lines 1--1
@@ -1518,17 +1520,17 @@ Overfull \hbox (6.68678pt too wide) in paragraph at lines 1--1
 
 Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
 nput line 10.
-[11
+[12
 
-] [12]
-
-LaTeX Warning: Marginpar on page 13 moved.
-
-[13]
+] [13]
 
 LaTeX Warning: Marginpar on page 14 moved.
 
 [14]
+
+LaTeX Warning: Marginpar on page 15 moved.
+
+[15]
 Overfull \hbox (0.11884pt too wide) in paragraph at lines 194--199
 []\T1/LinuxLibertineT-OsF/m/n/10 This leads us to the fol-low-ing greedy al-go-
 rithm: Or-der the ver-tices $\OML/nxlmi/m/it/10 v[]\OT1/LinuxLibertineT-TLF/m/n
@@ -1536,11 +1538,11 @@ rithm: Or-der the ver-tices $\OML/nxlmi/m/it/10 v[]\OT1/LinuxLibertineT-TLF/m/n
 /it/10 v[]$ 
  []
 
-[15] [16] [17] [18]
+[16] [17] [18] [19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19])
-(./concentration.tex [20]
+ [20])
+(./concentration.tex [21]
 Chapter 3.
 
 Overfull \hbox (6.79044pt too wide) in paragraph at lines 1--1
@@ -1548,24 +1550,24 @@ Overfull \hbox (6.79044pt too wide) in paragraph at lines 1--1
 n| 
  []
 
-[21
+[22
 
-] [22] [23]
+] [23] [24]
 Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
  line 130.
- [24]
+ [25]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
-[26] [27]) (./balls-bins.tex [28]
+ [26]
+[27] [28]) (./balls-bins.tex [29]
 Chapter 4.
-[29
+[30
 
-] [30]
+] [31]
 
-LaTeX Warning: Marginpar on page 31 moved.
+LaTeX Warning: Marginpar on page 32 moved.
 
-[31] [32]
+[32] [33]
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 8.0pt on input line 234.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
@@ -1583,12 +1585,12 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 6.46043pt on input line 234.
 
-
-LaTeX Warning: Marginpar on page 33 moved.
-
-[33]
 
 LaTeX Warning: Marginpar on page 34 moved.
+
+[34]
+
+LaTeX Warning: Marginpar on page 35 moved.
 
 LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-OsF
  on input line 305.
@@ -1600,20 +1602,20 @@ LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-OsF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 305.
 
 
-LaTeX Warning: Marginpar on page 34 moved.
+LaTeX Warning: Marginpar on page 35 moved.
 
 Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
 input line 340.
-[34]
-
-LaTeX Warning: Marginpar on page 35 moved.
-
-) (./hashing.tex [35]
-Chapter 5.
+[35]
 
 LaTeX Warning: Marginpar on page 36 moved.
 
-[36
+) (./hashing.tex [36]
+Chapter 5.
+
+LaTeX Warning: Marginpar on page 37 moved.
+
+[37
 
 ]
 LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-OsF o
@@ -1628,14 +1630,7 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
 (Font)              scaled to size 7.3pt on input line 90.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-OsF/m/it' will be
 (Font)              scaled to size 5.5pt on input line 90.
- [37] [38]
-
-LaTeX Warning: Marginpar on page 39 moved.
-
-[39]
-
-LaTeX Warning: Marginpar on page 40 moved.
-
+ [38] [39]
 
 LaTeX Warning: Marginpar on page 40 moved.
 
@@ -1643,13 +1638,10 @@ LaTeX Warning: Marginpar on page 40 moved.
 
 LaTeX Warning: Marginpar on page 41 moved.
 
+
+LaTeX Warning: Marginpar on page 41 moved.
+
 [41]
-
-LaTeX Warning: Marginpar on page 42 moved.
-
-
-LaTeX Warning: Marginpar on page 42 moved.
-
 
 LaTeX Warning: Marginpar on page 42 moved.
 
@@ -1661,9 +1653,19 @@ LaTeX Warning: Marginpar on page 43 moved.
 LaTeX Warning: Marginpar on page 43 moved.
 
 
+LaTeX Warning: Marginpar on page 43 moved.
+
+[43]
+
+LaTeX Warning: Marginpar on page 44 moved.
+
+
+LaTeX Warning: Marginpar on page 44 moved.
+
+
 Underfull \vbox (badness 1142) has occurred while \output is active []
 
- [43]
+ [44]
 Overfull \hbox (7.50711pt too wide) in paragraph at lines 494--524
  [] 
  []
@@ -1676,13 +1678,17 @@ Overfull \hbox (7.50711pt too wide) in paragraph at lines 556--588
  []
 
 
-LaTeX Warning: Marginpar on page 44 moved.
-
-[44]
-
 LaTeX Warning: Marginpar on page 45 moved.
 
-) (./online.tex [45]
+[45]
+
+LaTeX Warning: Marginpar on page 46 moved.
+
+[46]
+
+LaTeX Warning: Marginpar on page 47 moved.
+
+) (./online.tex [47]
 Chapter 6.
 
 Overfull \hbox (32.72678pt too wide) in paragraph at lines 9--10
@@ -1695,15 +1701,15 @@ t/10 , given by $\OML/nxlmi/m/it/10 f[]\LMS/ntxsy/m/n/10 ¹\OML/nxlmi/m/it/10 ^^
 eT-TLF/m/n/10 , [] , \OML/nxlmi/m/it/10 ^^[[]\LMS/ntxsy/m/n/10 º$ 
  []
 
-[46
+[48
 
-] [47] [48] [49]
+] [49] [50] [51]
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 94.
- [50] [51]
+ [52] [53]
 Package hyperref Info: bookmark level for unknown corollary defaults to 0 on in
 put line 164.
- [52] [53]
+ [54] [55]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1716,24 +1722,24 @@ n/10 1\LMS/ntxsy/m/n/10 \OML/nxlmi/m/it/10 e$\T1/LinuxLibertineT-OsF/m/n/10 -a
 pproximation 
  []
 
-[54]
+[56]
 Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
 line 257.
- [55] [56] [57])
+ [57] [58] [59])
 
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-[58] (./notes.aux)
+[60] (./notes.aux)
 Package rerunfilecheck Info: File `notes.out' has not changed.
 (rerunfilecheck)             Checksum: 09C6B5F66C0638F834AC35CA32F7E5FF;5364.
  ) 
 Here is how much of TeX's memory you used:
- 31813 strings out of 478287
- 595196 string characters out of 5849290
- 879073 words of memory out of 5000000
- 48943 multiletter control sequences out of 15000+600000
+ 31822 strings out of 478287
+ 595304 string characters out of 5849290
+ 879276 words of memory out of 5000000
+ 48946 multiletter control sequences out of 15000+600000
  702210 words of font info for 258 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,19n,94p,1271b,1001s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1764,10 +1770,10 @@ type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy
 a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on notes.pdf (58 pages, 735862 bytes).
+Output written on notes.pdf (60 pages, 743164 bytes).
 PDF statistics:
- 811 PDF objects out of 1000 (max. 8388607)
- 702 compressed objects within 8 object streams
- 300 named destinations out of 1000 (max. 500000)
+ 825 PDF objects out of 1000 (max. 8388607)
+ 714 compressed objects within 8 object streams
+ 303 named destinations out of 1000 (max. 500000)
  3317 words of extra memory for PDF output out of 10000 (max. 10000000)
 
