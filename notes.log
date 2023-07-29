@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.3)  19 JUL 2023 07:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.3)  28 JUL 2023 14:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1688,7 +1688,7 @@ LaTeX Warning: Marginpar on page 46 moved.
 
 LaTeX Warning: Marginpar on page 47 moved.
 
-) (./online.tex [47]
+[47] [48]) (./online.tex [49]
 Chapter 6.
 
 Overfull \hbox (32.72678pt too wide) in paragraph at lines 9--10
@@ -1701,15 +1701,15 @@ t/10 , given by $\OML/nxlmi/m/it/10 f[]\LMS/ntxsy/m/n/10 ¹\OML/nxlmi/m/it/10 ^^
 eT-TLF/m/n/10 , [] , \OML/nxlmi/m/it/10 ^^[[]\LMS/ntxsy/m/n/10 º$ 
  []
 
-[48
+[50
 
-] [49] [50] [51]
+] [51] [52] [53]
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-OsF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 94.
- [52] [53]
+ [54] [55]
 Package hyperref Info: bookmark level for unknown corollary defaults to 0 on in
 put line 164.
- [54] [55]
+ [56] [57]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1722,24 +1722,24 @@ n/10 1\LMS/ntxsy/m/n/10 \OML/nxlmi/m/it/10 e$\T1/LinuxLibertineT-OsF/m/n/10 -a
 pproximation 
  []
 
-[56]
+[58]
 Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
 line 257.
- [57] [58] [59])
+ [59] [60] [61])
 
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-[60] (./notes.aux)
+[62] (./notes.aux)
 Package rerunfilecheck Info: File `notes.out' has not changed.
 (rerunfilecheck)             Checksum: 09C6B5F66C0638F834AC35CA32F7E5FF;5364.
  ) 
 Here is how much of TeX's memory you used:
- 31822 strings out of 478287
- 595304 string characters out of 5849290
- 879276 words of memory out of 5000000
- 48946 multiletter control sequences out of 15000+600000
+ 31827 strings out of 478287
+ 595379 string characters out of 5849290
+ 879307 words of memory out of 5000000
+ 48947 multiletter control sequences out of 15000+600000
  702210 words of font info for 258 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,19n,94p,1271b,1001s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1770,10 +1770,10 @@ type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy
 a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on notes.pdf (60 pages, 743164 bytes).
+Output written on notes.pdf (62 pages, 750116 bytes).
 PDF statistics:
- 825 PDF objects out of 1000 (max. 8388607)
- 714 compressed objects within 8 object streams
- 303 named destinations out of 1000 (max. 500000)
+ 837 PDF objects out of 1000 (max. 8388607)
+ 724 compressed objects within 8 object streams
+ 307 named destinations out of 1000 (max. 500000)
  3317 words of extra memory for PDF output out of 10000 (max. 10000000)
 
