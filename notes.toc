@@ -48,4 +48,6 @@
 \contentsline {subsection}{\numberline {6.5.1}The weighted majority algorithm}{60}{subsection.6.5.1}%
 \contentsline {subsection}{\numberline {6.5.2}Omniscient expert}{60}{subsection.6.5.2}%
 \contentsline {subsection}{\numberline {6.5.3}General case}{61}{subsection.6.5.3}%
+\contentsline {chapter}{\numberline {7}Markov chains and random walks}{63}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Sampling and counting}{64}{chapter.8}%
 \contentsfinish 
