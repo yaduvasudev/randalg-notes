@@ -1,6 +1,20 @@
 \chapter{Introduction}
 
-Randomization is ubiquitous in computer science. In many cases, we obtain faster, simpler and more elegant algorithms that better the "polynomial-time" algorithm known for the same problem. An example is the problem of primality testing. Suppose you are given an integer $n$ as input and you want to check if $n$ is prime or not. The trivial algorithm would be to check whether  some number between $1$ and $\sqrt{n}$ divides $n$ or not. This is highly inefficient since for a number with $100$ digits could be as large as $2^{100}$ and the naive algorithm has a running time for $2^{50}$. In a breakthrough result in 2002, AKS showed that there is a polynomial time algorithm for testing primality, and currently the best upper bound known is $O(\log^7 n)$. While this running time does not look as prohibitive as the naive algorithm, it is, nonetheless, not very practical. As it turns out, there is a very simple algorithm to test primality, albeit one that can make an error occassionally. We will make the statement "make an error occassionally" precise in a moment. But, let us first look at the algorithm known as the Miller-Rabin test.
+Randomization is ubiquitous in computer science. In many cases, we obtain
+faster, simpler and more elegant algorithms that better the "polynomial-time"
+algorithm known for the same problem. An example is the problem of primality
+testing. Suppose you are given an integer $n$ as input and you want to check if
+$n$ is prime or not. The trivial algorithm would be to check whether some number
+between $1$ and $\sqrt{n}$ divides $n$ or not. This is highly inefficient since
+for a number with $100$ digits could be as large as $2^{100}$ and the naive
+algorithm has a running time for $2^{50}$. In a breakthrough result in 2002, AKS
+showed that there is a polynomial time algorithm for testing primality, and
+currently the best upper bound known is $O(\log^7 n)$. While this running time
+does not look as prohibitive as the naive algorithm, it is, nonetheless, not
+very practical. As it turns out, there is a very simple algorithm to test
+primality, albeit one that can make an error occassionally. We will make the
+statement "make an error occassionally" precise in a moment. But, let us first
+look at the algorithm known as the Miller-Rabin test.
 
 \begin{algorithm}
 	\KwIn{Integer $n$}
@@ -21,7 +35,20 @@ Randomization is ubiquitous in computer science. In many cases, we obtain faster
 	\label{alg:primality}
 \end{algorithm}
 
-By repeated squaring and computation of remainder modulo $n$, it is easy to see that the running time of the algorithm is $O(\log^2 n)$. As you can see, the algorithm is easy to implement in terms of the calculations that has to be done, and its running time is also good asymptotically. It can shown that if $n$ is a prime, then irrespective of the choice of $a$ then algorithm will always return "prime". When analyzing the algorithm (which is non-trivial and requires some basic algebra), we can show that for at least $3/4$th fraction of numbers between $2$ and $n-1$, the algorithm will return "composite". In other words, if the number is prime, then the probability that the algorithm errs is zero, whereas if it is composite, then the probability that it errs is at most $1/4$. It is possible to bring down with error probability to something as tiny as $1/2^40$ without changing the asymptotic complexity of the algorithm (we will see how to do this a little later). Note that while the algorithm is simple to explain, its proof of correctness will not be easy, in most cases. 
+By repeated squaring and computation of remainder modulo $n$, it is easy to see
+that the running time of the algorithm is $O(\log^2 n)$. As you can see, the
+algorithm is easy to implement in terms of the calculations that has to be done,
+and its running time is also good asymptotically. It can shown that if $n$ is a
+prime, then irrespective of the choice of $a$ then algorithm will always return
+"prime". When analyzing the algorithm (which is non-trivial and requires some
+basic algebra), we can show that for at least $3/4$th fraction of numbers
+between $2$ and $n-1$, the algorithm will return "composite". In other words, if
+the number is prime, then the probability that the algorithm errs is zero,
+whereas if it is composite, then the probability that it errs is at most
+$1/4$. It is possible to bring down with error probability to something as tiny
+as $1/2^{40}$ without changing the asymptotic complexity of the algorithm (we
+will see how to do this a little later). Note that while the algorithm is simple
+to explain, its proof of correctness will not be easy, in most cases.
 
 We will see various settings where randomized algorithms give simple, elegant and fast algorithms where fast deterministic algorithms are not known. Nonetheless, most theoretical computer scientists believe that randomness does not inherently add more computational power. In other words, they believe that if a computational problem has a fast randomized algorithm, then it also has a fast deterministic algorithm! Then why study randomized algorithms at all? Firstly, we are currently far away from that goal of converting every fast randomized algorithm to a fast deterministic algorithm. Secondly, fast here means polynomial-time. So, you could have a randomized primality test that runs in $O(\log^2 n)$ time and the best deterministic primality test may still require $O(\log^7 n)$. That is a considerable gap in many practical situations. Finally, there are scenarios where randomization is unavoidable. One such example is counting motifs in large graphs that are too big to run classical algorithms on. Any algorithm that can approximate these counts necessarily has to be randomized. 
 
@@ -31,7 +58,19 @@ In the rest of this lecture, we will see a few more examples while refreshing so
 
 Suppose that you are given a degree-$d$ polynomial $p(x) = \sum_{i=0}^d c_i x^i$ in the explicit way. Your friend claims that the factorization of $p(x)$ is given by $q(x) = \prod_{i=1}^d (x-a_i)$ by using a program for polynomial factorization that she has written. How do you check if your friend is indeed telling the truth? The most straightforward way would be for you to expand the factorization $q(x)$ and check that it indeed gives $p(x)$. But, this is tedious since you might end up with far more terms than just the $d$ terms that you will then have to cancel and reduce. With the power of randomness there is something very simple that you can do!
 
-Let us assume for the moment that the numbers involved are all rationals. Consider the polynomial $p(x) -q(x)$. Notice that this polynomial is identically zero precisely when $q(x)$ is the factorization of $p(x)$. Furthermore, $p(x) - q(x)$ is a degree-$d$ polynomials. Now, you know that every polynomial of degree $d$ has at most $d$ roots (this is known as the fundamental theorem of algebra). This gives you an idea for a solution! You choose a number $a$ uniformly at random from the set $\{1,2,\ldots,100d\}$, and check if $p(a)-q(a)=0$. Notice that if $q(x)$ is indeed the factorization of $p(x)$, then for every $a$, $p(a) - q(a)=0$ and we will answer correctly. Moreover, if $q(x)$ is not the correct factorization of $p(x)$, then $p(x)-q(x)$ is a non-zero polynomial of degree $d$. Hence, it has at most $d$ distinct roots, and the probability that $a$ is one such root is at most $1/100$.
+Let us assume for the moment that the numbers involved are all
+rationals. Consider the polynomial $p(x) -q(x)$. Notice that this polynomial is
+identically zero precisely when $q(x)$ is the factorization of
+$p(x)$. Furthermore, $p(x) - q(x)$ is a degree-$d$ polynomial. Now, you know
+that every polynomial of degree $d$ has at most $d$ roots (this is known as the
+fundamental theorem of algebra). This gives you an idea for a solution! You
+choose a number $a$ uniformly at random from the set $\{1,2,\ldots,100d\}$, and
+check if $p(a)-q(a)=0$. Notice that if $q(x)$ is indeed the factorization of
+$p(x)$, then for every $a$, $p(a) - q(a)=0$ and we will answer
+correctly. Moreover, if $q(x)$ is not the correct factorization of $p(x)$, then
+$p(x)-q(x)$ is a non-zero polynomial of degree $d$. Hence, it has at most $d$
+distinct roots, and the probability that $a$ is one such root is at most
+$1/100$.
 
 A generalization of this problem is the famous \textit{Polynomial Identity Testing} problem (PIT for short). Here you have access to a multivariate polynomial $p(x_1, x_2, \ldots, x_n)$ of degree $d$. Observe that the number of monomials of this polynomial can be as large as $\binom{n+d-1}{n}$, and the polynomial is expressed succinctly as a product of a small number of polynomials. You want to check if this polynomial is identically zero. Since the explicit description of the polynomial can be exponentially larger than the given representation, it is inefficient to write out the full polynomial and check whether it is indeed zero. Once again randomness comes to our rescue! We will state a lemma that generalized the fundamental theorem of arithmetic.
 
@@ -48,18 +87,45 @@ Here by ${a_1, a_2, \ldots, a_n \in_r S}$ we mean that each $a_i$ is picked from
 
 \subsection{Perfect matching in bipartite graphs}
 
-For a bipartite graph $G(L\cup R,E)$ with $|L| = |R| = n$, a perfect matching $M\subseteq E$ is a set of edges such that not two edges in $M$ share a vertex, and for every vertex $v \in L\cup R$, there is an edge in $M$ with one of the end points as $v$. The perfect matching thus gives a bijection between $L$ and $R$ via the edges in the graph. There are polynomial-time algorithms known for this problem (like the Edmonds-Karp algorithm). In fact, the idea of polynomial-time as the notion of efficiency was first described in a paper by Edmonds that gave a polynomial-time algorithm for the maximum matching problem. What we will see is that using randomization, and in particular PIT, we can give a simple algorithm for testing if a bipartite graph has a perfect matching.
+For a bipartite graph $G(L\cup R,E)$ with $|L| = |R| = n$, a perfect matching
+$M\subseteq E$ is a set of edges such that not two edges in $M$ share a vertex,
+and for every vertex $v \in L\cup R$, there is an edge in $M$ with one of the
+end points as $v$. The perfect matching thus gives a bijection between $L$ and
+$R$ via the edges in the graph. There are polynomial-time algorithms known for
+this problem (like the Edmonds-Karp algorithm). In fact, the idea of
+polynomial-time as the notion of efficiency was first described in a paper by
+Edmonds that gave a polynomial-time algorithm for the maximum matching
+problem. \marginnote{Algorithmically, finding a perfect matching in a bipartite
+  graph is no harder than checking one exists}What we will see is that using
+randomization, and in particular PIT, we can give a simple algorithm for testing
+if a bipartite graph has a perfect matching.
 
-Let $A$ denote the bipartite adjacency matrix of $G$. I.e.\ $A$ is an $n\times n$-matrix with the rows indexed by the vertices in $L$ and the columns indexed by the vertices in $R$ such that $A[i,j] = 1$ iff $(i,j)\in E$. Define an $n\times n$-matrix $P$ as follows:
+Let $A$ denote the bipartite adjacency matrix of $G$. I.e.\ $A$ is an
+$n\times n$-matrix with the rows indexed by the vertices in $L$ and the columns
+indexed by the vertices in $R$ such that $A[i,j] = 1$ iff $(i,j)\in E$. Define
+an $n\times n$-matrix $P$ as follows:
 \begin{align*}
 	P[i,j] &= A[i,j]x_{ij},
 \end{align*}
-where $x_{ij}$s are variables. Recall that the determinant of $P$ is defined as
+where $x_{ij}$s are variables. \marginnote{$sgn(\pi)$ is the number of
+  inversions in the permuation $\pi$, i.e.\ the number of pairs $i < j$ such
+  that $\pi(i) > \pi(j)$.}Recall that the determinant of $P$ is defined as
 \begin{align*}
 	\Det(P) = \sum_{\pi \in S_n} (-1)^{sgn(\pi)} \prod_{i=1}^n P[i,\pi(i)].
 \end{align*}
 
-Observe that for the matrix $P$ defined as above, the determinant $\Det(P)$ is a polynomial on $n^2$ variables $(x_{ij})$. The monomials of this polynomial are the products $\prod_{i=1}^n P[i,\pi(i)]$. A monomial is non-zero precisely when $\pi$ is a perfect matching in the graph. Furthermore, two different monomials have at least one variable distinct from each other and hence do not cancel each other. Consequently, the polynomial $\Det(P)$ is non-zero precisely when $G$ has a perfect matching. So, the problem of checking the existence of a perfect matching reduces to polynomial identity testing, where the polynomial is the determinant polynomial. When values for the variables are fixed, then we know how to compute the determinant efficiently. Assuming the DeMillo-Lipton-Schwartz-Zippel lemma, this gives a simple randomized algorithm for checking whether a bipartite graph has a perfect matching.
+Observe that for the matrix $P$ defined as above, the determinant $\Det(P)$ is a
+polynomial on $n^2$ variables $(x_{ij})$. The monomials of this polynomial are
+the products $\prod_{i=1}^n P[i,\pi(i)]$. A monomial is non-zero precisely when
+$\pi$ is a perfect matching in the graph. Furthermore, two different monomials
+have at least one variable distinct from each other and hence do not cancel each
+other. Consequently, the polynomial $\Det(P)$ is non-zero precisely when $G$ has
+a perfect matching. So, the problem of checking the existence of a perfect
+matching reduces to polynomial identity testing, where the polynomial is the
+determinant polynomial. When values for the variables are fixed, then we know
+how to compute the determinant efficiently. Assuming the
+DeMillo-Lipton-Schwartz-Zippel lemma, this gives a simple randomized algorithm
+for checking whether a bipartite graph has a perfect matching.
 \section{Sample spaces, events, probability}
 
 Let us recall the notions of sample spaces, events and probability distributions. A randomized algorithm is a random process, and analyzing the algorithm will involve understand the sample space of the random process and the distribution over this sample space. Formally, a \textit{sample space} $\Omega$ is the set of possible outcomes of a random experiment. An \textit{event} $E$ is a subset of $\Omega$. A \textit{probability space} is a $3$-tuple $(\Omega, \mathcal{F},\Pr)$ where $\mathcal{F}$ is the set of subsets of $\Omega$ and $\Pr:\mathcal{F} \to \R$ is a function that satisfy the following conditions:
@@ -211,3 +277,8 @@ Once again we note that the success probability of the algorithm is small, but t
 	\left(1 - \frac{2}{n(n-1)} \right)^k \leq e^{-\frac{2k}{n(n-1)}},
 \end{align*}
 where we use the inequality that $1-x \leq e^{-x}$ (remember this! It is a standard inequality used in a lot of calculations). Thus if we were to repeat this algorithm for $k=n(n-1)\log n$ times, the error probability is at most $1/n^2$.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:
