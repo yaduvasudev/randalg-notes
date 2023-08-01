@@ -115,7 +115,7 @@ where $x_{ij}$s are variables. \marginnote{$sgn(\pi)$ is the number of
 \end{align*}
 
 Observe that for the matrix $P$ defined as above, the determinant $\Det(P)$ is a
-polynomial on $n^2$ variables $(x_{ij})$. The monomials of this polynomial are
+polynomial on $|E|$ variables $(x_{ij})$. The monomials of this polynomial are
 the products $\prod_{i=1}^n P[i,\pi(i)]$. A monomial is non-zero precisely when
 $\pi$ is a perfect matching in the graph. Furthermore, two different monomials
 have at least one variable distinct from each other and hence do not cancel each
@@ -145,56 +145,105 @@ The following statement, which follows from the inclusion-exclusion principle is
 	\end{align*}
 \end{fact}
 
-The \emph{conditional probability} of an even $E$ conditioned on another event $F$ is denoted as $\Pr[E | F]$ and is defined as 
+The \emph{conditional probability} of an event $E$ conditioned on another event
+$F$ is denoted as $\Pr[E | F]$ and is defined as
 \begin{align*}
 	\Pr[E|F] = \frac{\Pr[E\cap F]}{\Pr[F]}.
 \end{align*}
-Notice that the conditional probability is well-defined only when $\Pr[F] \neq 0$. Intuitively, the sample space of interest is the set $F$, and hence we normalize it with $\Pr[F]$ so that the conditional probability remains a valid probability function.
+Notice that the conditional probability is well-defined only when
+$\Pr[F] \neq 0$. Intuitively, the sample space of interest is the set $F$, and
+hence we normalize it with $\Pr[F]$ so that the conditional probability remains
+a valid probability function.
 
-We say that two events $E$ and $F$ are independent if $\Pr[E|F] = \Pr[E]$ and $\Pr[F|E] = \Pr[F]$. In other words, conditioned on the even $E$(or $F$) occurring, the probability of the occurrence of $F$(or $E$) does not change. An equivalent way to say this is that $\Pr[E\cap F] = \Pr[E]\Pr[F]$. Notice that $\Pr[E\cap F] = \Pr[E]\Pr[F|E] = \Pr[F]\Pr[E|F]$. 
+We say that two events $E$ and $F$ are independent if $\Pr[E|F] = \Pr[E]$ and
+$\Pr[F|E] = \Pr[F]$. In other words, conditioned on the event $E$(or $F$)
+occurring, the probability of the occurrence of $F$(or $E$) does not change. An
+equivalent way to say this is that $\Pr[E\cap F] = \Pr[E]\Pr[F]$. Notice that
+$\Pr[E\cap F] = \Pr[E]\Pr[F|E] = \Pr[F]\Pr[E|F]$.
 
-Another useful, and fairly straightforward, property described below is known as the law of total probability.
+Another useful, and fairly straightforward, property described below is known as
+the law of total probability.
 
 \begin{theorem}
 	[Law of Total Probability]
-	Let $E_1, E_2, \ldots, E_n$ be mutually disjoints events in the sample space $\Omega$ such that $\bigcup_{i=1}^n E_i = \Omega$. Let $F$ be any event in the sample space $\Omega$. Then,
+	Let $E_1, E_2, \ldots, E_n$ be mutually disjoints events in the sample
+        space $\Omega$ such that $\bigcup_{i=1}^n E_i = \Omega$. Let $F$ be any
+        event in the sample space $\Omega$. Then,
 	\begin{align*}
 		\Pr[B] = \sum_{i=1}^n \Pr[B \cap E_i]
 	\end{align*}
 	\label{thm:tot-prob}
 \end{theorem}
 
-Let us now look at the proof of Lemma~\ref{lem:dlsz}. We will explicitly show the underlying sample space and the events of interest to illustrate the definitions and concepts described above.
+Let us now look at the proof of Lemma~\ref{lem:dlsz}. We will explicitly show
+the underlying sample space and the events of interest to illustrate the
+definitions and concepts described above.
 \begin{proof}
 	[Proof of Lemma~\ref{lem:dlsz}]
-	The proof is via an induction on $n$ (the number of variables). The base case is when $n=1$. Now the sample space of the experiment is the set $S$. Since we are sampling uniformly at random from the set $S$, the probability function $\Pr$ assigns the value $1/|S|$ to every element in the sample space. Now the event that we are interested in is the subset $Z \subseteq S$ such that for every $z\in Z$, $p(z)=0$. By the fundamental theorem of algebra, we know that $|Z| \leq d$. Therefore,
+	The proof is via an induction on $n$ (the number of variables). The base
+        case is when $n=1$. Now the sample space of the experiment is the set
+        $S$. Since we are sampling uniformly at random from the set $S$, the
+        probability function $\Pr$ assigns the value $1/|S|$ to every element in
+        the sample space. Now the event that we are interested in is the subset
+        $Z \subseteq S$ such that for every $z\in Z$, $p(z)=0$. By the
+        fundamental theorem of algebra, we know that $|Z| \leq d$. Therefore,
 	\begin{align*}
-		\Pr_{a_1 \in_r S} \left[p(a_1) = 0\right] = \Pr[Z] = \frac{|Z|}{|S|} \leq \frac{d}{|S|}.
+          \Pr_{a_1 \in_r S} \left[p(a_1) = 0\right] = \Pr[Z] = \frac{|Z|}{|S|} \leq \frac{d}{|S|}.
 	\end{align*}
 	
-	Let us prove the inductive step. The sample space $\Omega$ for this experiment is the set of $n$-tuples over $S$ with $\Pr$ being the function that assigns the same value to every element in the sample space. We can write the polynomial $p(x_1, x_2, \ldots, x_n)$ as
+	Let us prove the inductive step. The sample space $\Omega$ for this
+        experiment is the set of $n$-tuples over $S$ with $\Pr$ being the
+        function that assigns the same value to every element in the sample
+        space. We can write the polynomial $p(x_1, x_2, \ldots, x_n)$ as
 	\begin{align*}
-		p(x_1, x_2, \ldots, x_n) = \sum_{i=0}^d x^i p_i(x_2, x_3, \ldots, x_n).
+          p(x_1, x_2, \ldots, x_n) = \sum_{i=0}^d x^i p_i(x_2, x_3, \ldots, x_n).
 	\end{align*}
-	If $p$ is not identically zero, then there exists an $i$ such that $p_i(x_2, x_3, \ldots, x_n)$ is not identically zero. Consider the largest such $i$ for which $p_i$ is not identically zero. Let $Z_i \subseteq \Omega$ be tuples such that $p_i$ evaluates to zero on these points. By the inductive hypothesis, $\Pr[Z_i] \leq (d-i)/|S|$. Let $Z \subseteq \Omega$ denote the tuples on which $p$ evaluates to zero. By the law of total probability, we can write
+	If $p$ is not identically zero, then there exists an $i$ such that
+        $p_i(x_2, x_3, \ldots, x_n)$ is not identically zero. Consider the
+        largest such $i$ for which $p_i$ is not identically zero. Let
+        $Z_i \subseteq \Omega$ be tuples such that $p_i$ evaluates to zero on
+        these points. By the inductive hypothesis, $\Pr[Z_i] \leq
+        (d-i)/|S|$. Let $Z \subseteq \Omega$ denote the tuples on which $p$
+        evaluates to zero. By the law of total probability, we can write
 	\begin{align*}
-		\Pr_{a_1, a_2, \ldots a_n \in_r S} \left[ p(a_1, a_2, \ldots, a_n) = 0  \right]  = \Pr[Z] &= \Pr[Z\cap Z_i] + \Pr[Z\cap \bar{Z}_i]\\
-		&= \Pr[Z_i]\Pr[Z|Z_i] + \Pr[\bar{Z}_i]\Pr[Z|\bar{Z}_i]\\
-		&\leq \Pr[Z_i] + \Pr[Z|\bar{Z}_i]
+          \Pr_{a_1, a_2, \ldots a_n \in_r S} \left[ p(a_1, a_2, \ldots, a_n) = 0  \right]  = \Pr[Z] &= \Pr[Z\cap Z_i] + \Pr[Z\cap \bar{Z}_i]\\
+                                                                                                    &= \Pr[Z_i]\Pr[Z|Z_i] + \Pr[\bar{Z}_i]\Pr[Z|\bar{Z}_i]\\
+                                                                                                    &\leq \Pr[Z_i] + \Pr[Z|\bar{Z}_i]
 	\end{align*}
-	If the event $Z_i$ does not occur, then we have a polynomial $p(x_1, a_2, \ldots, a_n)$ of degree at most $i$ and hence $\Pr[Z|\bar{Z}_i] \leq i/|S|$. Therefore, we have
+	If the event $Z_i$ does not occur, then we have a polynomial
+        $p(x_1, a_2, \ldots, a_n)$ of degree at most $i$ and hence
+        $\Pr[Z|\bar{Z}_i] \leq i/|S|$. Therefore, we have
 	\begin{align*}
-		\Pr_{a_1, a_2, \ldots a_n \in_r S} \left[ p(a_1, a_2, \ldots, a_n) = 0  \right]  = \Pr[Z] \leq \frac{d}{|S|}.
+          \Pr_{a_1, a_2, \ldots a_n \in_r S} \left[ p(a_1, a_2, \ldots, a_n) = 0  \right]  = \Pr[Z] \leq \frac{d}{|S|}.
 	\end{align*}
 \end{proof}
 
-We will see one more example problem of randomization that gives non-trivial savings in the running time while understanding the basic concepts of discrete probability better.
+We will see one more example problem of randomization that gives non-trivial
+savings in the running time while understanding the basic concepts of discrete
+probability better.
 
 \section{Verifying matrix multiplication}
 
-Suppose that you are provided with three $n\times n$ matrices $A$, $B$ and $C$ with the claim that $AB = C$. You want to verify whether $C$ is indeed the product of the matrices $A$ and $B$. The simplest way to do this is to actually perform the matrix multiplication and check $AB$ and $C$ entry-wise. The naive matrix multiplications algorithm takes time $O(n^3)$. Currently, the fastest matrix multiplication algorithm has a running time of $O(n^{2.37})$, though it is conjectured that there is an $O(n^{2+\epsilon})$-time algorithm for matrix multiplication for every $\epsilon > 0$. We will see an $O(n^2)$-time randomized algorithm to verify matrix multiplication over the field $\mathbb{F}_2$ (i.e.\ we do addition and multiplication modulo $2$).
+Suppose that you are provided with three $n\times n$ matrices $A$, $B$ and $C$
+with the claim that $AB = C$. You want to verify whether $C$ is indeed the
+product of the matrices $A$ and $B$. The simplest way to do this is to actually
+perform the matrix multiplication and check $AB$ and $C$ entry-wise. The naive
+matrix multiplication algorithm takes time $O(n^3)$. Currently, the fastest
+matrix multiplication algorithm has a running time of $O(n^{2.37})$, though it
+is conjectured that there is an $O(n^{2+\epsilon})$-time algorithm for matrix
+multiplication for every $\epsilon > 0$. We will see an $O(n^2)$-time randomized
+algorithm to verify matrix multiplication over the field $\mathbb{F}_2$ (i.e.\
+we do addition and multiplication modulo $2$).
 
-The algorithm is quite simple to state: Choose a random vector $r \in \{0,1\}^n$ and check if $ABr = Cr$. Since $r$ is an $n\times 1$-matrix, the multiplication $Br$ and $Cr$ takes $O(n^2)$ time, and the result of $Br$ is another $n\times 1$-matrix. Thus, the verification can be done in $O(n^2)$-time. It remains to show that the procedure does not err too much. Notice that if $AB=C$, then this procedure does not err at all. Hence all that remains is to show that if $AB\neq C$, then the probability that this process gives a wrong answer is small. The following lemma is sufficient, since if $AB \neq C$, then $D=AB-C$ is a non-zero matrix.
+The algorithm is quite simple to state: Choose a random vector $r \in \{0,1\}^n$
+and check if $ABr = Cr$. Since $r$ is an $n\times 1$-matrix, the multiplication
+$Br$ and $Cr$ takes $O(n^2)$ time, and the result of $Br$ is another
+$n\times 1$-matrix. Thus, the verification can be done in $O(n^2)$-time. It
+remains to show that the procedure does not err too much. Notice that if $AB=C$,
+then this procedure does not err at all. Hence all that remains is to show that
+if $AB\neq C$, then the probability that this process gives a wrong answer is
+small. The following lemma is sufficient, since if $AB \neq C$, then $D=AB-C$ is
+a non-zero matrix.
 
 \begin{lemma}
 	Let $D$ be a non-zero $n\times n$-matrix. Then, we have
