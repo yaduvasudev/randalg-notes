@@ -255,9 +255,9 @@ a non-zero matrix.
 \begin{proof}
 	Let $r=(r_1, r_2, \ldots, r_n)$. If $r$ is sampled uniformly at random from $\{0,1\}^n$, then it is equivalent to saying that each $r_i$ is set to $0/1$ with probability $1/2$. Since $D$ is non-zero, assume wlog that $D_{1,1} \neq 0$. Consider the $(1,1)$-th entry of $Dr$ given by $\sum_{k=1}^n D_{1,k} r_k$. We will argue that $\Pr[\sum_{k=1}^n D_{1,k} r_k \neq 0] = 1/2$. 
 	
-	The sample space we are working with is the set $\{0,1\}^n$ with each element in the set being assigned the same probability. The event we are interested in the set of points such that $\sum_{k=1}^n D_{1,k}r_k \neq 0$. First notice that if $\sum_{k=1}^n D_{1,k}r_k \neq 0$, then $r_1 = -\sum_{k=2}^n D_{1,k}r_k/D_{1,1}$. Therefore, we can use the law of total probability to write our event of interest as 
+	The sample space we are working with is the set $\{0,1\}^n$ with each element in the set being assigned the same probability. The event we are interested in the set of points such that $\sum_{k=1}^n D_{1,k}r_k = 0$. First notice that if $\sum_{k=1}^n D_{1,k}r_k = 0$, then $r_1 = -\sum_{k=2}^n D_{1,k}r_k/D_{1,1}$. Therefore, we can use the law of total probability to write our event of interest as 
 	\begin{align*}
-		\Pr[\sum_{k=1}^n D_{1,k} r_k \neq 0] &= \sum_{b_2, b_3, \ldots, b_n \in_r \{0,1\}} \Pr\left[ r_1 = \frac{-\sum_{k=2}^n D_{1,k}r_k}{D_{1,1}} \cap (r_2, r_3, \ldots, r_n) = (b_1, b_2, \ldots, b_n) \right]\\
+		\Pr[\sum_{k=1}^n D_{1,k} r_k = 0] &= \sum_{b_2, b_3, \ldots, b_n \in_r \{0,1\}} \Pr\left[ r_1 = \frac{-\sum_{k=2}^n D_{1,k}r_k}{D_{1,1}} \cap (r_2, r_3, \ldots, r_n) = (b_1, b_2, \ldots, b_n) \right]\\
 		&= \sum_{b_2, b_3, \ldots, b_n \in_r \{0,1\}} \Pr\left[ (r_2, r_3, \ldots, r_n) = (b_1, b_2, \ldots, b_n) \right] \Pr\left[ r_1 = \frac{-\sum_{k=2}^n D_{1,k}b_k}{D_{1,1}} \right]\\
 		&= \frac{1}{2}
 	\end{align*}
