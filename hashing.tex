@@ -280,7 +280,139 @@ hash table is $\Theta(n)$. Notice that each hash function in a $2$-universal
 family of functions can be represented by storing the numbers $a, b$ which are
 at most $p$, where $p$ is a prime that is at least $n$. Since there are prime
 numbers between $n$ and $2n$, such hash functions can be represented using
-$2\log n$ bits. 
+$2\log n$ bits.
+
+\section{Static dictionaries in the bitprobe model}
+
+We will digress slightly from hashing and look at the static dictionary problem
+in a related model, known as the \emph{bitprobe} model. In the previous section,
+the number of queries to test membership was $O(1)$ \emph{cell probes} since we
+are allowed to query one word, which can occupy $O(\log |\mathcal{U}|)$ bits of
+memory. In contrast, in the bitprobe model, we are allowed to query individual
+bits of the data structure and the complexity measure is the actual number of
+bits (in contrast to the number of cells) that are probed to answer a membership
+query.
+
+If we measure the FKS hashing scheme in the bitprobe model, then the size of the
+data structure is $O(m\log |\mathcal{U}|)$ and the number of bit probes is
+$O(\log |\mathcal{U}|)$. You can think of the Bloom filter as solving the static
+dictionary problem in the bitprobe model using $O(m)$ space and $O(1)$ bit
+probes with one-sided error. It is not hard to see that if the algorithm does
+not err, then the bit array must be of length at least $|\mathcal{U}|$ via a
+simple pigeonhole argument.
+
+In this section, we will see nice result due to Buhrman, Miltersen,
+Radhakrishnan and Venkatesh that there is a data structure for static
+dictionaries in the bitprobe model that makes \emph{exactly one probe} into a
+bit array of size $O\left(\tfrac{n^2}{\epsilon^2}\log |\mathcal{U}|\right)$ and
+answers the membership query with one-sided error. The data structure differs
+from the others that we have seen so far in that it will not involve any
+hashing. The only downside of the data structure that we will see is that it is
+not explicit; i.e., given $|\mathcal{U}|$, and $S$ you will not be able to
+efficiently construct the data structure. Buhrman et al also show that there is
+an explicit construction, but whose size is
+$O\left(\left(\frac{n\log |\mathcal{U}|}{\epsilon} \right)^2 \right)$. In the
+case of two-sided errors, the size can be reduced to
+$O\left( \frac{n\log |\mathcal{U}|}{\epsilon} \right)$ which is comparable to
+what FKS hashing achieves.
+
+\begin{theorem}
+  There is a data structure that uses
+  $O\left(\frac{n^2}{\epsilon^2}\log m \right)$ bits to represent a set
+  $S \subseteq [m]$ of size at most $n$ such that membership queries of the form
+  ``Is $x\in S$?'' \marginnote{The error is only when $x\notin S$, like in the
+    Bloom filter} can be answered with a single probe to the data structure with
+  one-sided error at most $\epsilon$.
+  \label{thm:bitprobe-1-query}
+\end{theorem}
+
+To describe the proof, we will think of single probe algorithms on a bit vector
+as a bipartite graph $G(\mathcal{U}, [t], E)$, where $\mathcal{U}$ of size $m$
+is the universe from which the set $S$ of cardinality at most $n$ comes, and $t$
+is the size of the bit-array. For any $x\in {\cal U}$, the edges $(x,i)$ are the
+indices that are probed by the algorithm for the various random choices. We will denote by $N(x)$ the neighbors of $x$ in $G$.
+
+We will store the set $S$ as follows: for each $x\in S$, set all the bits in
+positions in $N(x)$ to $1$. The membership query is performed as follows: given
+$x\in {\cal U}$, choose $i$ uniformly at random from $N(x)$ and say that
+$x\in S$ iff the bit is $1$. Notice that we will always answer correctly if
+$x\in S$ irrespective of what the graph $G$ is. The one-sided error probability
+will depend on the structure of the graph $G$. Let us try to see if there are
+graphs that can be used to design this data structure.
+
+Notice that the data structure based on a graph $G$ has a one-sided error
+$\epsilon$ if for every set $S\subseteq {\cal U}$ with $|S| \leq n$, and every
+$x\in {\cal U}$, we have
+\begin{align}
+  |N(x) \cap N(S)| \leq \epsilon |N(x)|,
+  \label{eqn:small-error}
+\end{align}
+where $N(S) = \left| \bigcup_{y\in S} N(y) \right|$. We will assume that the
+graph is left-regular; i.e.\ for every $x\in {\cal U}$, $|N(x)| = d$ (for some
+$d$ that we will fix later). Now, for Equation~(\ref{eqn:small-error}) to be
+satisfied, it is sufficient that the following holds:
+\begin{align}
+  \forall x\neq y \in {\cal U}, |N(x) \cap N(y)| \leq \frac{\epsilon d}{n},
+  \label{eqn:small-error-suff}
+\end{align}
+since the set $S$ has at most $n$ elements.
+
+Formulating the question slightly differently, what we want is a collection of
+sets $T_1, T_2, \ldots, T_m$ such that the following conditions hold:
+\begin{itemize}
+\item $\forall i$, $|T_i| \subseteq [t]$
+\item $\forall i$, $|T_i| = d$
+\item $\forall i\neq j$, $|T_i \cap T_j| \leq r$
+\end{itemize}
+
+Such a family of sets is called an $(m,t,d,r)$-\emph{combinatorial design}. In
+our case, each $T_i$ is the set of neighbors of the $i^{th}$ element in
+${\cal U}$. To prove Theorem~\ref{thm:bitprobe-1-query}, we need to show that
+there is a combinatorial design with parameters
+$t = O\left( \frac{n^2}{\epsilon^2}\log m \right)$, and $r = \epsilon d/n$ for a
+suitable value of $d$. It should be easy to see that combinatorial designs do
+not exist for all parameters since if the sets $T_i$ are too large, then they
+are likely to have large intersections with other sets $T_j$.
+
+Ideally given $m$ and $n$, we should be able to efficiently compute the
+neighbors of the vertices in the graph $G$ for this to be practically
+usefull. Unfortunately, we will only be able to show the existence of such
+combinatorial designs using the probabilistic method. We will construct a
+collection of $m$ random sets $T_i$ and show that with non-zero probability they
+satisfy the conditions of being a combinatorial design, thus proving the
+existence of such set systems.
+
+Towards that end, for each $i$, add element $j\in [t]$ to $T_i$ with probability
+$2d/t$. Thus $\E[|T_i|] = 2d$, and by an application of the Chernoff bound, we
+can say that $\Pr\left[|T_i| < d \right] \leq e^{-\frac{d}{4}}$, and hence
+\begin{align}
+  \Pr\left[ \exists i, |T_i| < d \right] &\leq m e^{-\frac{d}{4}}
+  \label{eqn:set-size}                                         
+\end{align}
+
+Similarly $\E[|T_i \cap T_j|] = t\left(\frac{2d}{t}\right)^2 =
+\frac{4d^2}{t}$. If we choose $r = 2d^2/t$, then using Chernoff bounds, we can
+say that $\Pr[|T_i \cap T_j| > r] \leq e^{-\frac{d^2}{2t}}$. We can therefore
+conclude the following.
+\begin{align}
+  \Pr[ \exists i,j |T_i \cap T_j| > r] &\leq \binom{m}{2} e^{-\frac{d^2}{2t}} \leq m^2 e^{-\frac{d^2}{2t}}
+  \label{eqn:intersection}
+\end{align}
+
+If the probabilities in Equation~\ref{eqn:set-size} and \ref{eqn:intersection}
+are strictly less than $1$, then the corresponding design exists. In this case,
+we have $r = \epsilon d/n = 2d^2 /t$, and hence $t = 2dn/\epsilon$. Furthermore,
+we also need $d = \Theta\left(\frac{n\log m}{\epsilon} \right)$, for the RHS of
+Equation~\ref{eqn:intersection} to be less than $1$. Putting all this together
+we can make the following statement.
+\begin{lemma}
+  There exists an $(m,t,d,r)$-combinatorial design where
+  $d = \Theta\left(\frac{n\log m}{\epsilon} \right)$, $r = \Theta(\log m)$, and
+  $t = O\left(\frac{n^2}{\epsilon^2} \log m \right)$.
+\end{lemma}
+
+This construction together with the description of the data structure completes
+the proof of Theorem~\ref{thm:bitprobe-1-query}.
 
 \section{Open addressing with linear probing}
 
