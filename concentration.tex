@@ -185,8 +185,8 @@ where $p = \sum_{i=1}^n p_i/n$ and $q = 1-p$. This inequality is tight when all 
 \end{align*}
 Since $t$ is a parameter that we can choose, we can minimize the right-hand side to obtain the crude form (and the tightest) Chernoff bounds as
 \begin{align*}
-	\Pr[X > (p+r)n] &\leq \left(\left( \frac{p}{p+t} \right)^{p+t} \left( \frac{q}{q-t} \right)^{q-t} \right)^n \\
-	&= \exp\left( -n \left( (p+t)\ln \frac{p+t}{p} + (q-t)\ln \frac{q-t}{q} \right) \right).
+	\Pr[X > (p+r)n] &\leq \left(\left( \frac{p}{p+r} \right)^{p+r} \left( \frac{q}{q-r} \right)^{q-r} \right)^n \\
+	&= \exp\left( -n \left( (p+r)\ln \frac{p+r}{p} + (q-r)\ln \frac{q-r}{q} \right) \right).
 \end{align*}
 While this bound has a nice interpretation in terms of a certain notion of distance between probability distributions, we will now write a version of the bound that is easy to use in the analysis of the algorithms that we will see in this course.
 
@@ -257,3 +257,8 @@ Let $E_i$ be the event that server $i$ has a load of at most $n/k + 3\sqrt{n\log
 \end{align*}
 
 We will now see a more detailed analysis of the balls into bins process and its applications.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:
