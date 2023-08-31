@@ -321,7 +321,7 @@ what FKS hashing achieves.
   $O\left(\frac{n^2}{\epsilon^2}\log m \right)$ bits to represent a set
   $S \subseteq [m]$ of size at most $n$ such that membership queries of the form
   ``Is $x\in S$?'' \marginnote{The error is only when $x\notin S$, like in the
-    Bloom filter} can be answered with a single probe to the data structure with
+    Bloom filter.} can be answered with a single probe to the data structure with
   one-sided error at most $\epsilon$.
   \label{thm:bitprobe-1-query}
 \end{theorem}
@@ -365,7 +365,7 @@ sets $T_1, T_2, \ldots, T_m$ such that the following conditions hold:
 \item $\forall i\neq j$, $|T_i \cap T_j| \leq r$
 \end{itemize}
 
-Such a family of sets is called an $(m,t,d,r)$-\emph{combinatorial design}. In
+Such a family of sets is called an $(m,t,d,r)$-\emph{combinatorial design}.\marginnote{Nisan and Wigderson used constructions of combinatorial designs in constructing pseudo-random generators from worst-case complexity assumptions. They have been used in various places in complexity theory and construction of pseudorandom objects.} In
 our case, each $T_i$ is the set of neighbors of the $i^{th}$ element in
 ${\cal U}$. To prove Theorem~\ref{thm:bitprobe-1-query}, we need to show that
 there is a combinatorial design with parameters
