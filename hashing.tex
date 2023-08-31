@@ -360,7 +360,7 @@ since the set $S$ has at most $n$ elements.
 Formulating the question slightly differently, what we want is a collection of
 sets $T_1, T_2, \ldots, T_m$ such that the following conditions hold:
 \begin{itemize}
-\item $\forall i$, $|T_i| \subseteq [t]$
+\item $\forall i$, $T_i \subseteq [t]$
 \item $\forall i$, $|T_i| = d$
 \item $\forall i\neq j$, $|T_i \cap T_j| \leq r$
 \end{itemize}
@@ -391,17 +391,17 @@ can say that $\Pr\left[|T_i| < d \right] \leq e^{-\frac{d}{4}}$, and hence
 \end{align}
 
 Similarly $\E[|T_i \cap T_j|] = t\left(\frac{2d}{t}\right)^2 =
-\frac{4d^2}{t}$. If we choose $r = 2d^2/t$, then using Chernoff bounds, we can
-say that $\Pr[|T_i \cap T_j| > r] \leq e^{-\frac{d^2}{2t}}$. We can therefore
+\frac{4d^2}{t}$. If we choose $r = 8d^2/t$, then using Chernoff bounds, we can
+say that $\Pr[|T_i \cap T_j| > r] \leq e^{-\frac{8d^2}{t}}$. We can therefore
 conclude the following.
 \begin{align}
-  \Pr[ \exists i,j |T_i \cap T_j| > r] &\leq \binom{m}{2} e^{-\frac{d^2}{2t}} \leq m^2 e^{-\frac{d^2}{2t}}
+  \Pr[ \exists i,j |T_i \cap T_j| > r] &\leq \binom{m}{2} e^{-\frac{8d^2}{t}} \leq m^2 e^{-\frac{8d^2}{t}}
   \label{eqn:intersection}
 \end{align}
 
 If the probabilities in Equation~\ref{eqn:set-size} and \ref{eqn:intersection}
 are strictly less than $1$, then the corresponding design exists. In this case,
-we have $r = \epsilon d/n = 2d^2 /t$, and hence $t = 2dn/\epsilon$. Furthermore,
+we have $r = \epsilon d/n = 8d^2 /t$, and hence $t = 8dn/\epsilon$. Furthermore,
 we also need $d = \Theta\left(\frac{n\log m}{\epsilon} \right)$, for the RHS of
 Equation~\ref{eqn:intersection} to be less than $1$. Putting all this together
 we can make the following statement.
