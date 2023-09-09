@@ -545,6 +545,57 @@ $4$-wise independent indicator random variables.
   \end{align*}
 \end{proof}
 
+If we look at the proof of Lemma~\ref{lem:linear-probe-run}, we can observe the
+following as well.
+
+\begin{lemma}
+  Let ${\cal H}$ hash family that is used to map a set $S$ of size $n$ from a
+  universe $U$ of size $m$ to a hash table of size $t = \Theta(n)$ using open
+  addressing with linear probing. The following statements hold true.
+  \begin{enumerate}
+  \item If ${\cal H}$ is the set of all functions and the hash function
+    $h\in {\cal H}$ is chosen uniformly at random, then for every $i\in [n]$ the
+    expected time for searching is $O(1)$.
+  \item If ${\cal H}$ is a $3$-wise independent hash family, then for every
+    $i \in [n]$, the expected time for searching is $O(\log n)$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  The proof follows identically to the proof of
+  Lemma~\ref{lem:linear-probe-run}, and we observe that $X$ (which is the random
+  variable corresponding to the number of elements in the $j^{th}$ dyadic
+  interval) is the sum of independence Bernoulli random variables when $h$ is
+  completely random, and is the sum of pairwise-independent random variables
+  (because we have fixed the $h(1)$, and ${\cal H}$ is 3-wise independent).
+
+  \begin{enumerate}
+  \item In the first case, we have $\E[X] \leq 2^{j-2}$, and hence we can write
+    \begin{align*}
+      \Pr[|R| > 2^{j-1}] &\leq \Pr[X > 2^{j-1}] \leq \Pr[ X > 2\E[X]]\\
+      &\leq e^{-e^{j-2}/3}.
+    \end{align*}
+    Using this bound, we can write the expectation as follows.
+    \begin{align*}
+      \E[|R|] \leq \sum_{j\geq 0} 2^j \Pr[|R| > 2^{j-1}] \leq \sum_{j \geq 0} \frac{2^j}{e^{e^{j-2}/3}} = O(1).
+    \end{align*}
+  \item In the second case, since $X$ is the sum of pairwise-independent
+    indicator random variables, we can compute the variance as follows.
+    \begin{align*}
+      \Var[X] &= \Var\left[\sum_{k=2}^n X_k \right] = \sum_{k=2}^n \Var[X_k].
+    \end{align*}
+    Since $X_k$s are indicator random variables, we have $\E[X_k^2] = \E[X_k]$,
+    and hence we can upper-bound $\Var[X_k] \leq \E[X_k]$. Thus, we have
+    $\Var[X] \leq \E[X]$. Using Chebyshev's inequality, we have
+    \begin{align*}
+      \Pr[X > 2^{j-1}] \leq \frac{\E[X]}{2^{2(j-2)}} \leq \frac{4}{2^j}
+    \end{align*}
+    Putting this in the equation for $\E[|R|]$, we have
+    \begin{align*}
+      \E[|R|] \leq \sum_{j=0}^{\log t} 2^j \Pr[|R| > 2^{j-1}] = O(\log t) = O(\log n).
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
 
 \section{Cuckoo hashing}
 
