@@ -72,7 +72,7 @@ For concreteness let $A$ be a fixed deterministic online paging algorithm, and s
 Since a round contains $k$ distinct requests, there is some element in $S$ that was never requested in that round. The optimal algorithm will then evict that item at the first miss in the round. This guarantees that there are no more misses in that round. Thus, we have shown the following.
 
 \begin{theorem}
-	For any $c$-competitive deterministic paging algorithm must have $c \geq k$.
+	Any $c$-competitive deterministic paging algorithm must have $c \geq k$.
 	\label{thm:paging-det-lb}
 \end{theorem}
 
@@ -333,3 +333,8 @@ In the first step we take the majority vote, but after that we scale down the we
 	\end{align*}
 	The bound follows from taking logarithm on both sides and using the approximation for $\ln(1-x)$.
 \end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:
