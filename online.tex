@@ -6,9 +6,12 @@ To measure the performance of such an algorithm, we calculate its \emph{competit
 
 \begin{definition}
 	[Competitive ratio]
-	An online algorithm $A$ for a computational problem $\mathcal{P}$ is said to have a competitive ratio of $c$ if there exists a constant $\delta$ such that for every input sequence $\sigma_1, \sigma_2, \ldots, \sigma_n$, the value return by $A$, given by $f_A(\sigma_1, \sigma_2, \ldots, \sigma_n)$ is such that
+	An online algorithm $A$ for a computational problem $\mathcal{P}$ is
+        said to have a competitive ratio of $c$ if for every input sequence
+        $\sigma_1, \sigma_2, \ldots, \sigma_n$, the value return by $A$, given
+        by $f_A(\sigma_1, \sigma_2, \ldots, \sigma_n)$ is such that
 	\begin{align*}
-		f_A(\sigma_1,\sigma_2,\ldots,\sigma_n) \leq c\cdot f_{\opt}(\sigma_1,\sigma_2,\ldots,\sigma_n) + \delta.
+          f_A(\sigma_1,\sigma_2,\ldots,\sigma_n) \leq c\cdot f_{\opt}(\sigma_1,\sigma_2,\ldots,\sigma_n).
 	\end{align*}
 	\label{def:comp-ratio}
 \end{definition}
@@ -84,7 +87,7 @@ In the case of a randomized algorithm, the algorithm has access to random coins.
 
 We can think of an oblivious adversary as someone who knows the randomized algorithm, but has no access to the random coins that is used by the algorithm in its execution. Thus we can think of an oblivious adversary looking at the source code of the randomized algorithm and generating a sequence of requests. The oblivious adversary then runs the optimal (possibly offline) algorithm on this sequence. Notice that the outcome of the optimal algorithm is deterministic. But now, the outcome of the online algorithm is a random variable that depends on its internal coin tosses. Like before, we say that a randomized online algorithm has a competitive ratio of $c$ if there is a $\delta$ such that for every sequence $\sigma_1, \sigma_2, \ldots, \sigma_n$, we have
 \begin{align*}
-	\E(f_A(\sigma_1,\sigma_2,\ldots,\sigma_n)) \leq c. f_{\opt}(\sigma_1, \sigma_2, \ldots, \sigma_n) + \delta.
+	\E(f_A(\sigma_1,\sigma_2,\ldots,\sigma_n)) \leq c. f_{\opt}(\sigma_1, \sigma_2, \ldots, \sigma_n).
 \end{align*}
 Here the expectation is over the internal coin tosses on the algorithm $A$. We will show that there is an online paging algorithm with a competitive ratio of $2H_k$, and that there is an almost matching lower bound. First we will describe the randomized paging algorithm.
 
