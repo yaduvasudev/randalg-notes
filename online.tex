@@ -197,7 +197,7 @@ We will now apply Yao's minimax principle to obtain a lower bound on the expecte
 We will prove the following theorem in this subsection. The idea is to design a distribution over inputs such that every deterministic paging algorithm will incur a large number of cache misses in expectation, and conclude using the minimax principle. 
 
 \begin{theorem}
-	If an online algorithm for paging (randomized or deterministic) is $c$-competitive, then $c \leq H_k$.
+	If an online algorithm for paging (randomized or deterministic) is $c$-competitive, then $c \geq H_k$.
 	\label{thm:lb-pagin}
 \end{theorem}
 \begin{proof}
