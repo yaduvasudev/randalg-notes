@@ -214,31 +214,401 @@ We will prove the following theorem in this subsection. The idea is to design a 
 
 \section{Bipartite matching revisited}
 
-Let us go back to the online bipartite matching problem. We will start with an observation that any deterministic algorithm for online bipartite matching cannot achieve a competitive ratio better than $2$. This follows from the following simple example. Suppose that $L$ consists of two vertices $u_1$ and $u_2$. Now, the first vertex in $R$ is $v_1$ and its edges are $(u_1, v_1)$ and $(u_2, v_1)$. The online algorithm must choose one of these edges in the matching, say $(u_1, v_1)$. Now, the adversary will reveal $v_2$ with the edge $(u_1, v_2)$. This edge cannot be added to the matching and hence the size of the matching obtained is $1$ whereas the best offline algorithm gives a matching of size $2$. 
+Let us go back to the online bipartite matching problem. We saw a deterministic
+algorithm that was $2$-competitive and a matching lower bound for deterministic
+algorithms. The $2$-competitive algorithm was essentially an algorithm that
+outputs a maximal matching. We will now give an alternate proof of this fact
+using a technique that is going to be useful when we analyze the randomized
+algorithm for online bipartite matching.
 
-The bipartite matching problem is a special case of a more general problem known as the AdWords problem, where you have a set of sellers $L$ and a set of keywords $K$. Each seller $l_i$ has a valuation $v_j$ for the $j^{th}$ keyword - this is the amount the seller is willing to pay for their ad to be displayed when the keyword is searched. Now, the keywords come online and the valuations for each of the sellers for that keyword is revealed. You have to assign the keyword to a seller and you receive the revenue you receive is the valuation of that keyword given by the seller. Your goal is to maximize the revenue, subject to the constraint that every seller has a budget beyond which he/she is not willing to buy a keyword. It is easy to see that the bipartite matching problem is an instance of the AdWords problem when each seller has unit budget and has a valuation that is either $0$ or $1$ for every keyword.
+\subsection{A primal-dual analysis}
 
-We will now see a randomized online algorithm for bipartite matching that achieves a competitive ratio of $1 - 1/e$. It can also be shown using the minimax principle that this is the best bound achievable by any online algorithm. We now describe this algorithm, \ranking, first described by Karp, Vazirani and Vazirani.
+The bipartite matching problem for a graph $G(L,R,E)$ can be written as an
+integer linear program (ILP) in the following way: Let $x_e$ be a $0$-$1$ variable
+corresponding to the edge $e\in E$. We can write the matching problem as a
+maximization problem of a function of the variables $x_e$.
+\begin{align*}
+  & \max  \sum_{e\in E} x_e \\
+  & \text{s.t}  \sum_{u\in N(v)} x_{(u,v)} \leq 1, ~\forall v \in V
+\end{align*}
+
+While many combinatorial optimization problems can be written as an integer
+linear program, solving an ILP is NP-hard in general. One way in which the
+theory of linear programming is used to solve combinatorial optimization is to
+relax the constraint on the variables to be non-integral and solve the linear
+program (LP) instead. In our case, the relaxed LP for matching is the same
+as above, with the additional constrains that $x_e \geq 0$. We will call this as
+the \emph{primal} LP that we are interested to solve.
+
+A solution to the variables $x_e$ that satisfies all the
+constraints is known as \emph{feasible solution}. Notice that every feasible
+solution to the ILP written above is indeed a matching. A feasible solution to
+the LP is called a \emph{fractional matching}. The problem here is that the
+solution of the LP might give non-integral optimal solutions, and we need an
+efficient way to \emph{round} these non-integral solutions to integral
+solutions. \marginnote{For the matching problem, it is known
+  that the optimal solution for the relaxed LP is also obtained via integral
+  assignments to $x_e$.}   
+Rounding the fractional optimum to an integral feasible solution
+might be easy, but it is hard to round it to get an optimum solution, or to a
+value that is close to the optimum. In fact, it is possible that there are no
+integral optimum solutions. 
+
+The general form of a maximation LP can be written in the following way
+\begin{align*}
+   \max & \sum_{i=1}^n c_i x_i \\
+   s.t & \sum_{j=1}^n a_{ij}x_j \leq b_i, ~ 1\leq j \leq m\\
+  & x_i \geq 0, 1\leq i\leq n.
+\end{align*}
+
+Now, consider a set of variables $y_1, y_2, \ldots, y_m$ corresponding to each
+constraint in the primal LP. The linear function $\sum_{i=1}^m y_i b_i$ is an
+upper bound for
+$$\sum_{i=1}^m y_i \left(\sum_{j=1}^n a_{ij}x_j \right) =
+\sum_{i=1}^n x_i\left( \sum_{j=1}^m y_j a_{ji}\right).$$
+
+Furthermore, if each of the sums $\sum_{j=1}^m y_j a_{ji} \geq c_i$, then
+$\sum_{i=1}^m y_ib_i$ is an upper bound on the optimum of the primal
+LP. Choosing $y_i$s that make $\sum_{i=1}^m y_ib_i$ smaller gives better bounds
+on the optimum of the primal LP (which is a maximization problem in this
+case). This leads us to define the \emph{dual} LP as follows.
+\begin{align*}
+  \min ~&~ \sum_{i=1}^n b_i y_i \\
+  s.t ~&~ \sum_{j=1}^m a_{ji}y_j \geq c_i, ~ 1\leq i \leq n\\
+  &~ y_j \geq 0, ~ 1\leq j\leq m
+\end{align*}
+
+The argument that we presented above is known as \emph{weak duality}.
+\begin{lemma}[Weak duality]
+  Let ${\cal P}$ be a maximization LP, and let ${\cal D}$ be its dual LP. Then,
+  $$\opt({\cal P}) \leq \opt({\cal D}).$$
+  \label{lem:weak-dual}
+\end{lemma}
+
+The dual LP for the matching problem has one variable $y_v$ for each of the
+vertices $v$ in the graph. The dual LP is as follows.
+\begin{align*}
+  \min ~&~ \sum_{v\in V} y_v \\
+  s.t ~&~ y_u + y_v \geq 1, ~\forall (u,v)\in E\\
+  &~ y_v \geq 0.
+\end{align*}
+
+We will construct a feasible solution to the dual from the solution given by an
+algorithm and use the weak duality to argue about the guarantees of the greedy
+matching. In general, the primal-dual method involves using the primal and dual
+to search for a suitable feasible solution for the dual and construct an optimal
+solution for the primal. It will not involve solving the actual
+primal or dual LP. We will now reprove the guarantee of the greedy online
+matching algorithm using the primal and the dual LPs.
+
+\begin{theorem}
+  The greedy online matching algorithm is $2$-competitive.
+  \label{thm:greedy-pd}
+\end{theorem}
+\begin{proof}
+  We will define a feasible solution for the dual matching LP from the matching
+  created by the algorithm. Let $M$ be the matching produced by the greedy
+  algorithm. For every edge $e = (u,v)$, define two variables $q_u$ and $q_v$
+  and set both to be $1/2$. Notice that $\sum_{v\in V} q_v = |M|$. Suppose we
+  set $y_v = 2q_v$ for every $v\in V$. We want to show that these $y_v$s form a
+  feasible solution for the dual; i.e.\ for every every edge $(u,v)$,
+  $y_u + y_v \geq 1$.
+
+  This constraint is definitely satisfied when $(u,v)\in M$. For an edge
+  $(u,v)\notin M$, one of $y_u$ or $y_v$ is set to $1$. This is because $M$ is
+  maximal, and if $(u,v)\notin M$, then some other edge incident on $u$ or $v$
+  must be in the matching $M$. This would be mean one of $y_u$ and $y_v$ is set
+  to $1$ satisfying the constraint for the edge $(u,v)$.
+
+  Thus we have a feasible solution for the dual with value $\sum_{v\in V} y_v = 2\sum_{v\in v} q_v = 2|M|$. From weak duality, we can conclude that for the maximum matching $M^*$, $|M^*| \leq \sum_{v\in V} y_v = 2\sum_{v\in v} q_v = 2|M|$.
+\end{proof}
+
+We will now solve a fractional version of the matching problem, and will use the
+primal-dual analysis to prove its competitive ratio. We will then see how to
+extend the analysis to obtain the randomized online algorithm for matching.
+
+\subsection{Online fractional matching}
+
+Suppose that we are allowed to partially choose an edge in the matching. In
+other words, we want to solve the online version of the LP given in the previous
+section. Consider the lower bound graph for the greedy algorithm given to the right.
+
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (l1) at (0,2) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (l2) at (0,0) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (r1) at (2,2) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (r2) at (2,0) {};
+    \node[left =0cm of l1] {$\ell_1$}; \node[left =0cm of l2] {$\ell_2$};
+    \node[right =0cm of r1] {$r_1$}; \node[right =0cm of r2] {$r_2$};
+    \draw[thick,-] (l1) to node[midway,above] {$\tfrac{1}{2}$} (r1);
+    \draw[thick,-] (l2) to node[pos=0.2,above] {$\tfrac{1}{2}$} (r1);
+    \draw[thick,-] (l1) to node[pos=0.8,above] {$\tfrac{1}{2}$}  (r2);
+  \end{tikzpicture}
+  \caption{Instance of fractional matching with fractional values to the edge
+    variables in the primal LP for the lower bound graph.}
+  \label{fig:lbgraph-flp}
+\end{marginfigure}
+Suppose that we have $r_1$ coming first and revealing the edges $(\ell_1,r_1)$
+and $(\ell_2, r_2)$. We could set the variables corresponding to both the edges
+to $1/2$, and the setting the edge $(\ell_1, r_2)$ to $1/2$. This gives a
+feasible solution of value $3/2$ to the primal LP. The optimum is still $2$, but
+we have a $3/4$-approximation. It turns out that we can do better than the
+greedy if we are searching for fractional matchings using a deterministic
+algorithm. This algorithm is called the \emph{waterlevel algorithm} and is a
+$1-1/e$ approximation of the maximum matching. The problem of rounding the
+fractional solution to an integral solution still remains, and our lower bound
+proves that we cannot do it deterministically. We will use the ideas in the
+analysis of the fractional matching algorithm to analyze the randomized
+algorithm for online bipartite matching.
+
+Think of the vertices in $L$ of $G$ to be containers of unit capacity, and the
+vertices in $R$ to be reservoirs that supply one unit of water. The edges are
+pipelines that connect the reservoir to the containers. When a new vertex
+$v\in R$ arrives with the edges to vertices in $N(v)$, the water starts flowing
+from the $v$ to the containers in $N(v)$ which are filled least at an equal
+rate. This continues until containers are full or the reservoir runs out of
+water. Let's look at an example on the right.
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (l1) at (0,2) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (l2) at (0,1) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (l3) at (0,0) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (l4) at (0,-1) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (r1) at (2,2) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (r2) at (2,1) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (r3) at (2,0) {};
+    \node[circle,draw,thick,minimum size=5pt,inner sep=0pt] (r4) at (2,-1) {};
+    \node[left =0cm of l1] {$\ell_1$}; \node[left =0cm of l2] {$\ell_2$};
+    \node[left=0cm of l3] {$\ell_3$}; \node[left=0cm of l4] {$\ell_4$};
+    \node[right =0cm of r1] {$r_1$}; \node[right =0cm of r2] {$r_2$};
+    \node[right =0cm of r3] {$r_3$}; \node[right =0cm of r4] {$r_4$}; 
+    \draw[thick,-] (l1) to node[pos=0.5,above] {$\tfrac{1}{3}$} (r1);
+    \draw[thick,-] (l2) to node[pos=0.1,above] {$\tfrac{1}{3}$} (r1);
+    \draw[thick,-] (l1) to node[pos=0.9,above] {$\tfrac{1}{3}$}  (r2);
+    \draw[thick,-] (r1) to node[pos=0.9,above] {$\tfrac{1}{3}$}  (l3);
+    \draw[thick,-] (r2) to node[pos=0.2,above] {$\tfrac{2}{3}$}  (l4);
+    \draw[thick,-] (r3) to node[pos=0.1,above] {$\tfrac{1}{3}$}  (l4);
+    \draw[thick,-] (r4) to node[pos=0.1,above] {$\tfrac{2}{3}$}  (l3);
+    \draw[thick,-] (r4) to node[pos=0.5,below] {$0$} (l4);
+  \end{tikzpicture}
+  \caption{An example run of the waterlevel algorithm. The edge weights are the
+    final values to the variables in the primal LP.}
+  \label{fig:waterlevel-algo}
+\end{marginfigure}
+Suppose that the vertices $r_1$, $r_2$, $r_3$, and $r_4$ arrive in that
+order. When $r_1$ arrives it divides its water to $\ell_1$, $\ell_2$, and
+$\ell_3$ and the containers are $1/3$ full. Now, when $r_2$ arrives, it starts
+filling $\ell_3$ until both $\ell_1$ and $\ell_3$ are $1/3$ full. After this
+$r_2$ distributes the remaining $2/3$ units of water it has equally between
+$\ell_1$ and $\ell_3$. This stops when $r_2$ is empty, at which point $\ell_1$
+and $\ell_4$ are $2/3$ full, and $\ell_2$ and $\ell_3$ are $1/3$ full. When
+$r_3$ arrives, $\ell_4$ is already $2/3$-full, and hence $r_3$ can empty only
+$1/3$ of its contents before $\ell_4$ is filled to capacity. Finally when $r_4$
+arrives, it empties $2/3$ of its contents to $\ell_3$ and stops since both
+$\ell_3$ and $\ell_4$ are filled to capacity. The fractional matching weights
+are shows in the figure.
+
+If we try to analyze using the primal-dual method, we need to obtain a feasible
+solution for the dual LP from this algorithm. One way to do this would be
+imitate the way we proceeded with the greedy algorithm. There, when an edge
+$e = (u,v)$ was selected (which was equivalent to setting the corresponding
+variable to $1$), we set $q_u$ and $q_v$ to $1/2$, and then the feasible
+solution was obtained by setting $y_v = 2q_v$. If we try to imitate this by
+$q_v$ to be the sum of half of the weights for each of the edges, then
+$\sum_{v\in V} q_v$ is the value of the fractional matching. If we can show that
+$y_v = kq_v$ for some $k < 2$, is a feasible dual solution, then this will give
+a better competitive ratio. Unfortunately, in the worst case, $k$ will have to
+be $2$. To see this, consider the input in Figure~\ref{fig:waterlevel-algo}, but
+now there is a new vertex $r_5$ that appears at the end and is connected only to
+$\ell_4$. There is no outflow from this reservoir since the container is up to
+full capacity. The value of $q_{\ell_4} = 1/2$, and $q_{r_5} = 0$. Thus, the
+only way to obtain a feasible solution for the dual by this method would be to
+have $k=2$ which does not give a better bound than the greedy.
+
+Note that this need not be an issue with our algorithm, but an inability on our
+part to construct a suitable feasible solution to the dual LP. Let's try to
+obtain $q_v$s in a more sophisticated way. Consider a splitting function $g$
+that decides the value of $q_u$ and $q_v$ for any edge $(u,v)$ (where $u\in L$)
+based on how much water is present in the container $u$, rather than split it
+equitably. Let's assume that we want a non-decreasing function $g$. If the
+current amount is $t_u$, then for the next $dy$ amount of flow, the value of
+$q_u$ is increased by $g(t_u) dy$. Similarly, we will increase the value of
+$q_w$ by $(1 - g(t_u))dy$. Thus, if the final quantity of water in the container
+$u$ at the end of the algorithm is $t_u$, the value of $q_v$ is given by the
+equation
+\begin{align*}
+  q_u = \int_0^{t_u} g(y) dy.
+\end{align*}
+
+The goal is to find a suitable function $g$ so that we can construct an
+appropriate dual feasible solution as before. For an edge $(u,v)$ where $u\in L$
+and $v\in R$, suppose that $u$ is full. Then we can write
+\begin{align*}
+  q_u + q_v \geq q_u = \int_0^{1} g(y) dy
+\end{align*}
+We have seen that this can happen where the reservoir $v$ cannot send water to any container since they are all full.
+
+Notice that in the waterlevel algorithm, a vertex $v$ sends water only if it
+contains some water, and there is at least one neighbor that is not filled to
+capacity. If water level in $u$ at the end of the algorithm was $t_u < 1$, then
+whenever $v$ was sending water to any vertex $w$, it must have been the case
+case that the water level in $w$ is at most $t_u$. Furthermore, if $t_u < 1$,
+then the reservoir $v$ must have been completely empty. Hence, we can obtain an
+lower bound for $q_v$ as follows.
+\begin{align*}
+  q_v \geq \int_{0}^1 (1 - g(t_u))dy \geq 1 - g(t_u).
+\end{align*}
+
+Thus, we can obtain the following lower bound for $q_u + q_v$:
+\begin{align*}
+  q_u + q_v \geq (1 - g(t_u)) + \int_0^{t_u} g(y) dy.
+\end{align*}
+
+At this point, it is not clear whether such a function exists. Notice that the
+lower bound written above depends on the value of $t_u$ of the water level in
+the container $u$. Let's see if we can find a lower bound that is independent of
+this value. In other words, we want $(1-g(t_u)) + \int_0^{t_u} g(y)dy$ when
+considered as a function of $t_u$ is a constant. Thus, we get the following
+equation $ g(t_u) - g'(t_u) = 0$, giving us $g(y) = ce^y$. Now, if we want the
+two lower bounds for $q_u+q_v$ to be the same, we have
+\begin{align*}
+  \int_0^1 ce^y dy = (1 - ce^{t_u}) + \int_0^{t_u} ce^y dy
+\end{align*}
+
+Solving this gives $c = 1/e$, and thus $g(y) = e^{y-1}$. Now we can see that for
+any edge $e = (u,v)$, we have
+\begin{align*}
+  q_u + q_v \geq \int_0^1 e^{y-1}dy = 1 - 1/e
+\end{align*}
+
+We will set $y_u = \frac{e}{e-1} q_u$ for every vertex $u\in V$, and thus for
+every edge we have $y_u + y_v = \frac{e}{e-1}(q_u + q_v) \geq 1$. Thus this
+forms a feasible solution for the dual. Since $\sum_{u\in V} q_u$ is equal to
+the size of the fractional matching $|M|$, we have
+$\opt \leq \sum_{u\in V} y_u = \frac{e}{e-1} |M|$.
+
+\subsection{Online bipartite matching - the final piece}
+
+%\begin{algorithm}[H]
+%  
+%  \label{alg:waterlevel}
+%\end{algorithm}
+
+
+We will now see a randomized online algorithm for bipartite matching that
+achieves a competitive ratio of $1 - 1/e$. It can also be shown using the
+minimax principle that this is the best bound achievable by any online
+algorithm. This algorithm, \ranking, was first described by Karp, Vazirani and
+Vazirani.
 
 \begin{algorithm}[h]
-	\KwIn{$G(L,R,E)$, where $L$ is known and $R$ is revealed online}
-	
-	Choose a permutation $\pi$ uniformly at random and order vertices of $L$ according to $\pi$
-	
-	$M \gets \emptyset$
-	
-	\ForEach{$v\in R$ and its neighbors $N(v)$ revealed online}{
-		Find the first vertex $u \in N(v)$ (according to $\pi$) that is unmatched
-		
-		$M \gets M \cup \{u,v\}$
-	}
-	\label{alg:ranking}
-	\caption{\ranking}
-\end{algorithm}  
+  \KwIn{$G(L,R,E)$, where $L$ is known and $R$ is revealed online}
+  
+  Choose a permutation $\pi$ uniformly at random and order vertices of $L$
+  according to $\pi$
+  
+  $M \gets \emptyset$
+  
+  \ForEach{$v\in R$ and its neighbors $N(v)$ revealed online}{ Find the
+    first vertex $u \in N(v)$ (according to $\pi$) that is unmatched
+  	
+  	$M \gets M \cup \{u,v\}$
+  }
+  \label{alg:ranking}
+  \caption{\ranking}
+\end{algorithm}
 
-We will show that the matching computed by \ranking is a $1-1/e$-approximation of a maximum matching. More precisely, we will show that the expected size of the matching computed by \ranking (where the expectation is over the random permuation in Step~$1$) is at least $(1-1/e)\cdot \opt$, where $\opt$ is the size of the maximum matching.
+We will state this algorithm slightly differently. Instead of a random
+permutation on $L$, we will assume that for each $u\in L$, we choose a random
+number $\ell$ uniformly at random in $[0,1]$. Now, whenever a vertex $v\in R$
+arrives, $r$ is matched to an unmatched vertex in $N(v)$ with the smallest
+$\ell$ value. It is not hard to see that choosing random numbers in $[0,1]$ for
+each vertex in $L$ is equivalent to choosing a random ordering of $L$.
 
-To that end, we will view this algorithm as a market process between buyers and items. Let $L$ be a set of items such that each item $i$ has a price $p_i$. Now, $R$ consists of a set of buyers where each buyer $j$ has a valuation $v_j(i)$ for each item item $i \in N(j)$. The utility of an item $i$ for a buyer $j$, denoted by $u_j(i) = v_j(i) - p(i)$. The buyers arrive in an online fashion, and buyer $i$ purchases the item with the highest utility in $N(i)$ that has not yet been sold. We will assume that the prices are set in a randomly, by first sampling a number $w$ uniformly at random from the interval $[0,1]$ and setting the price $p_i$ to be $e^{w-1}$. The valuation $v_j(i)$ is set to $1$ for each buyer $j$ and item $i$. 
+In line with our waterlevel analogy, we will assume that $\ell_u$ is the
+capacity of the container corresponding to the vertex $u$, and matching $v$ to
+$u$ is sending $\ell_u$ amounts of water to $u$ and stopping. Analogous to the
+fractional matching case, we will divide this flow $\ell_u$ to the vertices as
+follows: we will set $q_u = e^{\ell_u - 1}$ and $q_v = 1 -
+e^{\ell_u-1}$. Clearly, by definition, we have
+$\sum_{u\in L} q_u + \sum_{v\in R} q_v = |M|$, the size of the matching output
+by the algorithm. Note that $q_u$ and $q_v$ are random variables, and hence the
+size of the matching output by the algorithm is also a random variable. In
+contrast to what we did for the waterlevel algorithm, here we will actually
+construct a dual solution (that may be infeasible) where the dual variables are
+random variables. We will show that the expected value of these random variables
+are feasible for the dual.
+
+To bound the expectation of $q_u$ and $q_v$, we need the following observations
+regarding bounds on the values that they can take. Let $(u,v)\in E$ and suppose
+we fix the value of $\ell_{u'}$ for all $u'\in L \setminus \{u\}$. Consider the
+case of running the algorithm on the graph $G \setminus \{u\}$. Let $\ell^*$ be the
+value of vertex $u^*$ to which $v$ is mapped in this case (assume that
+$\ell^* = 1$ if $v$ is not mapped). Then the following statements hold.
+
+\begin{claim}
+  If $\ell_u < \ell^*$, then $u$ is matched by some vertex when the
+  algorithm runs on $G$.
+\end{claim}
+\begin{proof}
+  We will actually show that if $u$ is unmatched until $v$ arrives, then $u$
+  will get mapped to $v$. To see this, notice that if $u$ is unmatched until $v$
+  arrives, then the behaviour of the algorithm on $G$ and $G\setminus \{u\}$ is
+  identical up till this point. So, when $v$ arrives and $\ell^* > \ell_u$,
+  surely $v$ will choose $u$ to get mapped to.
+\end{proof}
+
+\begin{claim}
+  $q_v > 1 - e^{\ell^* - 1}$, for all choices of $\ell_u$.
+\end{claim}
+\begin{proof}
+  Let us run the algorithm on $G$ and $G\setminus \{u\}$. The unmatched vertices
+  on $G$ is a superset of the unmatched vertices when the algorithm is run on
+  $G\setminus \{u\}$. This can be seen inductively. So, when $v$ arrives, it's
+  choice in $G$ will be with $u'$ such that $\ell_{u'} \leq
+  \ell_{u^*}$. Consequently, $q_v \geq 1 - e^{\ell^* - 1}$.
+\end{proof}
+
+Thus the expectation of $q_v$ conditioned on all fixing all the $\ell_{u'}$ for
+$u' \in L \setminus \{u\}$ is $\E[q_v] \geq 1 - e^{\ell^* - 1}$. Similarly, the
+conditional expectation of $q_u$ can be computed as follows using the first claim.
+\begin{align*}
+  \E[q_u] \geq \int_{0}^{\ell^*} e^{x-1} dx = e^{\ell^*-1} - \frac{1}{e}.
+\end{align*}
+
+Thus, we have $\E[q_u + q_v] \geq 1 - \tfrac{1}{e}$ for every edge $(u,v)\in
+E$. Define $y_u = \tfrac{e}{e-1} q_u$ for all the vertices in the graph. Thus,
+for every edge $(u,v)\in E$, $\E[y_u] + \E[y_v] \geq 1$. Hence, the expectations
+are feasible for the dual. Thus, we can write
+\begin{align*}
+  \opt \leq \E\left[\sum_{u\in L} y_u + \sum_{v\in R} y_v \right] = \frac{e}{e-1} \E\left[\sum_{u\in L} q_u + \sum_{u\in R} q_v \right] = \frac{e}{e-1}\E[|M|].
+\end{align*}
+
+
+\subsection{An economics-based proof of the \ranking algorithm}
+
+In this section, we will see an analysis of the \ranking algorithm that will
+look very similar to the one before, but stated in a slightly different
+language. While this analysis can be read independently of the analysis above,
+some of the choices made can be better appreciated if the primal-dual analysis
+is read.  Just like before, we will show that the expected size of the matching
+computed by \ranking (where the expectation is over the random permuation in
+Step~$1$) is at least $(1-1/e)\cdot \opt$, where $\opt$ is the size of the
+maximum matching.
+
+To that end, we will view this algorithm as a market process between buyers and
+items. Let $L$ be a set of items such that each item $i$ has a price $p_i$. Now,
+$R$ consists of a set of buyers where each buyer $j$ has a valuation $v_j(i)$
+for each item item $i \in N(j)$. The utility of an item $i$ for a buyer $j$,
+denoted by $u_j(i) = v_j(i) - p(i)$. The buyers arrive in an online fashion, and
+buyer $i$ purchases the item with the highest utility in $N(i)$ that has not yet
+been sold. We will assume that the prices are set in a randomly, by first
+sampling a number $w$ uniformly at random from the interval $[0,1]$ and setting
+the price $p_i$ to be $e^{w-1}$. The valuation $v_j(i)$ is set to $1$ for each
+buyer $j$ and item $i$.
 
 Since we are sampling from a distribution with no point mass, there are no two prices that are same, and it induces an ordering on the items in $L$. Thus, the market process corresponds to running the \ranking algorithm with the permutation corresponding to what is given by the prices. In other words, if $M$ is the matching given by the \ranking algorithm and $M'$ the matching given by the market process, we have
 \begin{align*}
