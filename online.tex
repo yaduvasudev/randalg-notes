@@ -641,11 +641,8 @@ To complete the proof, we need to prove the following claim.
     Thus, we have $\E[r_i + u_j] \geq 1 - 1/e$ and this concludes the proof.
 \end{proof}
 
-\section{The Multiplicative Weights Update (MWU) method}
 
-In this part we will look at a generic meta-algorithm known as the multiplicative weights update (MWU) method. The method is fairly elementary, but very many different algorithms can be seen as instantiations of this meta-algorithm. We start with an  online decision making problem.
-
-\subsection{The weighted majority algorithm}
+\section{The weighted majority algorithm}
 
 Consider a decision making problem where you have to make a yes/no decision everyday, and if you make the wrong decision you have to pay a thousand rupees to an adversary. If you make the correct decision, then you do not have to pay anything. Now, the catch is that the adversary can reveal to you the correct answer only after you say your decision. Clearly, this game is loaded in favor of your adversary for he/she can force you to pay up at every step.
 
@@ -686,7 +683,7 @@ In the first step we take the majority vote, but after that we scale down the we
 \begin{theorem}
 	Let $m_T$ be the number of mistakes made by the weighted majority algorithm after in $T$ steps, and let $m^{(i)}_T$ be the number of mistakes made by expert $i$ in $T$ steps. Then, for every $i \in [n]$ we have
 	\begin{align*}
-		m_T \leq 2(1+\epsilon)m^{(i)}_T + \frac{\log n}{\epsilon}.
+		m_T \leq 2(1+\epsilon)m^{(i)}_T + \frac{\ln n}{\epsilon}.
 	\end{align*}
 	\label{thm:wgtd-maj}
 \end{theorem}
@@ -702,10 +699,40 @@ In the first step we take the majority vote, but after that we scale down the we
 
 	Thus, after $T$ steps, for every $i\in [n]$ we have
 	\begin{align*}
-		(1-\epsilon)^{m_i{(T)}} \leq \Phi(T) \leq \left(1 - \frac{\epsilon}{2} \right)^{m_T}n
+          (1-\epsilon)^{m_{T}^{(i)}} \leq \Phi(T) \leq \left(1 - \frac{\epsilon}{2} \right)^{m_T}n
 	\end{align*}
-	The bound follows from taking logarithm on both sides and using the approximation for $\ln(1-x)$.
-\end{proof}
+	Now we can use the bound that $\ln(1-x) \geq -x - x^2/2$, to write the
+        following.
+        \begin{align*}
+          m_T^{(i)}\ln (1 - \epsilon) &\leq \ln n - \frac{\epsilon}{2}m_T\\
+          m_T^{(i)} \left( -\epsilon - \frac{\epsilon^2}{2} \right) &\leq \ln n - \frac{\epsilon}{2} m_T
+        \end{align*}
+        The theorem follows by rearranging the terms.
+      \end{proof}
+
+\subsection{A simple lower bound}
+
+Notice that if $m_T^{(i)} \gg \frac{\ln n}{\epsilon}$, then
+$m_T \leq 2(1+\epsilon) m_T^{(i)}$. If we look at any deterministic online
+decision making process, then the factor of $2$ is unavoidable.
+
+To see this consider two experts $e_0$ and $e_1$ where $e_i$ always answers
+$i$. The decisions of any deterministic algorithm can be computed by an
+adversary, and the adversary can always give the opposite decision as the
+correct decision. Hence, the loss incurred by the algorithm over $T$ rounds is
+$T$. On the other hand, irrespective of the decisions of the adversary, the best
+expert will incur at most $T/2$ losses throughout the entire run. We will look
+at a more general version of the weighted majority algorithm, using
+randomization that gives a better guarantee.
+      
+
+\section{The Multiplicative Weights Update (MWU) method}
+
+In this part we will look at a generic meta-algorithm known as the
+multiplicative weights update (MWU) method that generalizes the weighted
+majority algorithm that we saw earlier. The analysis is elementary, like in the
+case of the weighted majority algorithm, but very many different algorithms can
+be phrased in the terminology of MWU.
 
 %%% Local Variables: 
 %%% mode: latex
