@@ -104,15 +104,45 @@
 \newlength{\drop}
 \setcounter{tocdepth}{1}
 
-\newcommand*{\titleS}{\begingroup% Scripts, T&H p 151
-  \drop = 0.1\textheight \vspace*{\drop}
-  {\Huge \textsc{Randomized Algorithms}}\\[\baselineskip]
-  {\Large CS 6170}\\[\baselineskip]
-  \vfill
-  \rule{0.4\textwidth}{0.4pt}\\[\baselineskip]
-  {\Large\itshape Dept. of Computer Science and Engineering\\ IIT Madras}\par
-	\vspace*{\drop}
-	\endgroup}
+% \newcommand*{\titleS}{\begingroup% Scripts, T&H p 151
+%   \drop = 0.1\textheight \vspace*{\drop}
+%   {\Huge \textsc{Randomized Algorithms}}\\[\baselineskip]
+%   {\Large CS 6170}\\[\baselineskip]
+%   \vfill
+%   \rule{0.4\textwidth}{0.4pt}\\[\baselineskip]
+%   {\Large\itshape Dept. of Computer Science and Engineering\\ IIT Madras}\par
+% 	\vspace*{\drop}
+% 	\endgroup}
+
+\definecolor{amethyst}{rgb}{0.6,0.4,0.8}
+\definecolor{azure}{rgb}{0.1,0.1,0.6}
+
+\newcommand*{\mytitle}{
+  \begin{fullwidth}%
+    % \vspace*{\fill} \hrule height 1pt \vspace{3mm}
+    \vspace{2cm}
+    \hrule height 1pt
+    \vspace{3mm}
+    \begin{center}
+    \fontsize{25}{30}\fontfamily{lmtt}\selectfont\par\noindent\textcolor{amethyst}{Randomized Algorithms\\}%
+    \vspace{20pt}
+    \fontsize{18}{21}\selectfont\par\noindent\textcolor{DarkSlateGray}{course notes for
+      CS 6170}%
+    \end{center}
+    \vspace{3mm} \hrule height 1pt %\vspace*{\fill}
+    \vspace*{\fill}
+    \hrule height 1pt
+    \vspace{1mm}
+    \begin{flushleft}
+      \fontsize{10}{12}{\fontfamily{lmtt}\selectfont\par\noindent\textcolor{DarkSlateGray}{Yadu Vasudev}}
+      \vspace{-1mm}
+      \fontsize{10}{12}{\fontfamily{lmtt}\selectfont\par\noindent\textcolor{DarkSlateGray}{yadu@cse.iitm.ac.in}}
+    \end{flushleft}
+  \end{fullwidth}%
+  \thispagestyle{empty}%
+  \clearpage%
+}
+
 
 %\title{\Huge Randomized Algorithms\\ \noindent \Large CS 6170}
 %\date{CS 6170}
@@ -122,7 +152,7 @@
 
 \begin{document}
 
-\titleS
+\mytitle
 
 %\maketitle
 

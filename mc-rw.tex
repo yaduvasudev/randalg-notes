@@ -1,5 +1,58 @@
 \chapter{Markov chains and random walks}
 
+We now turn to algorithms that can be analyzed using random walks on graphs. We
+will use the theory of Markov chains to analyze these random walks. We will
+start with the following algorithmic question.
+
+Consider a boolean formula $\phi$ in 2-CNF form. I.e.\ $\phi$ can be written as
+$C_1 \wedge C_2 \wedge \cdots \wedge C_m$ where each $C_i$ is a disjuction on
+two literals, say $\ell_1 \vee \ell_2$. A literal is a boolean variable or its
+negation. We will describle a simple algorithm and then explain how this
+algorithm can be analyzed using a random walk on a suitable graph.
+
+\section{2-SAT}
+
+Let $\phi = C_1 \wedge C_2 \wedge \cdots \wedge C_m$ where $C_i$ is a
+disjunction of at most two literals. This is known as the 2-SAT problem. This
+has a simple polynomial-time deterministic algorithm, where we can model the
+formula using a directed graph whose vertices are the variables and their
+negations. For each clause $C = \ell \vee \ell'$, we put an edge from
+$\neg \ell \to \ell'$ and from $\neg \ell' \to \ell$ since we can can represent
+a disjunction equivalently using implication. Now, it is easy to verify that the
+formula $\phi$ is satisfiably iff no strongly connected component of this
+digraph contains both a variable and its negation. Thus, there is a linear-time
+deterministic algorithm for 2-SAT.
+
+We will, on the other hand, see a simple randomized algorithm for this
+problem. The analysis of the algorithm will help us to generalize this to an
+algorithm for 3-SAT that, even though exponential, will be faster than the
+brute-force algorithm.
+
+The 2-SAT algorithm is simple to describe: we start with an \emph{arbitrary}
+assignment $\bar{a}$, say the all-zero assignment, and check if it satisfies
+$\phi$. If it does, then we stop. Else if $\phi(\bar{a}) = 0$, then there is
+some $C_i$ such that $C_i(\bar{a}) = 0$. Choose one of the literals in this
+clause $C_i$ u.a.r and flip it. \marginnote{We will fix $r$ during the
+  analysis.}Keep continuing from some $r$ steps until you find a satisfying
+assignment. If you haven't found one until then, then stop and return that
+$\phi$ is not satisfiable.
+
+Notice that this algorithm has the potential to loop infintely by going over the
+same set of assignments, even though the formula is satisfiable. Consider this
+example:
+\begin{align*}
+  \phi = (x_1 \vee \bar{x}_2) \wedge (x_2 \vee \bar{x}_3) \wedge (x_3 \vee x_1).
+\end{align*}
+
+Notice that $\bar{a} = 000$ is not a satisfying assignment since $C_3(000) =
+0$. So, suppose we flip $x_3$ to $1$, then we have a new assignment
+$\bar{a'} = 001$. But $C_2(\bar{a'}) = 0$. There is a non-zero probability of
+flipping $x_3$ again, and this can lead to a sequence of flips that that cycles
+between these assignments, never converging to a satisfying assignment. Instead
+of arguing that the algorithm will always reach a satisfying assignment, if one
+exists, we will instead argue that the algorithm is more likely to move towards
+a satisfying assignment that away from it.
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "notes"
